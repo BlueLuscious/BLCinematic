@@ -1,0 +1,46 @@
+1. Header y footer.
+El header debe tener al menos:
+El logo de su sitio.
+El menú de navegación con links a la página de géneros y favoritos (si es que deciden hacer la funcionalidad electiva "Favoritos").
+Un buscador (formulario) que al usarse debe enviarnos a una página con resultados de búsqueda (punto 2).
+La búsqueda debe ejecutarse tanto al hacer "enter" como al clickear en el botón de buscar. Queda a decisión del equipo si incluir o no el botón.
+La búsqueda debe obtener resultados de películas o de series usando los endpoint "Search Movies" o "Search TV Shows".
+Queda a criterio de cada grupo la elección sobre qué temática realizar la búsqueda. Nótese que la estructura de datos de películas y
+de series puede ser levemente diferente. El buscador debe indicar sobre qué contenidos está buscando.
+
+2. Página: Resultado de búsqueda.
+La página de resultados debe mostrar:
+El texto buscado. Ejemplo: “Resultados de búsqueda para: texto ingresado en el input.”
+La lista de resultados que coincidan con el término buscado. Al clickear en cualquiera de los resultados deberá redirigir a su detalle (punto 4).
+Si no hay resultados que coincidan con el término buscado la página debe mostrar un texto "no hay resultado para su búsqueda".
+
+3. Página: home del sitio. 
+La página principal del sitio deberá mostrar 3 grupos de datos de al menos 5 elementos con la oferta de películas y/o
+series obtenidas de los end points "TV" y "Movies".
+Cada grupo de datos tendrá su título que lo identifica.
+Cada elemento del grupo tendrá al menos una foto, un texto con el título/ nombre y la fecha de estreno. 
+Al hacer click sobre cualquiera de los elementos debe redirigir a la página de detalle (punto 4).
+
+4.Página: detalles de serie y película
+Es la página con la información de una película o de una serie. La información que deben mostrar obtenida de la API es: 
+Foto de la portada.
+Nombre o título.
+Calificación (rating).
+Fecha de estreno.
+Duración (sólo en las películas).
+Sinópsis.
+Género al que pertenece. Si tiene más de un género deben mostrarse todos. Cada género debe linkear al detalle de género que corresponda (punto 7). 
+Además la página debe permitir “Ver Recomendaciones”: al clickear debe mostrarse una sección (que a priori aparece oculta)
+con un listado de series ó películas recomendadas según la serie o película que uno esté viendo.
+El end point tanto en series como en películas es "Get Recommendations". Queda a criterio del equipo cuantas recomendaciones mostrar.
+Las recomendaciones deben mostrar su póster o imagen. 
+Al clickear en cualquiera de las series/ películas recomendadas debe redirigir al detalle (punto 4).
+
+5. Es la página a donde el usuario podrá ver los géneros disponibles en TMDB para películas y para series.
+La información debe provenir de la API. Al hacer click sobre un género debe redirigir al detalle (punto 7).
+
+6. Página: Detalle del género (series y películas por género).
+La página debe mostrar:
+El listado de las películas o series pertenecientes al género que seleccionó. El end point para usar es "Discover".
+El nombre del género. En caso de que no se encuentre el género o no exista, debe indicarse un mensaje de error.
+Lista de películas o series con su foto y su nombre. Al clickear en cualquiera de las series/ películas debe redirigir al detalle (punto 4).
