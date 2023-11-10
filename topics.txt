@@ -44,3 +44,16 @@ La página debe mostrar:
 El listado de las películas o series pertenecientes al género que seleccionó. El end point para usar es "Discover".
 El nombre del género. En caso de que no se encuentre el género o no exista, debe indicarse un mensaje de error.
 Lista de películas o series con su foto y su nombre. Al clickear en cualquiera de las series/ películas debe redirigir al detalle (punto 4).
+
+
+
+
+
+
+BY GENRE:
+el valor del buscador si es igual a genre (quiza tambien puedo usarlo a media_type) muestra las peliculas
+o igual a title o name si busca por nombre.
+y si el valor buscador del buscador es un array que lo split y busque coincidencias en todas las palabras.
+
+
+los getApiDataByURL hacerlos constante, meterlos en un array y insertar en buscador descrito arriba. (Una opcion)
