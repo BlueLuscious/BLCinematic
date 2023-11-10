@@ -1,0 +1,167 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* HEADER */
+.header {
+    padding: 1%;
+    background-color: rgb(29, 101, 209);
+}
+
+.header_navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.header_navbar_tr {
+    display: inline;
+    padding-right: 5em;
+}
+
+.header_navbar_td {
+    border-bottom: 0.1em solid;
+    border-bottom-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    font-size: 1.5em;
+}
+
+.header_navbar_item {
+    padding-left: 5em;
+    padding-right: 10em;
+}
+
+.header_navbar_item input {
+    padding: 1em;
+    width: 35em;
+    border: rgb(255, 255, 255);
+    border-radius: 5em;
+    outline: transparent;
+    font-size: 1.25em;
+}
+/* HEADER */
+
+/* MAIN */
+.main_trending_tr,
+.main_now_playing_tr,
+.main_airing_today_tr {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1%;
+    padding: 1%;
+    height: 95%;
+    border-radius: 1em;
+    box-shadow: 0.15em 0.15em 0.15em 0.15em #555;
+    background-color: rgb(255, 255, 255);
+}
+
+.main_trending_tr td,
+.main_now_playing_tr td,
+.main_airing_today_tr td {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1em;
+    font-size: 1.25em;
+}
+
+.main_trending_tr img,
+.main_now_playing_tr img,
+.main_airing_today_tr img {
+    width: 13.75em;
+    border-radius: 1em;
+}
+
+.trending_section,
+.movies_section,
+.tv_shows_section {
+    padding-top: 2.5em;
+    padding-bottom: 2.5em;
+}
+
+.trending_section h1,
+.movies_section h1,
+.tv_shows_section h1 {
+    padding: 0.5%;
+    position: relative;
+    left: 7.25%;
+    width: 5em;
+    text-align: center;
+    border: 0.15em solid rgb(17, 60, 124);
+    border-radius: 2em;
+    color: rgb(255, 255, 255);
+    background-color: rgb(17, 60, 124); 
+    font-size: 1.75em;
+}
+
+.trending_content,
+.movies_content,
+.tv_shows_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 4%;
+    width: 91%;
+}
+
+#trendingTable,
+#moviesTable,
+#tvShowsTable {
+    display: inline-flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    width: 100%;
+    padding-bottom: 1em;
+}
+
+body::-webkit-scrollbar,
+#trendingTable::-webkit-scrollbar,
+#moviesTable::-webkit-scrollbar,
+#tvShowsTable::-webkit-scrollbar {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color:rgb(76, 130, 211);
+}
+
+#trendingTable::-webkit-scrollbar-thumb,
+#moviesTable::-webkit-scrollbar-thumb,
+#tvShowsTable::-webkit-scrollbar-thumb {
+    background-color:rgb(76, 130, 211);
+    border-radius: 1em;
+}
+
+body::-webkit-scrollbar-thumb:hover,
+#trendingTable::-webkit-scrollbar-thumb:hover,
+#moviesTable::-webkit-scrollbar-thumb:hover,
+#tvShowsTable::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(29, 101, 209)
+}
+/* MAIN */
+
+/* FOOTER */
+.top_footer {
+    margin-top: 5em;
+    width: 100%;
+    height: 7.5em;
+    background-color: rgb(17, 60, 124);
+}
+
+.body_footer {
+    width: 100%;
+    height: 22.5em;
+    background-color: rgb(29, 101, 209);
+}
+
+.footer {
+    visibility: hidden;
+    opacity: 0;
+}
+/* FOOTER */
