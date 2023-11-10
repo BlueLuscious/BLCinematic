@@ -28,6 +28,7 @@ body {
     border-bottom-color: rgb(255, 255, 255);
     color: rgb(255, 255, 255);
     font-size: 1.5em;
+    cursor: pointer;
 }
 
 .header_navbar_item {
@@ -46,61 +47,93 @@ body {
 /* HEADER */
 
 /* MAIN */
-.main_trending_tr,
-.main_now_playing_tr,
-.main_airing_today_tr {
+.main_trending_tr {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     margin: 1%;
     padding: 1%;
-    height: 95%;
+    height: 32.75em;
     border-radius: 1em;
     box-shadow: 0.15em 0.15em 0.15em 0.15em #555;
     background-color: rgb(255, 255, 255);
 }
 
-.main_trending_tr td,
-.main_now_playing_tr td,
-.main_airing_today_tr td {
+.main_trending_tr td {
     display: flex;
     flex-direction: column;
     padding-bottom: 1em;
     font-size: 1.25em;
 }
 
-.main_trending_tr img,
-.main_now_playing_tr img,
-.main_airing_today_tr img {
+.main_trending_tr img {
     width: 13.75em;
     border-radius: 1em;
 }
 
-.trending_section,
-.movies_section,
-.tv_shows_section {
-    padding-top: 2.5em;
+.trending_section {
+    padding-top: 2em;
     padding-bottom: 2.5em;
 }
 
-.trending_section h1,
-.movies_section h1,
-.tv_shows_section h1 {
-    padding: 0.5%;
-    position: relative;
-    left: 7.25%;
+
+
+
+
+/* ANDA, MEJORAR!!!! */
+.choose_content {
+    display: inline-flex;
+    margin-left: 10.25em;
+    margin-right: 5em;
+    margin-top: 4em;
+
+}
+
+.choose_content h1 {
+    margin: 0;
+    padding: 0.5em;
     width: 5em;
     text-align: center;
-    border: 0.15em solid rgb(17, 60, 124);
     border-radius: 2em;
     color: rgb(255, 255, 255);
-    background-color: rgb(17, 60, 124); 
+    background-color: rgb(17, 60, 124);
     font-size: 1.75em;
 }
 
-.trending_content,
-.movies_content,
-.tv_shows_content {
+.choose_content table {
+    border: 0.2em solid rgb(17, 60, 124);
+    border-radius: 3em;
+    background-color: rgb(255, 255, 255);
+}
+
+.choose_content tr {
+    display: inline;
+}
+
+.choose_content td {
+    padding: 0.5em;
+    width: 5em;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 2em;
+    color: rgb(17, 60, 124);
+    background-color: rgb(255, 255, 255);
+    font-size: 1.75em;
+    cursor: pointer;
+}
+
+#choose_content_all {
+    color: rgb(255, 255, 255);
+    background-color: rgb(17, 60, 124);
+    cursor: default;
+}
+/* ANDA, MEJORAR!!!! */
+
+
+
+
+
+.trending_content {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,9 +142,7 @@ body {
     width: 91%;
 }
 
-#trendingTable,
-#moviesTable,
-#tvShowsTable {
+.trending_tables {
     display: inline-flex;
     overflow-y: hidden;
     overflow-x: scroll;
@@ -120,9 +151,7 @@ body {
 }
 
 body::-webkit-scrollbar,
-#trendingTable::-webkit-scrollbar,
-#moviesTable::-webkit-scrollbar,
-#tvShowsTable::-webkit-scrollbar {
+.trending_tables::-webkit-scrollbar {
     width: 1.5em;
     height: 1.5em;
 }
@@ -131,17 +160,13 @@ body::-webkit-scrollbar-thumb {
     background-color:rgb(76, 130, 211);
 }
 
-#trendingTable::-webkit-scrollbar-thumb,
-#moviesTable::-webkit-scrollbar-thumb,
-#tvShowsTable::-webkit-scrollbar-thumb {
+.trending_tables::-webkit-scrollbar-thumb {
     background-color:rgb(76, 130, 211);
     border-radius: 1em;
 }
 
 body::-webkit-scrollbar-thumb:hover,
-#trendingTable::-webkit-scrollbar-thumb:hover,
-#moviesTable::-webkit-scrollbar-thumb:hover,
-#tvShowsTable::-webkit-scrollbar-thumb:hover {
+.trending_tables::-webkit-scrollbar-thumb:hover {
     background-color: rgb(29, 101, 209)
 }
 /* MAIN */
