@@ -31,24 +31,24 @@
         </nav>
     </header>
     <main class="main">
-        <section class="trending_section">
+        <div class="choose_content">
             <h1>Trending</h1>
+        </div>
+        <div class="choose_content">
+            <table>
+                <tr class="choose_content_option"><td class="content_choice" id="choose_content_all"><strong>All</strong></td></tr>
+                <tr class="choose_content_option"><td class="content_choice"><strong>Movies</strong></td></tr>
+                <tr class="choose_content_option"><td class="content_choice"><strong>TV Shows</strong></td></tr>
+            </table>
+        </div>
+        <section class="trending_section">
             <div class="trending_content">
-                <table id="trendingTable"></table>
+                <table id="trendingAllTable" class="trending_tables"></table>
             </div>
         </section>
-
-        <section class="movies_section">
-            <h1>Movies</h1>
-            <div class="movies_content">
-                <table id="moviesTable"></table>
-            </div>
-        </section>
-
-        <section class="tv_shows_section">
-            <h1>TV Shows</h1>
-            <div class="tv_shows_content">
-                <table id="tvShowsTable"></table>
+        <section class="trending_section">
+            <div class="trending_content">
+                <table id="trendingMoviesTable" class="trending_tables"></table>
             </div>
         </section>
     </main>
