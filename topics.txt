@@ -57,3 +57,5 @@ y si el valor buscador del buscador es un array que lo split y busque coincidenc
 
 
 los getApiDataByURL hacerlos constante, meterlos en un array y insertar en buscador descrito arriba. (Una opcion)
+
+bajar footer igual con el video del loco
