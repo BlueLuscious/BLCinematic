@@ -17,6 +17,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     const trendingAllCard = document.getElementById('trendingAllTable')
     const trendingMoviesCard = document.getElementById('trendingMoviesTable')
+    const trendingSeriesCard = document.getElementById('trendingSeriesTable')
 
     getApiDataByURL(trendingAllDay)
         .then(data => {
@@ -99,8 +100,35 @@ window.addEventListener('DOMContentLoaded', function () {
             })
         })
 
+    getApiDataByURL(trendingSeriesDay)
+        .then(data => {
+            const trendingSeriesList = data.results
 
+            trendingSeriesList.forEach(trendingItem => {
+                const row = document.createElement('tr')
+                row.classList.add('main_trending_tr')
+
+                const imageData = document.createElement('td')
+                const image = document.createElement('img')
+                image.src = `${IMAGE_URL + trendingItem.poster_path}`
+                imageData.appendChild(image)
+                row.appendChild(imageData)
+
+                const nameItem = document.createElement('td')
+                const nameBold = document.createElement('strong')
+                nameBold.textContent = trendingItem.name
+                nameItem.appendChild(nameBold)
+
+                const firstAirDate = document.createElement('td')
+                const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
+                firstAirDate.textContent = formattedFirstAirDate
+
+                row.appendChild(nameItem)
+                row.appendChild(firstAirDate)
+                trendingSeriesCard.appendChild(row)
+
+                loadFooter()
+            })
+        })
     // TRENDING
-
-
 })
