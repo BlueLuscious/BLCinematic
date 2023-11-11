@@ -20,7 +20,7 @@ body {
 
 .header_navbar_tr {
     display: inline;
-    padding-right: 5em;
+    margin-right: 5em;
 }
 
 .header_navbar_td {
@@ -32,8 +32,8 @@ body {
 }
 
 .header_navbar_item {
-    padding-left: 5em;
-    padding-right: 10em;
+    margin-left: 5em;
+    margin-right: 10em;
 }
 
 .header_navbar_item input {
