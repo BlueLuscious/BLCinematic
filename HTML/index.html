@@ -35,6 +35,7 @@
 
     <!-- MAIN -->
     <main class="main">
+        <!-- trending section -->
         <div class="choose_content">
             <h1>Trending</h1>
         </div>
@@ -61,7 +62,6 @@
                 </tr>
             </table>
         </div>
-        <!-- trending section -->
         <section class="trending_section">
             <div class="trending_content">
                 <table id="trendingAllDay" class="trending_tables"></table>
@@ -94,6 +94,90 @@
             </div>
         </section>
         <!-- trending section -->
+        <br><br><br>
+        <!-- movies section -->
+        <div class="choose_content">
+            <h1>Movies</h1>
+        </div>
+        <div class="choose_content">
+            <table>
+                <tr class="choose_movies_option">
+                    <td class="movies_choice" id="choose_content_now_playing"><strong>Now Playing</strong></td>
+                </tr>
+                <tr class="choose_movies_option">
+                    <td class="movies_choice"><strong>Popular</strong></td>
+                </tr>
+                <tr class="choose_movies_option">
+                    <td class="movies_choice"><strong>Top Rated</strong></td>
+                </tr>
+                <tr class="choose_movies_option">
+                    <td class="movies_choice"><strong>Upcoming</strong></td>
+                </tr>
+            </table>
+        </div>
+        <section class="movies_section">
+            <div class="movies_content">
+                <table id="moviesNowPlaying" class="movies_tables"></table>
+            </div>
+        </section>
+        <section class="movies_section">
+            <div class="movies_content">
+                <table id="moviesPopular" class="movies_tables"></table>
+            </div>
+        </section>
+        <section class="movies_section">
+            <div class="movies_content">
+                <table id="moviesTopRated" class="movies_tables"></table>
+            </div>
+        </section>
+        <section class="movies_section">
+            <div class="movies_content">
+                <table id="moviesUpcoming" class="movies_tables"></table>
+            </div>
+        </section>
+        <!-- movies section -->
+        <br><br><br>
+        <!-- series section -->
+        <div class="choose_content">
+            <h1>TV Shows</h1>
+        </div>
+        <div class="choose_content">
+            <table>
+                <tr class="choose_series_option">
+                    <td class="series_choice" id="choose_content_airing_today"><strong>Airing Today</strong></td>
+                </tr>
+                <tr class="choose_series_option">
+                    <td class="series_choice"><strong>On The Air</strong></td>
+                </tr>
+                <tr class="choose_series_option">
+                    <td class="series_choice"><strong>Popular</strong></td>
+                </tr>
+                <tr class="choose_series_option">
+                    <td class="series_choice"><strong>Top Rated</strong></td>
+                </tr>
+            </table>
+        </div>
+        <section class="series_section">
+            <div class="series_content">
+                <table id="seriesAiringToday" class="series_tables"></table>
+            </div>
+        </section>
+        <section class="series_section">
+            <div class="series_content">
+                <table id="seriesOnTheAir" class="series_tables"></table>
+            </div>
+        </section>
+        <section class="series_section">
+            <div class="series_content">
+                <table id="seriesPopular" class="series_tables"></table>
+            </div>
+        </section>
+        <section class="series_section">
+            <div class="series_content">
+                <table id="seriesTopRated" class="series_tables"></table>
+            </div>
+        </section>
+        <!-- series section -->
     <!-- MAIN -->
 
     <!-- FOOTER -->
@@ -108,7 +192,10 @@
     <!-- FOOTER -->
 </body>
 <script type="module" src="../JS/getTrending.js"></script>
+<script type="module" src="../JS/getMovies.js"></script>
+<script type="module" src="../JS/getTvShows.js"></script>
 <script src="../JS/index.js"></script>
+<script src="../JS/index2.js"></script>
 <script
     src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="

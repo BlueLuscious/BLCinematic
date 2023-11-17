@@ -47,7 +47,9 @@ body {
 /* HEADER */
 
 /* MAIN */
-.main_trending_tr {
+.main_trending_tr,
+.main_movies_tr,
+.main_series_tr  {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -59,19 +61,25 @@ body {
     background-color: rgb(255, 255, 255);
 }
 
-.main_trending_tr td {
+.main_trending_tr td,
+.main_movies_tr td,
+.main_series_tr td {
     display: flex;
     flex-direction: column;
     padding-bottom: 1em;
     font-size: 1.25em;
 }
 
-.main_trending_tr img {
+.main_trending_tr img,
+.main_movies_tr img,
+.main_series_tr img {
     width: 13.75em;
     border-radius: 1em;
 }
 
-.trending_section {
+.trending_section,
+.movies_section,
+.series_section {
     padding-top: 2em;
     padding-bottom: 2.5em;
 }
@@ -79,12 +87,14 @@ body {
 .choose_content,
 .choose_time {
     display: inline-flex;
-    margin-left: 10em;
+    margin-left: 10.75em;
+    margin-right: 3em;
     margin-top: 4em;
 
 }
 
-.choose_content h1 {
+.choose_content h1,
+.choose_time h1 {
     margin: 0;
     padding: 0.5em;
     width: 5em;
@@ -121,13 +131,17 @@ body {
 }
 
 #choose_content_all,
-#choose_time_day {
+#choose_time_day,
+#choose_content_now_playing,
+#choose_content_airing_today {
     color: rgb(255, 255, 255);
     background-color: rgb(17, 60, 124);
     cursor: default;
 }
 
-.trending_content {
+.trending_content,
+.movies_content,
+.series_content {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -136,7 +150,9 @@ body {
     width: 91%;
 }
 
-.trending_tables {
+.trending_tables,
+.movies_tables,
+.series_tables {
     display: inline-flex;
     overflow-y: hidden;
     overflow-x: scroll;
@@ -145,7 +161,9 @@ body {
 }
 
 body::-webkit-scrollbar,
-.trending_tables::-webkit-scrollbar {
+.trending_tables::-webkit-scrollbar,
+.movies_tables::-webkit-scrollbar,
+.series_tables::-webkit-scrollbar {
     width: 1.5em;
     height: 1.5em;
 }
@@ -154,13 +172,17 @@ body::-webkit-scrollbar-thumb {
     background-color:rgb(76, 130, 211);
 }
 
-.trending_tables::-webkit-scrollbar-thumb {
+.trending_tables::-webkit-scrollbar-thumb,
+.movies_tables::-webkit-scrollbar-thumb,
+.series_tables::-webkit-scrollbar-thumb {
     background-color:rgb(76, 130, 211);
     border-radius: 1em;
 }
 
 body::-webkit-scrollbar-thumb:hover,
-.trending_tables::-webkit-scrollbar-thumb:hover {
+.trending_tables::-webkit-scrollbar-thumb:hover,
+.movies_tables::-webkit-scrollbar-thumb:hover,
+.series_tables::-webkit-scrollbar-thumb:hover {
     background-color: rgb(29, 101, 209)
 }
 /* MAIN */
