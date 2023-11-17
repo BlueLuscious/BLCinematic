@@ -76,15 +76,10 @@ body {
     padding-bottom: 2.5em;
 }
 
-
-
-
-
-/* ANDA, MEJORAR!!!! */
-.choose_content {
+.choose_content,
+.choose_time {
     display: inline-flex;
-    margin-left: 10.25em;
-    margin-right: 5em;
+    margin-left: 10em;
     margin-top: 4em;
 
 }
@@ -97,41 +92,40 @@ body {
     border-radius: 2em;
     color: rgb(255, 255, 255);
     background-color: rgb(17, 60, 124);
-    font-size: 1.75em;
+    font-size: 1.6em;
 }
 
-.choose_content table {
+.choose_content table,
+.choose_time table {
     border: 0.2em solid rgb(17, 60, 124);
     border-radius: 3em;
     background-color: rgb(255, 255, 255);
 }
 
-.choose_content tr {
+.choose_content tr,
+.choose_time tr {
     display: inline;
 }
 
-.choose_content td {
+.choose_content td,
+.choose_time td {
     padding: 0.5em;
-    width: 5em;
+    width: 6em;
     text-align: center;
     border: 1px solid;
     border-radius: 2em;
     color: rgb(17, 60, 124);
     background-color: rgb(255, 255, 255);
-    font-size: 1.75em;
+    font-size: 1.6em;
     cursor: pointer;
 }
 
-#choose_content_all {
+#choose_content_all,
+#choose_time_day {
     color: rgb(255, 255, 255);
     background-color: rgb(17, 60, 124);
     cursor: default;
 }
-/* ANDA, MEJORAR!!!! */
-
-
-
-
 
 .trending_content {
     display: flex;

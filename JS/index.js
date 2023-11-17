@@ -88,12 +88,12 @@ window.addEventListener('DOMContentLoaded', function () {
         // NAVBAR ITEMS COLOR --> BY REDIRECTIONS //
     })
 
-
-
-    // CHOOSE CONTENT //
+    // CHOOSING THINGS //
     const trendingSections = Array.from(document.getElementsByClassName('trending_section'))
-    const trendingOptions = Array.from(document.getElementsByClassName('choose_content_option'))
-    const trendingChoices = Array.from(document.getElementsByClassName('content_choice'))
+    const contentOptions = Array.from(document.getElementsByClassName('choose_content_option'))
+    const contentChoices = Array.from(document.getElementsByClassName('content_choice'))
+    const timeOptions = Array.from(document.getElementsByClassName('choose_time_option'))
+    const timeChoices = Array.from(document.getElementsByClassName('time_choice'))
 
     // predifine section display (index 0)
     trendingSections.forEach(function (section, index) {
@@ -102,66 +102,104 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     })
 
-    // predifine choice background-color (index 0)
-    trendingChoices.forEach(function (choice, index) {
+    // predifine choices background-color (index 0)
+    contentChoices.forEach(function (choice, index) {
         if (index == 0) {
             choice.style.backgroundColor = 'rgb(17, 60, 124)'
+            content_0 = true
         }
     })
 
+    timeChoices.forEach(function (choice, index) {
+        if (index == 0) {
+            choice.style.backgroundColor = 'rgb(17, 60, 124)'
+            time_0 = true
+        }
+    })
 
-    trendingOptions.forEach(function (option, optionIndex) {
-        // modify choice background-color and cursor by click
+    // choose content //
+    contentOptions.forEach(function (option, optionIndex) {
+        // modify choice background-color, cursor and sections display by click
         option.addEventListener('click', function () {
             if (optionIndex == 0) {
-                trendingChoices.forEach(function (choice, choiceIndex) {
+                contentChoices.forEach(function (choice, choiceIndex) {
                     choice.style.color = choiceIndex === optionIndex ? 'rgb(255, 255, 255)' : 'rgb(17, 60, 124)'
                     choice.style.backgroundColor = choiceIndex === optionIndex ? 'rgb(17, 60, 124)' : 'rgb(255, 255, 255)'
                     choice.style.cursor = choiceIndex === optionIndex ? 'default' : 'pointer'
                 })
 
-                trendingSections.forEach(function (section, sectionIndex) {
-                    section.style.display = sectionIndex === optionIndex ? 'block' : 'none'
+                content_0 = true
+
+                trendingSections.forEach(function (section) {
+                    section.style.display = 'none'
                 })
+
+                if (time_0) {
+                    trendingSections[0].style.display = 'block'
+                } else if (time_1) {
+                    trendingSections[3].style.display = 'block'
+                }
+            } else {
+                content_0 = false
             }
 
             if (optionIndex == 1) {
-                trendingChoices.forEach(function (choice, choiceIndex) {
+                contentChoices.forEach(function (choice, choiceIndex) {
                     choice.style.color = choiceIndex === optionIndex ? 'rgb(255, 255, 255)' : 'rgb(17, 60, 124)'
                     choice.style.backgroundColor = choiceIndex === optionIndex ? 'rgb(17, 60, 124)' : 'rgb(255, 255, 255)'
                     choice.style.cursor = choiceIndex === optionIndex ? 'default' : 'pointer'
                 })
 
-                trendingSections.forEach(function (section, sectionIndex) {
-                    section.style.display = sectionIndex === optionIndex ? 'block' : 'none'
+                content_1 = true
+
+                trendingSections.forEach(function (section) {
+                    section.style.display = 'none'
                 })
+
+                if (time_0) {
+                    trendingSections[1].style.display = 'block'
+                } else if (time_1) {
+                    trendingSections[4].style.display = 'block'
+                }
+            } else {
+                content_1 = false
             }
 
             if (optionIndex == 2) {
-                trendingChoices.forEach(function (choice, choiceIndex) {
+                contentChoices.forEach(function (choice, choiceIndex) {
                     choice.style.color = choiceIndex === optionIndex ? 'rgb(255, 255, 255)' : 'rgb(17, 60, 124)'
                     choice.style.backgroundColor = choiceIndex === optionIndex ? 'rgb(17, 60, 124)' : 'rgb(255, 255, 255)'
                     choice.style.cursor = choiceIndex === optionIndex ? 'default' : 'pointer'
                 })
 
-                trendingSections.forEach(function (section, sectionIndex) {
-                    section.style.display = sectionIndex === optionIndex ? 'block' : 'none'
+                content_2 = true
+
+                trendingSections.forEach(function (section) {
+                    section.style.display = 'none'
                 })
+
+                if (time_0) {
+                    trendingSections[2].style.display = 'block'
+                } else if (time_1) {
+                    trendingSections[5].style.display = 'block'
+                }
+            } else {
+                content_2 = false
             }
         })
 
         // modify choice background-color and cursor by mouseover
         option.addEventListener('mouseover', function () {
-            if (optionIndex >= 0 && trendingChoices[optionIndex].style.backgroundColor !== 'rgb(17, 60, 124)') {
-                trendingChoices[optionIndex].style.color = 'rgb(255, 255, 255)'
-                trendingChoices[optionIndex].style.backgroundColor = 'rgb(134, 174, 235)'
-                trendingChoices[optionIndex].style.cursor = 'pointer'
+            if (optionIndex >= 0 && contentChoices[optionIndex].style.backgroundColor !== 'rgb(17, 60, 124)') {
+                contentChoices[optionIndex].style.color = 'rgb(255, 255, 255)'
+                contentChoices[optionIndex].style.backgroundColor = 'rgb(134, 174, 235)'
+                contentChoices[optionIndex].style.cursor = 'pointer'
             }
         })
 
         // modify choice background-color and cursor by mouseout
         option.addEventListener('mouseout', function () {
-            trendingChoices.forEach(function (choice, choiceIndex) {
+            contentChoices.forEach(function (choice, choiceIndex) {
                 if (choiceIndex >= 0 && choice.style.backgroundColor !== 'rgb(17, 60, 124)') {
                     choice.style.color = 'rgb(17, 60, 124)'
                     choice.style.backgroundColor = 'rgb(255, 255, 255)'
@@ -170,9 +208,89 @@ window.addEventListener('DOMContentLoaded', function () {
             })
         })
     })
-    // CHOOSE CONTENT //
+    // choose content  //
 
+    // choose time //
+    timeOptions.forEach(function (option, optionIndex) {
+        // modify choice background-color, cursor and sections display by click
+        option.addEventListener('click', function () {
+            if (optionIndex == 0) {
+                timeChoices.forEach(function (choice, choiceIndex) {
+                    choice.style.color = choiceIndex === optionIndex ? 'rgb(255, 255, 255)' : 'rgb(17, 60, 124)'
+                    choice.style.backgroundColor = choiceIndex === optionIndex ? 'rgb(17, 60, 124)' : 'rgb(255, 255, 255)'
+                    choice.style.cursor = choiceIndex === optionIndex ? 'default' : 'pointer'
+                })
 
+                time_0 = true
 
+                trendingSections.forEach(function (section) {
+                    section.style.display = 'none'
+                })
 
+                if (content_0) {
+                    trendingSections[0].style.display = 'block'
+                }
+
+                if (content_1) {
+                    trendingSections[1].style.display = 'block'
+                }
+
+                if (content_2) {
+                    trendingSections[2].style.display = 'block'
+                }
+            } else {
+                time_0 = false
+            }
+
+            if (optionIndex == 1) {
+                timeChoices.forEach(function (choice, choiceIndex) {
+                    choice.style.color = choiceIndex === optionIndex ? 'rgb(255, 255, 255)' : 'rgb(17, 60, 124)'
+                    choice.style.backgroundColor = choiceIndex === optionIndex ? 'rgb(17, 60, 124)' : 'rgb(255, 255, 255)'
+                    choice.style.cursor = choiceIndex === optionIndex ? 'default' : 'pointer'
+                })
+
+                time_1 = true
+
+                trendingSections.forEach(function (section) {
+                    section.style.display = 'none'
+                })
+
+                if (content_0) {
+                    trendingSections[3].style.display = 'block'
+                }
+
+                if (content_1) {
+                    trendingSections[4].style.display = 'block'
+                }
+
+                if (content_2) {
+                    trendingSections[5].style.display = 'block'
+                }
+            } else {
+                time_1 = false
+            }
+        })
+
+        // modify choice background-color and cursor by mouseover
+        option.addEventListener('mouseover', function () {
+            if (optionIndex >= 0 && timeChoices[optionIndex].style.backgroundColor !== 'rgb(17, 60, 124)') {
+                timeChoices[optionIndex].style.color = 'rgb(255, 255, 255)'
+                timeChoices[optionIndex].style.backgroundColor = 'rgb(134, 174, 235)'
+                timeChoices[optionIndex].style.cursor = 'pointer'
+            }
+        })
+
+        // modify choice background-color and cursor by mouseout
+        option.addEventListener('mouseout', function () {
+            timeChoices.forEach(function (choice, choiceIndex) {
+                if (choiceIndex >= 0 && choice.style.backgroundColor !== 'rgb(17, 60, 124)') {
+                    choice.style.color = 'rgb(17, 60, 124)'
+                    choice.style.backgroundColor = 'rgb(255, 255, 255)'
+                    choice.style.cursor = 'pointer'
+                }
+            })
+        })
+    })
+    // choose time //
+    // CHOOSING THINGS //
 })
