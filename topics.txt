@@ -15,10 +15,9 @@ La lista de resultados que coincidan con el término buscado. Al clickear en cua
 Si no hay resultados que coincidan con el término buscado la página debe mostrar un texto "no hay resultado para su búsqueda".
 
 3. Página: home del sitio. 
-La página principal del sitio deberá mostrar 3 grupos de datos de al menos 5 elementos con la oferta de películas y/o
-series obtenidas de los end points "TV" y "Movies".
-Cada grupo de datos tendrá su título que lo identifica.
-Cada elemento del grupo tendrá al menos una foto, un texto con el título/ nombre y la fecha de estreno. 
+# La página principal del sitio deberá mostrar 3 grupos de datos de al menos 5 elementos con la oferta de películas y/o series obtenidas de los end points "TV" y "Movies".
+# Cada grupo de datos tendrá su título que lo identifica.
+# Cada elemento del grupo tendrá al menos una foto, un texto con el título/ nombre y la fecha de estreno. 
 Al hacer click sobre cualquiera de los elementos debe redirigir a la página de detalle (punto 4).
 
 4.Página: detalles de serie y película
@@ -59,3 +58,11 @@ y si el valor buscador del buscador es un array que lo split y busque coincidenc
 los getApiDataByURL hacerlos constante, meterlos en un array y insertar en buscador descrito arriba. (Una opcion)
 
 bajar footer igual con el video del loco
+
+
+main y main 2, al pasar el id de la pelicula escupir su data en el main 2,
+hacerlo display block y ocultar el main, main 2 va a verse en (movies.html?${id})
+(copiarse de lo hecho en la indiana)
+
+
+hace boton de regresar arriba
