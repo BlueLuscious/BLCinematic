@@ -22,6 +22,8 @@ window.addEventListener('DOMContentLoaded', function () {
     const trendingMoviesWeekCard = document.getElementById('trendingMoviesWeek')
     const trendingSeriesWeekCard = document.getElementById('trendingSeriesWeek')
 
+    const trendingAllDayByOneCard = document.getElementById('trendingAllDayByOne')
+
     // trending day //
     getApiDataByURL(trendingAllDay)
         .then(data => {
@@ -45,8 +47,12 @@ window.addEventListener('DOMContentLoaded', function () {
                     title.appendChild(titleBold)
     
                     const date = document.createElement('td')
-                    const formattedDate = formatDate(trendingItem.release_date)
-                    date.textContent = formattedDate
+                    if (trendingItem.release_date == '') {
+                        date.textContent = ''
+                    } else {
+                        const formattedDate = formatDate(trendingItem.release_date)
+                        date.textContent = formattedDate
+                    }
 
                     row.appendChild(title)
                     row.appendChild(date)
@@ -60,8 +66,12 @@ window.addEventListener('DOMContentLoaded', function () {
                     nameItem.appendChild(nameBold)
     
                     const firstAirDate = document.createElement('td')
-                    const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
-                    firstAirDate.textContent = formattedFirstAirDate
+                    if (trendingItem.first_air_date == '') {
+                        firstAirDate.textContent = ''
+                    } else {
+                        const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
+                        firstAirDate.textContent = formattedFirstAirDate
+                    }
 
                     row.appendChild(nameItem)
                     row.appendChild(firstAirDate)
@@ -70,6 +80,25 @@ window.addEventListener('DOMContentLoaded', function () {
                 trendingAllDayCard.appendChild(row)
 
                 loadFooter()
+
+
+                
+                const mainTrendingCards = Array.from(document.getElementsByClassName('main_trending_tr'))
+
+                mainTrendingCards.forEach(function (trendingCard, index) {
+                    trendingCard.addEventListener('click', function () {
+                        if (trendingAllList[index].media_type == 'movie') {
+                            window.location.href = `movies.html?indexCard=${index}`
+                        }
+    
+                        if (trendingAllList[index].media_type == 'tv') {
+                            window.location.href = `tvShows.html?indexCard=${index}`
+                        }
+                    })
+                })
+
+
+
             })
         })
 

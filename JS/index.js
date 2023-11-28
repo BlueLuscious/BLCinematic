@@ -21,6 +21,44 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     // REDIRECTIONS //
 
+    // REDIRECTIONS BY CLICK MOVIES OR SERIES (URLPARAMS) //
+    const urlParams = new URLSearchParams(window.location.search)
+    const indexCard = urlParams.get('indexCard')
+    const mains = Array.from(document.getElementsByClassName('main_divs'))
+
+    if (window.location.pathname === '/HTML/movies.html' && window.location.search === '') {
+        mains.forEach(function (main, index) {
+            if (index != 0) {
+                main.style.display = 'none'
+            }
+        })
+    }
+
+    if (window.location.pathname === '/HTML/movies.html' && window.location.search === `?indexCard=${indexCard}`) {
+        mains.forEach(function (main, index) {
+            if (index != 1) {
+                main.style.display = 'none'
+            }
+        })
+    }
+
+    if (window.location.pathname === '/HTML/tvShows.html' && window.location.search === '') {
+        mains.forEach(function (main, index) {
+            if (index != 0) {
+                main.style.display = 'none'
+            }
+        })
+    }
+
+    if (window.location.pathname === '/HTML/tvShows.html' && window.location.search === `?indexCard=${indexCard}`) {
+        mains.forEach(function (main, index) {
+            if (index != 1) {
+                main.style.display = 'none'
+            }
+        })
+    }
+    // REDIRECTIONS BY CLICK MOVIES OR SERIES (URLPARAMS) //
+
     // NAVBAR ITEMS COLOR --> BY REDIRECTIONS //
     navbarItems.forEach(function (navbarItem, index) {
         navbarItem.addEventListener('click', function () {
@@ -52,7 +90,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
         navbarItem.addEventListener('mouseover', function () {
             if (window.location.pathname === '/HTML/index.html') {
-                if (index > 0) {
+                if (window.innerWidth <= 1600 && index > 0) {
+                    this.style.fontSize = '1.35em'
+                } else if (window.innerWidth > 1600 && index > 0) {
                     this.style.fontSize = '1.6em'
                 }
             }
@@ -62,7 +102,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
             }
             if (window.location.pathname === '/HTML/tvShows.html') {
-                if (index < 2) {
+                if (index != 2) {
                     this.style.fontSize = '1.6em'
                 }
             }
@@ -70,7 +110,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
         navbarItem.addEventListener('mouseout', function () {
             if (window.location.pathname === '/HTML/index.html') {
-                if (index > 0) {
+                if (window.innerWidth <= 1600 && index > 0) {
+                    this.style.fontSize = '1.25em'
+                } else if (window.innerWidth > 1600 && index > 0) {
                     this.style.fontSize = '1.5em'
                 }
             }
@@ -80,7 +122,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
             }
             if (window.location.pathname === '/HTML/tvShows.html') {
-                if (index < 2) {
+                if (index != 2) {
                     this.style.fontSize = '1.5em'
                 }
             }
@@ -208,7 +250,7 @@ window.addEventListener('DOMContentLoaded', function () {
             })
         })
     })
-    // choose content  //
+    // choose content //
 
     // choose time //
     timeOptions.forEach(function (option, optionIndex) {
@@ -293,4 +335,25 @@ window.addEventListener('DOMContentLoaded', function () {
     })
     // choose time //
     // CHOOSING THINGS //
+
+
+
+/*     const scrollToTop = document.getElementById('scrollToTop')
+
+    scrollToTop.style.display = 'none'
+
+    window.addEventListener('scroll', function () {
+        if (document.body.scrollTop > 120 || document.documentElement.scrollTop > 120) {
+            scrollToTop.style.display = 'block'
+        } else {
+            scrollToTop.style.display = 'none'
+        }
+    });
+
+    scrollToTop.addEventListener('click', function () {
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+    }); */
+
+
 })
