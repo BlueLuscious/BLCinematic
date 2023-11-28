@@ -1,0 +1,77 @@
+@media screen {
+    /* PC */
+    @media (max-width: 1860px) {
+        .header_navbar_item:first-of-type {
+            margin-left: 5em;
+            margin-right: 6.5em;
+        }
+        .header_navbar_item:last-of-type {
+            margin-left: 6.5em;
+        }
+        .header_navbar_item input {
+            padding: 0.85em;
+            width: 28em;
+            font-size: 1.15em;
+        }
+
+        .choose_content,
+        .choose_time {
+            margin-left: 8.75em;
+            margin-right: 2em;
+        }
+    }
+
+    @media (max-width: 1750px) {
+        .header_navbar_item:first-of-type {
+            margin-left: 5em;
+            margin-right: 5.5em;
+        }
+        .header_navbar_item:last-of-type {
+            margin-left: 5.5em;
+        }
+        .header_navbar_item input {
+            padding: 0.60em;
+            width: 26em;
+            font-size: 1.05em;
+        }
+
+        .header_navbar_td {
+            font-size: 1.5em;
+        }
+
+        .choose_content,
+        .choose_time {
+            margin-left: 6.75em;
+            margin-right: 1em;
+        }
+    }
+
+    @media (max-width: 1600px) {
+        .header_navbar_item:first-of-type {
+            margin-left: 5em;
+            margin-right: 4.5em;
+        }
+        .header_navbar_item:last-of-type {
+            margin-left: 4.5em;
+        }
+        .header_navbar_item input {
+            width: 24em;
+        }
+
+        .header_navbar_td {
+            font-size: 1.25em;
+        }
+
+        .choose_content,
+        .choose_time {
+            margin-left: 4.75em;
+            margin-right: 0;
+        }
+    }
+
+    @media (max-width: 1480px) {
+        /* hacer tres puntitos con nav expandible */
+        /* los mismo para los choose content */
+    }
+    /* PC */
+}
