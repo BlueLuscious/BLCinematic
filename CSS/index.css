@@ -1,21 +1,15 @@
 body {
     margin: 0;
     padding: 0;
-    overflow-y: hidden;
-    overflow-x: hidden;
+    overflow-y: scroll;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: rgb(230, 240, 255);
-}
-
-.scroll_body {
-    height: 100vh;
-    overflow-y: scroll;
 }
 
 /* HEADER */
 .header {
     padding: 1%;
-    background-color: rgb(29, 101, 209);
+    background-color: rgb(76, 130, 211);
 }
 
 .header_navbar {
@@ -215,7 +209,7 @@ body {
     padding-bottom: 1em;
 }
 
-.scroll_body::-webkit-scrollbar,
+body::-webkit-scrollbar,
 .trending_tables::-webkit-scrollbar,
 .movies_tables::-webkit-scrollbar,
 .series_tables::-webkit-scrollbar {
@@ -223,20 +217,20 @@ body {
     height: 1.5em;
 }
 
-.scroll_body::-webkit-scrollbar-thumb {
-    background-color:rgb(76, 130, 211);
+body::-webkit-scrollbar-thumb {
+    background-color: rgb(76, 130, 211);
     cursor: grab;
 }
 
 .trending_tables::-webkit-scrollbar-thumb,
 .movies_tables::-webkit-scrollbar-thumb,
 .series_tables::-webkit-scrollbar-thumb {
-    background-color:rgb(76, 130, 211);
+    background-color: rgb(76, 130, 211);
     border-radius: 1em;
     cursor: grab;
 }
 
-.scroll_body::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
 .trending_tables::-webkit-scrollbar-thumb:hover,
 .movies_tables::-webkit-scrollbar-thumb:hover,
 .series_tables::-webkit-scrollbar-thumb:hover {
@@ -247,7 +241,7 @@ body {
 .scroll_to_top {
     position: fixed;
     bottom: 5%;
-    right: 2.5%;
+    right: 1.25%;
     margin: 0;
     padding: 0;
     border: none;
@@ -277,7 +271,7 @@ body {
 .body_footer {
     width: 100%;
     height: 22.5em;
-    background-color: rgb(29, 101, 209);
+    background-color: rgb(76, 130, 211);
 }
 
 .footer {
