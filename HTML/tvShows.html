@@ -5,52 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BL Cinematic</title>
     <link rel="stylesheet" href="../CSS/index.css" type="text/css">
+    <link rel="stylesheet" href="../CSS/responsive.css" type="text/css">
 </head>
 <body>
-    <!-- HEADER -->
-    <header class="header">
-        <nav class="header_navbar">
-            <div class="header_navbar_item">
-                <img src="BLCinematic-Logo.png" alt="BLCinematic-Logo">
+    <div class="scroll_body">
+        <!-- HEADER -->
+        <header class="header">
+            <nav class="header_navbar">
+                <div class="header_navbar_item">
+                    <img src="BLCinematic-Logo.png" alt="BLCinematic-Logo">
+                </div>
+                <div class="header_navbar_item">
+                    <input type="text" id='searchBar' name="search" placeholder="Search for Movies or TV Shows...">
+                </div>
+                <div class="header_navbar_item">
+                    <table>
+                        <tr class="header_navbar_tr">
+                            <td class="header_navbar_td">Home</td>
+                        </tr>
+                        <tr class="header_navbar_tr">
+                            <td class="header_navbar_td">Movies</td>
+                        </tr>
+                        <tr class="header_navbar_tr">
+                            <td class="header_navbar_td">TV Shows</td>
+                        </tr>
+                        <tr class="header_navbar_tr">
+                            <td class="header_navbar_td">Genres</td>
+                        </tr>
+                        <tr class="header_navbar_tr">
+                            <td class="header_navbar_td">Favourites</td>
+                        </tr>
+                    </table>
+                </div>
+            </nav>
+        </header>
+        <!-- HEADER -->
+
+        <!-- MAIN -->
+        <main class="main">
+            <div class="main_divs">
+                <section class="trending_section_by_one">
+                    <h1>Holaaaa</h1>
+                </section>
             </div>
-            <div class="header_navbar_item">
-                <input type="text" id='searchBar' name="search" placeholder="Search for Movies or TV Shows...">
+    
+            <div class="main_divs">
+                <section class="trending_section_by_one">
+                    <h1>Hola series</h1>
+                    <div class="trending_content">
+                        <table id="trendingByOne" class="trending_tables"></table>
+                    </div>
+                </section>
             </div>
-            <div>
-                <table>
-                    <tr class="header_navbar_tr">
-                        <td class="header_navbar_td">Inicio</td>
-                    </tr>
-                    <tr class="header_navbar_tr">
-                        <td class="header_navbar_td">Movies</td>
-                    </tr>
-                    <tr class="header_navbar_tr">
-                        <td class="header_navbar_td">TV Shows</td>
-                    </tr>
-                </table>
+        </main>
+        <!-- MAIN -->
+
+        <!-- FOOTER -->
+        <footer class="footer" id="id_footer">
+            <div class="top_footer">
+
             </div>
-        </nav>
-    </header>
-    <!-- HEADER -->
+            <div class="body_footer">
 
-    <!-- MAIN -->
-    <main class="main">
-
-    </main>
-    <!-- MAIN -->
-
-    <!-- FOOTER -->
-    <footer class="footer" id="id_footer">
-        <div class="top_footer">
-
-        </div>
-        <div class="body_footer">
-
-        </div>
-    </footer>
-    <!-- FOOTER -->
+            </div>
+        </footer>
+        <!-- FOOTER -->
+    </div>
 </body>
-<script type="module" src="../JS/getApi.js"></script>
+<script type="module" src="../JS/"></script>
 <script src="../JS/index.js"></script>
 <script
     src="https://code.jquery.com/jquery-3.7.1.min.js"
