@@ -2,7 +2,7 @@ import { getApiDataByURL } from "./functions.js"
 import { formatDate } from "./functions.js"
 import { loadFooter } from "./functions.js"
 
-window.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
 
     const IMAGE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
 

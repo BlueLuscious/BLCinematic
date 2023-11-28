@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
 
     const COLOR1 = 'rgb(6, 33, 74)'
     const navbarItems = Array.from(document.getElementsByClassName('header_navbar_td'))
@@ -336,24 +336,22 @@ window.addEventListener('DOMContentLoaded', function () {
     // choose time //
     // CHOOSING THINGS //
 
-
-
-/*     const scrollToTop = document.getElementById('scrollToTop')
+    // SCROLL TOP BUTTON //
+    const scrollToTop = document.getElementById('scrollToTop')
 
     scrollToTop.style.display = 'none'
 
     window.addEventListener('scroll', function () {
-        if (document.body.scrollTop > 120 || document.documentElement.scrollTop > 120) {
+        if (document.body.scrollTop > 890 || document.documentElement.scrollTop > 890) {
             scrollToTop.style.display = 'block'
         } else {
             scrollToTop.style.display = 'none'
         }
-    });
+    })
 
     scrollToTop.addEventListener('click', function () {
         document.body.scrollTop = 0
         document.documentElement.scrollTop = 0
-    }); */
-
-
+    })
+    // SCROLL TOP BUTTON //
 })

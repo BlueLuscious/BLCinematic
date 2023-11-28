@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
 
     // CHOOSING THINGS - MOVIES //
     const moviesSections = Array.from(document.getElementsByClassName('movies_section'))
