@@ -275,7 +275,6 @@ body::-webkit-scrollbar-thumb:hover,
 }
 
 .footer {
-    visibility: hidden;
-    opacity: 0;
+    display: none;
 }
 /* FOOTER */
