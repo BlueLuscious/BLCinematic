@@ -18,12 +18,69 @@ export async function getApiDataByURL(params) {
 }
 // GET APIDATA FUNCTION
 
+// GET TRENDING RESULTS //
+const IMAGE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
+
+export function getTrending(listItem, card, formatDate) {
+    listItem.forEach(trendingItem => {
+        const row = document.createElement('tr')
+        row.classList.add('main_trending_tr')
+
+        const imageData = document.createElement('td')
+        const image = document.createElement('img')
+        image.src = `${IMAGE_URL + trendingItem.poster_path}`
+        imageData.appendChild(image)
+        row.appendChild(imageData)
+
+        // movies title
+        if (trendingItem.media_type == 'movie') {
+            const title = document.createElement('td')
+            const titleBold = document.createElement('strong')
+            titleBold.textContent = trendingItem.title
+            title.appendChild(titleBold)
+
+            const date = document.createElement('td')
+            if (trendingItem.release_date == '') {
+                date.textContent = ''
+            } else {
+                const formattedDate = formatDate(trendingItem.release_date)
+                date.textContent = formattedDate
+            }
+
+            row.appendChild(title)
+            row.appendChild(date)
+        }
+
+        // tv shows and series name
+        if (trendingItem.media_type == 'tv') {
+            const nameItem = document.createElement('td')
+            const nameBold = document.createElement('strong')
+            nameBold.textContent = trendingItem.name
+            nameItem.appendChild(nameBold)
+
+            const firstAirDate = document.createElement('td')
+            if (trendingItem.first_air_date == '') {
+                firstAirDate.textContent = ''
+            } else {
+                const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
+                firstAirDate.textContent = formattedFirstAirDate
+            }
+
+            row.appendChild(nameItem)
+            row.appendChild(firstAirDate)
+        }
+
+        card.appendChild(row)
+    })
+}
+// GET TRENDING RESULTS //
+
+
+
 // LOAD FOOTER
 export async function loadFooter() {
     const footer = document.getElementById('id_footer')
-    footer.style.visibility = 'visible'
-    footer.style.opacity = '1'
-
+    footer.style.display = 'block'
 }
 // LOAD FOOTER
 

@@ -19,126 +19,58 @@ document.addEventListener('DOMContentLoaded', function () {
 
     getApiDataByURL(seriesAiringToday)
         .then(data => {
-            const seriesAiringTodayList = data.results
-
-            seriesAiringTodayList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_series_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                const nameItem = document.createElement('td')
-                const nameBold = document.createElement('strong')
-                nameBold.textContent = trendingItem.name
-                nameItem.appendChild(nameBold)
-
-                const firstAirDate = document.createElement('td')
-                const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
-                firstAirDate.textContent = formattedFirstAirDate
-
-                row.appendChild(nameItem)
-                row.appendChild(firstAirDate)
-                seriesAiringTodayCard.appendChild(row)
-
-                loadFooter()
-            })
+            getSeries(data.results, seriesAiringTodayCard)
+            loadFooter()
         })
 
     getApiDataByURL(seriesOnTheAir)
         .then(data => {
-            const seriesOnTheAirList = data.results
-
-            seriesOnTheAirList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_series_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                const nameItem = document.createElement('td')
-                const nameBold = document.createElement('strong')
-                nameBold.textContent = trendingItem.name
-                nameItem.appendChild(nameBold)
-
-                const firstAirDate = document.createElement('td')
-                const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
-                firstAirDate.textContent = formattedFirstAirDate
-
-                row.appendChild(nameItem)
-                row.appendChild(firstAirDate)
-                seriesOnTheAirCard.appendChild(row)
-
-                loadFooter()
-            })
+            getSeries(data.results, seriesOnTheAirCard)
+            loadFooter()
         })
 
     getApiDataByURL(seriesPopular)
         .then(data => {
-            const seriesPopularList = data.results
-
-            seriesPopularList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_series_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                const nameItem = document.createElement('td')
-                const nameBold = document.createElement('strong')
-                nameBold.textContent = trendingItem.name
-                nameItem.appendChild(nameBold)
-
-                const firstAirDate = document.createElement('td')
-                const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
-                firstAirDate.textContent = formattedFirstAirDate
-
-                row.appendChild(nameItem)
-                row.appendChild(firstAirDate)
-                seriesPopularCard.appendChild(row)
-
-                loadFooter()
-            })
+            getSeries(data.results, seriesPopularCard)
+            loadFooter()
         })
 
     getApiDataByURL(seriesTopRated)
         .then(data => {
-            const seriesTopRatedList = data.results
-
-            seriesTopRatedList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_series_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                const nameItem = document.createElement('td')
-                const nameBold = document.createElement('strong')
-                nameBold.textContent = trendingItem.name
-                nameItem.appendChild(nameBold)
-
-                const firstAirDate = document.createElement('td')
-                const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
-                firstAirDate.textContent = formattedFirstAirDate
-
-                row.appendChild(nameItem)
-                row.appendChild(firstAirDate)
-                seriesTopRatedCard.appendChild(row)
-
-                loadFooter()
-            })
+            getSeries(data.results, seriesTopRatedCard)
+            loadFooter()
         })
     // SERIES //
+
+    // GET SERIES RESULTS //
+    function getSeries(listItem, card) {
+        listItem.forEach(trendingItem => {
+            const row = document.createElement('tr')
+            row.classList.add('main_series_tr')
+
+            const imageData = document.createElement('td')
+            const image = document.createElement('img')
+            image.src = `${IMAGE_URL + trendingItem.poster_path}`
+            imageData.appendChild(image)
+            row.appendChild(imageData)
+
+            const nameItem = document.createElement('td')
+            const nameBold = document.createElement('strong')
+            nameBold.textContent = trendingItem.name
+            nameItem.appendChild(nameBold)
+
+            const firstAirDate = document.createElement('td')
+            if (trendingItem.first_air_date == '') {
+                firstAirDate.textContent = ''
+            } else {
+                const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
+                firstAirDate.textContent = formattedFirstAirDate
+            }
+
+            row.appendChild(nameItem)
+            row.appendChild(firstAirDate)
+            card.appendChild(row)
+        })
+    }
+    // GET SERIES RESULTS //
 })

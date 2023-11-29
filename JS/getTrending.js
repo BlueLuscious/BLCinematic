@@ -1,11 +1,11 @@
 import { getApiDataByURL } from "./functions.js"
 import { formatDate } from "./functions.js"
 import { loadFooter } from "./functions.js"
+import { getTrending } from "./functions.js"
 
 document.addEventListener('DOMContentLoaded', function () {
 
     // const apiKey = 'cfac909fcba4ab5a5293e810bfda6d52'
-    const IMAGE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
 
     // TRENDING //
     const trendingAllDay = 'https://api.themoviedb.org/3/trending/all/day?language=en-US'
@@ -22,261 +22,69 @@ document.addEventListener('DOMContentLoaded', function () {
     const trendingMoviesWeekCard = document.getElementById('trendingMoviesWeek')
     const trendingSeriesWeekCard = document.getElementById('trendingSeriesWeek')
 
-    const trendingAllDayByOneCard = document.getElementById('trendingAllDayByOne')
-
     // trending day //
     getApiDataByURL(trendingAllDay)
         .then(data => {
-            const trendingAllList = data.results
-
-            trendingAllList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_trending_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                // movies title
-                if (trendingItem.media_type == 'movie') {
-                    const title = document.createElement('td')
-                    const titleBold = document.createElement('strong')
-                    titleBold.textContent = trendingItem.title
-                    title.appendChild(titleBold)
-    
-                    const date = document.createElement('td')
-                    if (trendingItem.release_date == '') {
-                        date.textContent = ''
-                    } else {
-                        const formattedDate = formatDate(trendingItem.release_date)
-                        date.textContent = formattedDate
-                    }
-
-                    row.appendChild(title)
-                    row.appendChild(date)
-                }
-
-                // tv shows and series name
-                if (trendingItem.media_type == 'tv') {
-                    const nameItem = document.createElement('td')
-                    const nameBold = document.createElement('strong')
-                    nameBold.textContent = trendingItem.name
-                    nameItem.appendChild(nameBold)
-    
-                    const firstAirDate = document.createElement('td')
-                    if (trendingItem.first_air_date == '') {
-                        firstAirDate.textContent = ''
-                    } else {
-                        const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
-                        firstAirDate.textContent = formattedFirstAirDate
-                    }
-
-                    row.appendChild(nameItem)
-                    row.appendChild(firstAirDate)
-                }
-
-                trendingAllDayCard.appendChild(row)
-
-                loadFooter()
-
-
-                
-                const mainTrendingCards = Array.from(document.getElementsByClassName('main_trending_tr'))
-
-                mainTrendingCards.forEach(function (trendingCard, index) {
-                    trendingCard.addEventListener('click', function () {
-                        if (trendingAllList[index].media_type == 'movie') {
-                            window.location.href = `movies.html?indexCard=${index}`
-                        }
-    
-                        if (trendingAllList[index].media_type == 'tv') {
-                            window.location.href = `tvShows.html?indexCard=${index}`
-                        }
-                    })
-                })
-
-
-
-            })
+            getTrending(data.results, trendingAllDayCard, formatDate)
+            eventClickCard(data.results, trendingAllDayCard)
+            loadFooter()
         })
 
     getApiDataByURL(trendingMoviesDay)
         .then(data => {
-            const trendingMoviesList = data.results
-
-            trendingMoviesList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_trending_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                const title = document.createElement('td')
-                const titleBold = document.createElement('strong')
-                titleBold.textContent = trendingItem.title
-                title.appendChild(titleBold)
-
-                const date = document.createElement('td')
-                const formattedDate = formatDate(trendingItem.release_date)
-                date.textContent = formattedDate
-
-                row.appendChild(title)
-                row.appendChild(date)
-                trendingMoviesDayCard.appendChild(row)
-
-                loadFooter()
-            })
+            getTrending(data.results, trendingMoviesDayCard, formatDate)
+            eventClickCard(data.results, trendingMoviesDayCard)
+            loadFooter()
         })
 
     getApiDataByURL(trendingSeriesDay)
         .then(data => {
-            const trendingSeriesList = data.results
-
-            trendingSeriesList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_trending_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                const nameItem = document.createElement('td')
-                const nameBold = document.createElement('strong')
-                nameBold.textContent = trendingItem.name
-                nameItem.appendChild(nameBold)
-
-                const firstAirDate = document.createElement('td')
-                const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
-                firstAirDate.textContent = formattedFirstAirDate
-
-                row.appendChild(nameItem)
-                row.appendChild(firstAirDate)
-                trendingSeriesDayCard.appendChild(row)
-
-                loadFooter()
-            })
+            getTrending(data.results, trendingSeriesDayCard, formatDate)
+            eventClickCard(data.results, trendingSeriesDayCard)
+            loadFooter()
         })
-        // trending day //
+    // trending day //
 
-        // trending week //
-        getApiDataByURL(trendingAllWeek)
+    // trending week //
+    getApiDataByURL(trendingAllWeek)
         .then(data => {
-            const trendingAllList = data.results
-
-            trendingAllList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_trending_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                // movies title
-                if (trendingItem.media_type == 'movie') {
-                    const title = document.createElement('td')
-                    const titleBold = document.createElement('strong')
-                    titleBold.textContent = trendingItem.title
-                    title.appendChild(titleBold)
-    
-                    const date = document.createElement('td')
-                    const formattedDate = formatDate(trendingItem.release_date)
-                    date.textContent = formattedDate
-
-                    row.appendChild(title)
-                    row.appendChild(date)
-                }
-
-                // tv shows and series name
-                if (trendingItem.media_type == 'tv') {
-                    const nameItem = document.createElement('td')
-                    const nameBold = document.createElement('strong')
-                    nameBold.textContent = trendingItem.name
-                    nameItem.appendChild(nameBold)
-    
-                    const firstAirDate = document.createElement('td')
-                    const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
-                    firstAirDate.textContent = formattedFirstAirDate
-
-                    row.appendChild(nameItem)
-                    row.appendChild(firstAirDate)
-                }
-
-                trendingAllWeekCard.appendChild(row)
-
-                loadFooter()
-            })
+            getTrending(data.results, trendingAllWeekCard, formatDate)
+            eventClickCard(data.results, trendingAllWeekCard)
+            loadFooter()
         })
 
-        getApiDataByURL(trendingMoviesWeek)
+    getApiDataByURL(trendingMoviesWeek)
         .then(data => {
-            const trendingMoviesList = data.results
-
-            trendingMoviesList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_trending_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                const title = document.createElement('td')
-                const titleBold = document.createElement('strong')
-                titleBold.textContent = trendingItem.title
-                title.appendChild(titleBold)
-
-                const date = document.createElement('td')
-                const formattedDate = formatDate(trendingItem.release_date)
-                date.textContent = formattedDate
-
-                row.appendChild(title)
-                row.appendChild(date)
-                trendingMoviesWeekCard.appendChild(row)
-
-                loadFooter()
-            })
+            getTrending(data.results, trendingMoviesWeekCard, formatDate)
+            eventClickCard(data.results, trendingMoviesWeekCard)
+            loadFooter()
         })
 
-        getApiDataByURL(trendingSeriesWeek)
+    getApiDataByURL(trendingSeriesWeek)
         .then(data => {
-            const trendingSeriesList = data.results
-
-            trendingSeriesList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_trending_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                const nameItem = document.createElement('td')
-                const nameBold = document.createElement('strong')
-                nameBold.textContent = trendingItem.name
-                nameItem.appendChild(nameBold)
-
-                const firstAirDate = document.createElement('td')
-                const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
-                firstAirDate.textContent = formattedFirstAirDate
-
-                row.appendChild(nameItem)
-                row.appendChild(firstAirDate)
-                trendingSeriesWeekCard.appendChild(row)
-
-                loadFooter()
-            })
+            getTrending(data.results, trendingSeriesWeekCard, formatDate)
+            eventClickCard(data.results, trendingSeriesWeekCard)
+            loadFooter()
         })
-        // trending week //
+    // trending week //
     // TRENDING //
+
+    //
+    function eventClickCard(results, card) {
+        const mainTrendingCards = Array.from(card.getElementsByClassName('main_trending_tr'))
+
+        mainTrendingCards.forEach(function (trendingCard, index) {
+            trendingCard.addEventListener('click', function () {
+                if (results[index].media_type == 'movie') {
+                    window.location.href = `movies.html?indexCard=${index}`
+                }
+
+                if (results[index].media_type == 'tv') {
+                    window.location.href = `tvShows.html?indexCard=${index}`
+                }
+            })
+        })
+    }
+    //
+    
 })

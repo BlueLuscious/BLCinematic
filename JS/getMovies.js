@@ -19,126 +19,58 @@ document.addEventListener('DOMContentLoaded', function () {
     
     getApiDataByURL(moviesNowPlaying)
         .then(data => {
-            const moviesNowPlayingList = data.results
-
-            moviesNowPlayingList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_movies_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                const title = document.createElement('td')
-                const titleBold = document.createElement('strong')
-                titleBold.textContent = trendingItem.title
-                title.appendChild(titleBold)
-
-                const date = document.createElement('td')
-                const formattedDate = formatDate(trendingItem.release_date)
-                date.textContent = formattedDate
-
-                row.appendChild(title)
-                row.appendChild(date)
-                moviesNowPlayingCard.appendChild(row)
-
-                loadFooter()
-            })
+            getMovies(data.results, moviesNowPlayingCard)
+            loadFooter()
         })
 
-        getApiDataByURL(moviesPopular)
+    getApiDataByURL(moviesPopular)
         .then(data => {
-            const moviesPopularList = data.results
-
-            moviesPopularList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_movies_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                const title = document.createElement('td')
-                const titleBold = document.createElement('strong')
-                titleBold.textContent = trendingItem.title
-                title.appendChild(titleBold)
-
-                const date = document.createElement('td')
-                const formattedDate = formatDate(trendingItem.release_date)
-                date.textContent = formattedDate
-
-                row.appendChild(title)
-                row.appendChild(date)
-                moviesPopularCard.appendChild(row)
-
-                loadFooter()
-            })
+            getMovies(data.results, moviesPopularCard)
+            loadFooter()
         })
 
-        getApiDataByURL(moviesTopRated)
+    getApiDataByURL(moviesTopRated)
         .then(data => {
-            const moviesTopRatedList = data.results
-
-            moviesTopRatedList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_movies_tr')
-
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
-
-                const title = document.createElement('td')
-                const titleBold = document.createElement('strong')
-                titleBold.textContent = trendingItem.title
-                title.appendChild(titleBold)
-
-                const date = document.createElement('td')
-                const formattedDate = formatDate(trendingItem.release_date)
-                date.textContent = formattedDate
-
-                row.appendChild(title)
-                row.appendChild(date)
-                moviesTopRatedCard.appendChild(row)
-
-                loadFooter()
-            })
+            getMovies(data.results, moviesTopRatedCard)
+            loadFooter()
         })
 
-        getApiDataByURL(moviesUpcoming)
+    getApiDataByURL(moviesUpcoming)
         .then(data => {
-            const moviesUpcomingList = data.results
+            getMovies(data.results, moviesUpcomingCard)
+            loadFooter()
+        })
+    // MOVIES //
 
-            moviesUpcomingList.forEach(trendingItem => {
-                const row = document.createElement('tr')
-                row.classList.add('main_movies_tr')
+    // GET MOVIES RESULTS //
+    function getMovies(listItem, card) {
+        listItem.forEach(trendingItem => {
+            const row = document.createElement('tr')
+            row.classList.add('main_movies_tr')
 
-                const imageData = document.createElement('td')
-                const image = document.createElement('img')
-                image.src = `${IMAGE_URL + trendingItem.poster_path}`
-                imageData.appendChild(image)
-                row.appendChild(imageData)
+            const imageData = document.createElement('td')
+            const image = document.createElement('img')
+            image.src = `${IMAGE_URL + trendingItem.poster_path}`
+            imageData.appendChild(image)
+            row.appendChild(imageData)
 
-                const title = document.createElement('td')
-                const titleBold = document.createElement('strong')
-                titleBold.textContent = trendingItem.title
-                title.appendChild(titleBold)
+            const title = document.createElement('td')
+            const titleBold = document.createElement('strong')
+            titleBold.textContent = trendingItem.title
+            title.appendChild(titleBold)
 
-                const date = document.createElement('td')
+            const date = document.createElement('td')
+            if (trendingItem.release_date == '') {
+                date.textContent = ''
+            } else {
                 const formattedDate = formatDate(trendingItem.release_date)
                 date.textContent = formattedDate
+            }
 
-                row.appendChild(title)
-                row.appendChild(date)
-                moviesUpcomingCard.appendChild(row)
-
-                loadFooter()
-            })
+            row.appendChild(title)
+            row.appendChild(date)
+            card.appendChild(row)
         })
-        // MOVIES //
+    }
+    // GET MOVIES RESULTS //
 })
