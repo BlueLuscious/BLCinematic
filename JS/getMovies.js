@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     getApiDataByURL(moviesNowPlaying)
         .then(data => {
             getMovies(data.results, moviesNowPlayingCard)
+            eventClickCard(data.results, moviesNowPlayingCard)
             loadFooter()
         })
 
@@ -73,4 +74,21 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
     // GET MOVIES RESULTS //
+
+    function eventClickCard(results, card) {
+        const mainTrendingCards = Array.from(card.getElementsByClassName('main_movies_tr'))
+
+        mainTrendingCards.forEach(function (trendingCard, index) {
+            trendingCard.addEventListener('click', function () {
+                if (results[index].media_type == 'movie') {
+                    window.location.href = `movies.html?indexCard=${index}`
+                }
+
+                if (results[index].media_type == 'tv') {
+                    window.location.href = `tvShows.html?indexCard=${index}`
+                }
+            })
+        })
+    }
+    
 })
