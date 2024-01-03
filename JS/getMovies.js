@@ -11,34 +11,37 @@ document.addEventListener('DOMContentLoaded', function () {
     const moviesPopular = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1'
     const moviesTopRated = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1'
     const moviesUpcoming = 'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1'
-    
+
     const moviesNowPlayingCard = document.getElementById('moviesNowPlaying')
     const moviesPopularCard = document.getElementById('moviesPopular')
     const moviesTopRatedCard = document.getElementById('moviesTopRated')
     const moviesUpcomingCard = document.getElementById('moviesUpcoming')
-    
+
     getApiDataByURL(moviesNowPlaying)
         .then(data => {
             getMovies(data.results, moviesNowPlayingCard)
-            eventClickCard(data.results, moviesNowPlayingCard)
+            eventClickCard(moviesNowPlayingCard)
             loadFooter()
         })
 
     getApiDataByURL(moviesPopular)
         .then(data => {
             getMovies(data.results, moviesPopularCard)
+            eventClickCard(moviesPopularCard)
             loadFooter()
         })
 
     getApiDataByURL(moviesTopRated)
         .then(data => {
             getMovies(data.results, moviesTopRatedCard)
+            eventClickCard(moviesTopRatedCard)
             loadFooter()
         })
 
     getApiDataByURL(moviesUpcoming)
         .then(data => {
             getMovies(data.results, moviesUpcomingCard)
+            eventClickCard(moviesUpcomingCard)
             loadFooter()
         })
     // MOVIES //
@@ -75,20 +78,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     // GET MOVIES RESULTS //
 
-    function eventClickCard(results, card) {
-        const mainTrendingCards = Array.from(card.getElementsByClassName('main_movies_tr'))
+    //
+    function eventClickCard(card) {
+        const mainMoviesCards = Array.from(card.getElementsByClassName('main_movies_tr'))
 
-        mainTrendingCards.forEach(function (trendingCard, index) {
-            trendingCard.addEventListener('click', function () {
-                if (results[index].media_type == 'movie') {
-                    window.location.href = `movies.html?indexCard=${index}`
-                }
-
-                if (results[index].media_type == 'tv') {
-                    window.location.href = `tvShows.html?indexCard=${index}`
-                }
+        mainMoviesCards.forEach(function (moviesCard, index) {
+            moviesCard.addEventListener('click', function () {
+                window.location.href = `movies.html?indexCard=${index}`
             })
         })
     }
-    
+    //
+
 })

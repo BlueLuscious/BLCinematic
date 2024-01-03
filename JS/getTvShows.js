@@ -20,24 +20,28 @@ document.addEventListener('DOMContentLoaded', function () {
     getApiDataByURL(seriesAiringToday)
         .then(data => {
             getSeries(data.results, seriesAiringTodayCard)
+            eventClickCard(seriesAiringTodayCard)
             loadFooter()
         })
 
     getApiDataByURL(seriesOnTheAir)
         .then(data => {
             getSeries(data.results, seriesOnTheAirCard)
+            eventClickCard(seriesOnTheAirCard)
             loadFooter()
         })
 
     getApiDataByURL(seriesPopular)
         .then(data => {
             getSeries(data.results, seriesPopularCard)
+            eventClickCard(seriesPopularCard)
             loadFooter()
         })
 
     getApiDataByURL(seriesTopRated)
         .then(data => {
             getSeries(data.results, seriesTopRatedCard)
+            eventClickCard(seriesTopRatedCard)
             loadFooter()
         })
     // SERIES //
@@ -73,4 +77,17 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
     // GET SERIES RESULTS //
+
+    //
+    function eventClickCard(card) {
+        const mainSeriesCards = Array.from(card.getElementsByClassName('main_series_tr'))
+
+        mainSeriesCards.forEach(function (seriesCard, index) {
+            seriesCard.addEventListener('click', function () {
+                window.location.href = `tvShows.html?indexCard=${index}`
+            })
+        })
+    }
+    //
+
 })
