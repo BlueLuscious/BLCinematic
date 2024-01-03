@@ -1,0 +1,63 @@
+// GET MOVIES RESULTS //
+export function getMovies(listItem, card, formatDate) {
+    listItem.forEach(trendingItem => {
+        const row = document.createElement('tr')
+        row.classList.add('main_movies_tr')
+
+        const imageData = document.createElement('td')
+        const image = document.createElement('img')
+        image.src = `${IMAGE_URL + trendingItem.poster_path}`
+        imageData.appendChild(image)
+        row.appendChild(imageData)
+
+        const title = document.createElement('td')
+        const titleBold = document.createElement('strong')
+        titleBold.textContent = trendingItem.title
+        title.appendChild(titleBold)
+
+        const date = document.createElement('td')
+        if (trendingItem.release_date == '') {
+            date.textContent = ''
+        } else {
+            const formattedDate = formatDate(trendingItem.release_date)
+            date.textContent = formattedDate
+        }
+
+        row.appendChild(title)
+        row.appendChild(date)
+        card.appendChild(row)
+    })
+}
+// GET MOVIES RESULTS //
+
+// GET SERIES RESULTS //
+export function getSeries(listItem, card, formatDate) {
+    listItem.forEach(trendingItem => {
+        const row = document.createElement('tr')
+        row.classList.add('main_series_tr')
+
+        const imageData = document.createElement('td')
+        const image = document.createElement('img')
+        image.src = `${IMAGE_URL + trendingItem.poster_path}`
+        imageData.appendChild(image)
+        row.appendChild(imageData)
+
+        const nameItem = document.createElement('td')
+        const nameBold = document.createElement('strong')
+        nameBold.textContent = trendingItem.name
+        nameItem.appendChild(nameBold)
+
+        const firstAirDate = document.createElement('td')
+        if (trendingItem.first_air_date == '') {
+            firstAirDate.textContent = ''
+        } else {
+            const formattedFirstAirDate = formatDate(trendingItem.first_air_date)
+            firstAirDate.textContent = formattedFirstAirDate
+        }
+
+        row.appendChild(nameItem)
+        row.appendChild(firstAirDate)
+        card.appendChild(row)
+    })
+}
+// GET SERIES RESULTS //
