@@ -1,4 +1,4 @@
-// GET APIDATA FUNCTION
+// GET APIDATA //
 export async function getApiDataByURL(params) {
     const options = {
         method: 'GET',
@@ -16,15 +16,26 @@ export async function getApiDataByURL(params) {
         })
         .catch(err => console.error(err))
 }
-// GET APIDATA FUNCTION
+// GET APIDATA //
 
-// GET TRENDING RESULTS //
+// GET RESULTS //
 const IMAGE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
 
-export function getTrending(listItem, card, formatDate) {
+export function getResults(listItem, card, formatDate) {
     listItem.forEach(trendingItem => {
         const row = document.createElement('tr')
-        row.classList.add('main_trending_tr')
+
+        if (trendingItem.media_type == 'movie' || trendingItem.media_type == 'tv') {
+            row.classList.add('main_trending_tr')
+        }
+
+        if (!trendingItem.media_type && trendingItem.title) {
+            row.classList.add('main_movies_tr')
+        }
+
+        if (!trendingItem.media_type && trendingItem.name) {
+            row.classList.add('main_series_tr')
+        }
 
         const imageData = document.createElement('td')
         const image = document.createElement('img')
@@ -33,7 +44,7 @@ export function getTrending(listItem, card, formatDate) {
         row.appendChild(imageData)
 
         // movies title
-        if (trendingItem.media_type == 'movie') {
+        if (trendingItem.media_type == 'movie' || row.classList.contains('main_movies_tr')) {
             const title = document.createElement('td')
             const titleBold = document.createElement('strong')
             titleBold.textContent = trendingItem.title
@@ -51,8 +62,8 @@ export function getTrending(listItem, card, formatDate) {
             row.appendChild(date)
         }
 
-        // tv shows and series name
-        if (trendingItem.media_type == 'tv') {
+        // series name
+        if (trendingItem.media_type == 'tv' || row.classList.contains('main_series_tr')) {
             const nameItem = document.createElement('td')
             const nameBold = document.createElement('strong')
             nameBold.textContent = trendingItem.name
@@ -73,18 +84,27 @@ export function getTrending(listItem, card, formatDate) {
         card.appendChild(row)
     })
 }
-// GET TRENDING RESULTS //
+// GET RESULTS //
 
+// GET CLICKED RESULTS //
+export function getClickedCard(results, card, cardClassName) {
+    const mainCards = Array.from(card.getElementsByClassName(cardClassName))
 
+    mainCards.forEach(function (mainCard, index) {
+        mainCard.addEventListener('click', function () {
+            if (results[index].media_type == 'movie' || mainCard.classList.contains('main_movies_tr')) {
+                window.location.href = `movies.html?indexCard=${index}`
+            }
 
-// LOAD FOOTER
-export async function loadFooter() {
-    const footer = document.getElementById('id_footer')
-    footer.style.display = 'block'
+            if (results[index].media_type == 'tv' || mainCard.classList.contains('main_series_tr')) {
+                window.location.href = `series.html?indexCard=${index}`
+            }
+        })
+    })
 }
-// LOAD FOOTER
+// GET CLICKED RESULTS //
 
-// FORMAT DATE FUNCTION
+// FORMAT DATE //
 export function formatDate(date) {
     date = date.split('-')
 
@@ -134,4 +154,11 @@ export function formatDate(date) {
     date = `${month} ${date[2]}, ${date[0]}`
     return date
 }
-// FORMAT DATE FUNCTION
+// FORMAT DATE //
+
+// LOAD FOOTER //
+export async function loadFooter() {
+    const footer = document.getElementById('id_footer')
+    footer.style.display = 'block'
+}
+// LOAD FOOTER //

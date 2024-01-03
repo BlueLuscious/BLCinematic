@@ -1,7 +1,8 @@
-import { getApiDataByURL } from "./functions.js"
 import { formatDate } from "./functions.js"
+import { getApiDataByURL } from "./functions.js"
+import { getResults } from "./functions.js"
+import { getClickedCard } from "./functions.js"
 import { loadFooter } from "./functions.js"
-import { getTrending } from "./functions.js"
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -22,25 +23,27 @@ document.addEventListener('DOMContentLoaded', function () {
     const trendingMoviesWeekCard = document.getElementById('trendingMoviesWeek')
     const trendingSeriesWeekCard = document.getElementById('trendingSeriesWeek')
 
+    const cardClassName = 'main_trending_tr'
+
     // trending day //
     getApiDataByURL(trendingAllDay)
         .then(data => {
-            getTrending(data.results, trendingAllDayCard, formatDate)
-            eventClickCard(data.results, trendingAllDayCard)
+            getResults(data.results, trendingAllDayCard, formatDate)
+            getClickedCard(data.results, trendingAllDayCard, cardClassName)
             loadFooter()
         })
 
     getApiDataByURL(trendingMoviesDay)
         .then(data => {
-            getTrending(data.results, trendingMoviesDayCard, formatDate)
-            eventClickCard(data.results, trendingMoviesDayCard)
+            getResults(data.results, trendingMoviesDayCard, formatDate)
+            getClickedCard(data.results, trendingMoviesDayCard, cardClassName)
             loadFooter()
         })
 
     getApiDataByURL(trendingSeriesDay)
         .then(data => {
-            getTrending(data.results, trendingSeriesDayCard, formatDate)
-            eventClickCard(data.results, trendingSeriesDayCard)
+            getResults(data.results, trendingSeriesDayCard, formatDate)
+            getClickedCard(data.results, trendingSeriesDayCard, cardClassName)
             loadFooter()
         })
     // trending day //
@@ -48,43 +51,25 @@ document.addEventListener('DOMContentLoaded', function () {
     // trending week //
     getApiDataByURL(trendingAllWeek)
         .then(data => {
-            getTrending(data.results, trendingAllWeekCard, formatDate)
-            eventClickCard(data.results, trendingAllWeekCard)
+            getResults(data.results, trendingAllWeekCard, formatDate)
+            getClickedCard(data.results, trendingAllWeekCard, cardClassName)
             loadFooter()
         })
 
     getApiDataByURL(trendingMoviesWeek)
         .then(data => {
-            getTrending(data.results, trendingMoviesWeekCard, formatDate)
-            eventClickCard(data.results, trendingMoviesWeekCard)
+            getResults(data.results, trendingMoviesWeekCard, formatDate)
+            getClickedCard(data.results, trendingMoviesWeekCard, cardClassName)
             loadFooter()
         })
 
     getApiDataByURL(trendingSeriesWeek)
         .then(data => {
-            getTrending(data.results, trendingSeriesWeekCard, formatDate)
-            eventClickCard(data.results, trendingSeriesWeekCard)
+            getResults(data.results, trendingSeriesWeekCard, formatDate)
+            getClickedCard(data.results, trendingSeriesWeekCard, cardClassName)
             loadFooter()
         })
     // trending week //
     // TRENDING //
-
-    //
-    function eventClickCard(results, card) {
-        const mainTrendingCards = Array.from(card.getElementsByClassName('main_trending_tr'))
-
-        mainTrendingCards.forEach(function (trendingCard, index) {
-            trendingCard.addEventListener('click', function () {
-                if (results[index].media_type == 'movie') {
-                    window.location.href = `movies.html?indexCard=${index}`
-                }
-
-                if (results[index].media_type == 'tv') {
-                    window.location.href = `tvShows.html?indexCard=${index}`
-                }
-            })
-        })
-    }
-    //
     
 })

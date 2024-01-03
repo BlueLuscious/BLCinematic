@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         navbarItems[1].style.borderBottomColor = COLOR1
         navbarItems[1].style.cursor = 'default'
     }
-    if (window.location.pathname === '/HTML/tvShows.html') {
+    if (window.location.pathname === '/HTML/series.html') {
         navbarItems[2].style.color = COLOR1
         navbarItems[2].style.borderBottomColor = COLOR1
         navbarItems[2].style.cursor = 'default'
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
-    if (window.location.pathname === '/HTML/tvShows.html' && window.location.search === '') {
+    if (window.location.pathname === '/HTML/series.html' && window.location.search === '') {
         mains.forEach(function (main, index) {
             if (index != 0) {
                 main.style.display = 'none'
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
-    if (window.location.pathname === '/HTML/tvShows.html' && window.location.search === `?indexCard=${indexCard}`) {
+    if (window.location.pathname === '/HTML/series.html' && window.location.search === `?indexCard=${indexCard}`) {
         mains.forEach(function (main, index) {
             if (index != 1) {
                 main.style.display = 'none'
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = 'movies.html'
                 }
                 if (index == 2) {
-                    window.location.href = 'tvShows.html'
+                    window.location.href = 'series.html'
                 }
             }
             if (window.location.pathname === '/HTML/movies.html') {
@@ -75,10 +75,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = 'index.html'
                 }
                 if (index == 2) {
-                    window.location.href = 'tvShows.html'
+                    window.location.href = 'series.html'
                 }
             }
-            if (window.location.pathname === '/HTML/tvShows.html') {
+            if (window.location.pathname === '/HTML/series.html') {
                 if (index == 0) {
                     window.location.href = 'index.html'
                 }
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     this.style.fontSize = '1.6em'
                 }
             }
-            if (window.location.pathname === '/HTML/tvShows.html') {
+            if (window.location.pathname === '/HTML/series.html') {
                 if (index != 2) {
                     this.style.fontSize = '1.6em'
                 }
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     this.style.fontSize = '1.5em'
                 }
             }
-            if (window.location.pathname === '/HTML/tvShows.html') {
+            if (window.location.pathname === '/HTML/series.html') {
                 if (index != 2) {
                     this.style.fontSize = '1.5em'
                 }
