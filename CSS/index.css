@@ -1,15 +1,26 @@
+/* VARS */
+:root {
+    --white-colour: rgb(255, 255, 255);
+    --dark-blue-colour: rgb(17, 60, 124);
+    --medium-blue-colour: rgb(29, 101, 209);
+    --medium-blue-colour-2: rgb(76, 130, 211);
+    --light-blue-colour: rgb(134, 174, 235);
+    --light-blue-colour-2: rgb(230, 240, 255);
+}
+/* VARS */
+
 body {
     margin: 0;
     padding: 0;
     overflow-y: scroll;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: rgb(230, 240, 255);
+    background-color: var(--light-blue-colour-2);
 }
 
 /* HEADER */
 .header {
     padding: 1%;
-    background-color: rgb(76, 130, 211);
+    background-color: var(--medium-blue-colour-2);
 }
 
 .header_navbar {
@@ -27,7 +38,7 @@ body {
 .header_navbar_item input {
     padding: 1em;
     width: 30em;
-    border: rgb(255, 255, 255);
+    border: var(--white-colour);
     border-radius: 5em;
     outline: transparent;
     font-size: 1.25em;
@@ -54,8 +65,8 @@ body {
 .header_navbar_td {
     display: inline;
     border-bottom: 0.1em solid;
-    border-bottom-color: rgb(255, 255, 255);
-    color: rgb(255, 255, 255);
+    border-bottom-color: var(--white-colour);
+    color: var(--white-colour);
     font-size: 1.5em;
     cursor: pointer;
 }
@@ -73,7 +84,7 @@ body {
     height: 32.75em;
     border-radius: 1em;
     box-shadow: 0.15em 0.15em 0.15em 0.15em #555;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--white-colour);
     cursor: pointer;
 }
 
@@ -116,16 +127,16 @@ body {
     width: 5em;
     text-align: center;
     border-radius: 2em;
-    color: rgb(255, 255, 255);
-    background-color: rgb(17, 60, 124);
+    color: var(--white-colour);
+    background-color: var(--dark-blue-colour);
     font-size: 1.6em;
 }
 
 .choose_content table,
 .choose_time table {
-    border: 0.2em solid rgb(17, 60, 124);
+    border: 0.2em solid var(--dark-blue-colour);
     border-radius: 3em;
-    background-color:  rgb(230, 240, 255);
+    background-color:  var(--light-blue-colour-2);
 }
 
 .choose_content tr,
@@ -140,8 +151,8 @@ body {
     text-align: center;
     border: 1px solid;
     border-radius: 2em;
-    color: rgb(17, 60, 124);
-    background-color: rgb(255, 255, 255);
+    color: var(--dark-blue-colour);
+    background-color: var(--white-colour);
     font-size: 1.6em;
     cursor: pointer;
 }
@@ -150,8 +161,8 @@ body {
 #choose_time_day,
 #choose_content_now_playing,
 #choose_content_airing_today {
-    color: rgb(255, 255, 255);
-    background-color: rgb(17, 60, 124);
+    color: var(--white-colour);
+    background-color: var(--dark-blue-colour);
     cursor: default;
 }
 
@@ -218,14 +229,14 @@ body::-webkit-scrollbar,
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: rgb(76, 130, 211);
+    background-color: var(--medium-blue-colour-2);
     cursor: grab;
 }
 
 .trending_tables::-webkit-scrollbar-thumb,
 .movies_tables::-webkit-scrollbar-thumb,
 .series_tables::-webkit-scrollbar-thumb {
-    background-color: rgb(76, 130, 211);
+    background-color: var(--medium-blue-colour-2);
     border-radius: 1em;
     cursor: grab;
 }
@@ -234,7 +245,7 @@ body::-webkit-scrollbar-thumb:hover,
 .trending_tables::-webkit-scrollbar-thumb:hover,
 .movies_tables::-webkit-scrollbar-thumb:hover,
 .series_tables::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(29, 101, 209);
+    background-color: var(--medium-blue-colour);
     cursor: grabbing;
 }
 
@@ -252,10 +263,10 @@ body::-webkit-scrollbar-thumb:hover,
 .scroll_to_top .bi {
     display: flex;
     justify-content: center;
-    border: 3px solid rgb(230, 240, 255);
+    border: 3px solid var(--light-blue-colour-2);
     border-radius: 0.2em;
-    color: rgb(17, 60, 124);
-    background-color: rgb(230, 240, 255);
+    color: var(--dark-blue-colour);
+    background-color: var(--light-blue-colour-2);
     font-size: 3.25em;
 }
 /* MAIN */
@@ -265,13 +276,13 @@ body::-webkit-scrollbar-thumb:hover,
     margin-top: 5em;
     width: 100%;
     height: 7.5em;
-    background-color: rgb(17, 60, 124);
+    background-color: var(--dark-blue-colour);
 }
 
 .body_footer {
     width: 100%;
     height: 22.5em;
-    background-color: rgb(76, 130, 211);
+    background-color: var(--medium-blue-colour-2);
 }
 
 .footer {
