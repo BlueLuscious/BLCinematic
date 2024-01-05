@@ -12,20 +12,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const seriesOptions = Array.from(document.getElementsByClassName('choose_series_option'))
     const seriesChoices = Array.from(document.getElementsByClassName('series_choice'))
 
-    const functions = [
+    const handlers = [
         interactivity.changeSectionDisplay, 
         styles.changeChoiceStylesByClick, 
         styles.changeChoiceStylesByMouseover, 
         styles.changeChoiceStylesByMouseout
     ]
 
-    interactivity.setDisplaySection(moviesSections)
-    styles.setColorChoice(moviesChoices)
+    interactivity.setSectionDisplay(moviesSections)
+    styles.setChoiceColour(moviesChoices)
 
-    interactivity.setDisplaySection(seriesSections)
-    styles.setColorChoice(seriesChoices)
+    interactivity.setSectionDisplay(seriesSections)
+    styles.setChoiceColour(seriesChoices)
 
-    interactivity.chooseOption(moviesOptions, moviesChoices, moviesSections, functions)
-    interactivity.chooseOption(seriesOptions, seriesChoices, seriesSections, functions)
+    interactivity.chooseOption(moviesOptions, moviesChoices, moviesSections, handlers)
+    interactivity.chooseOption(seriesOptions, seriesChoices, seriesSections, handlers)
 
 })

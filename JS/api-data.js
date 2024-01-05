@@ -1,3 +1,5 @@
+import { ApiUrls } from "./constants.js"
+
 // GET APIDATA //
 export async function getApiDataByURL(params) {
     const options = {
@@ -19,8 +21,6 @@ export async function getApiDataByURL(params) {
 // GET APIDATA //
 
 // GET RESULTS //
-const IMAGE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
-
 export function getResults(listItem, card, formatDate) {
     listItem.forEach(trendingItem => {
         const row = document.createElement('tr')
@@ -39,7 +39,7 @@ export function getResults(listItem, card, formatDate) {
 
         const imageData = document.createElement('td')
         const image = document.createElement('img')
-        image.src = `${IMAGE_URL + trendingItem.poster_path}`
+        image.src = `${ApiUrls.IMAGE_URL + trendingItem.poster_path}`
         imageData.appendChild(image)
         row.appendChild(imageData)
 
@@ -86,6 +86,9 @@ export function getResults(listItem, card, formatDate) {
 }
 // GET RESULTS //
 
+// GET RESULT BY ID //
+// GET RESULT BY ID //
+
 // GET CLICKED RESULTS //
 export function getClickedCard(results, card, cardClassName) {
     const mainCards = Array.from(card.getElementsByClassName(cardClassName))
@@ -103,62 +106,3 @@ export function getClickedCard(results, card, cardClassName) {
     })
 }
 // GET CLICKED RESULTS //
-
-// FORMAT DATE //
-export function formatDate(date) {
-    date = date.split('-')
-
-    let month
-    switch (date[1]) {
-        case '01':
-            month = 'Jan'
-            break;
-        case '02':
-            month = 'Feb'
-            break;
-        case '03':
-            month = 'Mar'
-            break;
-        case '04':
-            month = 'Apr'
-            break;
-        case '05':
-            month = 'May'
-            break;
-        case '06':
-            month = 'Jun'
-            break;
-        case '07':
-            month = 'Jul'
-            break;
-        case '08':
-            month = 'Aug'
-            break;
-        case '09':
-            month = 'Sep'
-            break;
-        case '10':
-            month = 'Oct'
-            break;
-        case '11':
-            month = 'Nov'
-            break;
-        case '12':
-            month = 'Dec'
-            break;
-        default:
-            month = 'Invalid'
-            break;
-    }
-
-    date = `${month} ${date[2]}, ${date[0]}`
-    return date
-}
-// FORMAT DATE //
-
-// LOAD FOOTER //
-export async function loadFooter() {
-    const footer = document.getElementById('id_footer')
-    footer.style.display = 'block'
-}
-// LOAD FOOTER //

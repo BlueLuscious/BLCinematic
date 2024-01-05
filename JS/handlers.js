@@ -1,6 +1,7 @@
 import { Colour } from "./constants.js"
 
 export class Interactivity {
+
     // choose content
     chooseOption(options, choices, sections, functions) {
         options.forEach(function (option, optionIndex) {
@@ -37,7 +38,7 @@ export class Interactivity {
     }
 
     // predifine section display (index 0)
-    setDisplaySection(sections) {
+    setSectionDisplay(sections) {
         sections.forEach(function (section, index) {
             if (index != 0) {
                 section.style.display = 'none'
@@ -51,11 +52,13 @@ export class Interactivity {
             section.style.display = sectionIndex === optionIndex ? 'block' : 'none'
         })
     }
+
 }
 
 export class Styles {
+
     // predifine choices background-color (index 0)
-    setColorChoice(choices) {
+    setChoiceColour(choices) {
         choices.forEach(function (choice, index) {
             if (index == 0) {
                 choice.style.backgroundColor = Colour.DARK_BLUE_COLOUR
@@ -91,4 +94,66 @@ export class Styles {
             }
         })
     }
+
+}
+
+export class Toolbox {
+
+    // format date
+    formatDate(date) {
+        date = date.split('-')
+
+        let month
+        switch (date[1]) {
+            case '01':
+                month = 'Jan'
+                break;
+            case '02':
+                month = 'Feb'
+                break;
+            case '03':
+                month = 'Mar'
+                break;
+            case '04':
+                month = 'Apr'
+                break;
+            case '05':
+                month = 'May'
+                break;
+            case '06':
+                month = 'Jun'
+                break;
+            case '07':
+                month = 'Jul'
+                break;
+            case '08':
+                month = 'Aug'
+                break;
+            case '09':
+                month = 'Sep'
+                break;
+            case '10':
+                month = 'Oct'
+                break;
+            case '11':
+                month = 'Nov'
+                break;
+            case '12':
+                month = 'Dec'
+                break;
+            default:
+                month = 'Invalid'
+                break;
+        }
+
+        date = `${month} ${date[2]}, ${date[0]}`
+        return date
+    }
+
+    // load footer //
+    loadFooter() {
+        const footer = document.getElementById('id_footer')
+        footer.style.display = 'block'
+    }
+
 }
