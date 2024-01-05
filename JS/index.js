@@ -1,3 +1,8 @@
+import { Interactivity, Styles, Toolbox } from "./handlers.js"
+const interactivity = new Interactivity
+const styles = new Styles
+const toolbox = new Toolbox
+
 document.addEventListener('DOMContentLoaded', function () {
 
     const COLOR1 = 'rgb(6, 33, 74)'
@@ -137,48 +142,32 @@ document.addEventListener('DOMContentLoaded', function () {
     const timeOptions = Array.from(document.getElementsByClassName('choose_time_option'))
     const timeChoices = Array.from(document.getElementsByClassName('time_choice'))
 
-    // predifine section display (index 0)
-    trendingSections.forEach(function (section, index) {
-        if (index != 0) {
-            section.style.display = 'none'
-        }
-    })
+    let content_0 = true
+    let content_1 = true
+    let content_2 = true
+    let time_0 = true
+    let time_1 = true
 
-    // predifine choices background-color (index 0)
-    contentChoices.forEach(function (choice, index) {
-        if (index == 0) {
-            choice.style.backgroundColor = 'rgb(17, 60, 124)'
-            content_0 = true
-        }
-    })
+    toolbox.setSectionIndex0(trendingSections)
 
-    timeChoices.forEach(function (choice, index) {
-        if (index == 0) {
-            choice.style.backgroundColor = 'rgb(17, 60, 124)'
-            time_0 = true
-        }
-    })
+    styles.setChoiceColour(contentChoices)
+    styles.setChoiceColour(timeChoices)
 
     // choose content //
     contentOptions.forEach(function (option, optionIndex) {
-        // modify choice background-color, cursor and sections display by click
+
         option.addEventListener('click', function () {
             if (optionIndex == 0) {
-                contentChoices.forEach(function (choice, choiceIndex) {
-                    choice.style.color = choiceIndex === optionIndex ? 'rgb(255, 255, 255)' : 'rgb(17, 60, 124)'
-                    choice.style.backgroundColor = choiceIndex === optionIndex ? 'rgb(17, 60, 124)' : 'rgb(255, 255, 255)'
-                    choice.style.cursor = choiceIndex === optionIndex ? 'default' : 'pointer'
-                })
+                styles.changeChoiceStylesByClick(contentChoices, optionIndex)
 
                 content_0 = true
 
-                trendingSections.forEach(function (section) {
-                    section.style.display = 'none'
-                })
+                toolbox.hideAllSections(trendingSections)
 
                 if (time_0) {
                     trendingSections[0].style.display = 'block'
-                } else if (time_1) {
+                }
+                if (time_1) {
                     trendingSections[3].style.display = 'block'
                 }
             } else {
@@ -186,21 +175,16 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if (optionIndex == 1) {
-                contentChoices.forEach(function (choice, choiceIndex) {
-                    choice.style.color = choiceIndex === optionIndex ? 'rgb(255, 255, 255)' : 'rgb(17, 60, 124)'
-                    choice.style.backgroundColor = choiceIndex === optionIndex ? 'rgb(17, 60, 124)' : 'rgb(255, 255, 255)'
-                    choice.style.cursor = choiceIndex === optionIndex ? 'default' : 'pointer'
-                })
+                styles.changeChoiceStylesByClick(contentChoices, optionIndex)
 
                 content_1 = true
 
-                trendingSections.forEach(function (section) {
-                    section.style.display = 'none'
-                })
+                toolbox.hideAllSections(trendingSections)
 
                 if (time_0) {
                     trendingSections[1].style.display = 'block'
-                } else if (time_1) {
+                }
+                if (time_1) {
                     trendingSections[4].style.display = 'block'
                 }
             } else {
@@ -208,21 +192,16 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if (optionIndex == 2) {
-                contentChoices.forEach(function (choice, choiceIndex) {
-                    choice.style.color = choiceIndex === optionIndex ? 'rgb(255, 255, 255)' : 'rgb(17, 60, 124)'
-                    choice.style.backgroundColor = choiceIndex === optionIndex ? 'rgb(17, 60, 124)' : 'rgb(255, 255, 255)'
-                    choice.style.cursor = choiceIndex === optionIndex ? 'default' : 'pointer'
-                })
+                styles.changeChoiceStylesByClick(contentChoices, optionIndex)
 
                 content_2 = true
 
-                trendingSections.forEach(function (section) {
-                    section.style.display = 'none'
-                })
+                toolbox.hideAllSections(trendingSections)
 
                 if (time_0) {
                     trendingSections[2].style.display = 'block'
-                } else if (time_1) {
+                }
+                if (time_1) {
                     trendingSections[5].style.display = 'block'
                 }
             } else {
@@ -230,44 +209,27 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
 
-        // modify choice background-color and cursor by mouseover
         option.addEventListener('mouseover', function () {
-            if (optionIndex >= 0 && contentChoices[optionIndex].style.backgroundColor !== 'rgb(17, 60, 124)') {
-                contentChoices[optionIndex].style.color = 'rgb(255, 255, 255)'
-                contentChoices[optionIndex].style.backgroundColor = 'rgb(134, 174, 235)'
-                contentChoices[optionIndex].style.cursor = 'pointer'
-            }
+            styles.changeChoiceStylesByMouseover(contentChoices, optionIndex)
         })
 
-        // modify choice background-color and cursor by mouseout
         option.addEventListener('mouseout', function () {
-            contentChoices.forEach(function (choice, choiceIndex) {
-                if (choiceIndex >= 0 && choice.style.backgroundColor !== 'rgb(17, 60, 124)') {
-                    choice.style.color = 'rgb(17, 60, 124)'
-                    choice.style.backgroundColor = 'rgb(255, 255, 255)'
-                    choice.style.cursor = 'pointer'
-                }
-            })
+            styles.changeChoiceStylesByMouseout(contentChoices)
         })
+        
     })
     // choose content //
 
     // choose time //
     timeOptions.forEach(function (option, optionIndex) {
-        // modify choice background-color, cursor and sections display by click
+
         option.addEventListener('click', function () {
             if (optionIndex == 0) {
-                timeChoices.forEach(function (choice, choiceIndex) {
-                    choice.style.color = choiceIndex === optionIndex ? 'rgb(255, 255, 255)' : 'rgb(17, 60, 124)'
-                    choice.style.backgroundColor = choiceIndex === optionIndex ? 'rgb(17, 60, 124)' : 'rgb(255, 255, 255)'
-                    choice.style.cursor = choiceIndex === optionIndex ? 'default' : 'pointer'
-                })
+                styles.changeChoiceStylesByClick(timeChoices, optionIndex)
 
                 time_0 = true
 
-                trendingSections.forEach(function (section) {
-                    section.style.display = 'none'
-                })
+                toolbox.hideAllSections(trendingSections)
 
                 if (content_0) {
                     trendingSections[0].style.display = 'block'
@@ -285,17 +247,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if (optionIndex == 1) {
-                timeChoices.forEach(function (choice, choiceIndex) {
-                    choice.style.color = choiceIndex === optionIndex ? 'rgb(255, 255, 255)' : 'rgb(17, 60, 124)'
-                    choice.style.backgroundColor = choiceIndex === optionIndex ? 'rgb(17, 60, 124)' : 'rgb(255, 255, 255)'
-                    choice.style.cursor = choiceIndex === optionIndex ? 'default' : 'pointer'
-                })
+                styles.changeChoiceStylesByClick(timeChoices, optionIndex)
 
                 time_1 = true
 
-                trendingSections.forEach(function (section) {
-                    section.style.display = 'none'
-                })
+                toolbox.hideAllSections(trendingSections)
 
                 if (content_0) {
                     trendingSections[3].style.display = 'block'
@@ -313,45 +269,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
 
-        // modify choice background-color and cursor by mouseover
         option.addEventListener('mouseover', function () {
-            if (optionIndex >= 0 && timeChoices[optionIndex].style.backgroundColor !== 'rgb(17, 60, 124)') {
-                timeChoices[optionIndex].style.color = 'rgb(255, 255, 255)'
-                timeChoices[optionIndex].style.backgroundColor = 'rgb(134, 174, 235)'
-                timeChoices[optionIndex].style.cursor = 'pointer'
-            }
+            styles.changeChoiceStylesByMouseover(timeChoices, optionIndex)
         })
 
-        // modify choice background-color and cursor by mouseout
         option.addEventListener('mouseout', function () {
-            timeChoices.forEach(function (choice, choiceIndex) {
-                if (choiceIndex >= 0 && choice.style.backgroundColor !== 'rgb(17, 60, 124)') {
-                    choice.style.color = 'rgb(17, 60, 124)'
-                    choice.style.backgroundColor = 'rgb(255, 255, 255)'
-                    choice.style.cursor = 'pointer'
-                }
-            })
+            styles.changeChoiceStylesByMouseout(timeChoices)
         })
+
     })
     // choose time //
     // CHOOSING THINGS //
 
-    // SCROLL TOP BUTTON //
-    const scrollToTop = document.getElementById('scrollToTop')
+    interactivity.scrollToTop()
 
-    scrollToTop.style.display = 'none'
-
-    window.addEventListener('scroll', function () {
-        if (document.body.scrollTop > 890 || document.documentElement.scrollTop > 890) {
-            scrollToTop.style.display = 'block'
-        } else {
-            scrollToTop.style.display = 'none'
-        }
-    })
-
-    scrollToTop.addEventListener('click', function () {
-        document.body.scrollTop = 0
-        document.documentElement.scrollTop = 0
-    })
-    // SCROLL TOP BUTTON //
 })

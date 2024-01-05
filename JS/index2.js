@@ -1,6 +1,7 @@
-import { Interactivity, Styles } from "./handlers.js"
+import { Interactivity, Styles, Toolbox } from "./handlers.js"
 const interactivity = new Interactivity
 const styles = new Styles
+const toolbox = new Toolbox
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -13,16 +14,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const seriesChoices = Array.from(document.getElementsByClassName('series_choice'))
 
     const handlers = [
-        interactivity.changeSectionDisplay, 
+        toolbox.changeSectionDisplay, 
         styles.changeChoiceStylesByClick, 
         styles.changeChoiceStylesByMouseover, 
         styles.changeChoiceStylesByMouseout
     ]
 
-    interactivity.setSectionDisplay(moviesSections)
+    toolbox.setSectionIndex0(moviesSections)
     styles.setChoiceColour(moviesChoices)
 
-    interactivity.setSectionDisplay(seriesSections)
+    toolbox.setSectionIndex0(seriesSections)
     styles.setChoiceColour(seriesChoices)
 
     interactivity.chooseOption(moviesOptions, moviesChoices, moviesSections, handlers)

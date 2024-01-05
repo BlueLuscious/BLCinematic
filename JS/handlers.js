@@ -2,7 +2,7 @@ import { Colour } from "./constants.js"
 
 export class Interactivity {
 
-    // choose content
+    // choose content or time
     chooseOption(options, choices, sections, functions) {
         options.forEach(function (option, optionIndex) {
             option.addEventListener('click', function () {
@@ -37,19 +37,23 @@ export class Interactivity {
         })
     }
 
-    // predifine section display (index 0)
-    setSectionDisplay(sections) {
-        sections.forEach(function (section, index) {
-            if (index != 0) {
-                section.style.display = 'none'
+    // scroll top button
+    scrollToTop() {
+        const scrollToTop = document.getElementById('scrollToTop')
+
+        scrollToTop.style.display = 'none'
+    
+        window.addEventListener('scroll', function () {
+            if (document.body.scrollTop > 890 || document.documentElement.scrollTop > 890) {
+                scrollToTop.style.display = 'block'
+            } else {
+                scrollToTop.style.display = 'none'
             }
         })
-    }
-
-    // modify sections display
-    changeSectionDisplay(sections, optionIndex) {
-        sections.forEach(function (section, sectionIndex) {
-            section.style.display = sectionIndex === optionIndex ? 'block' : 'none'
+    
+        scrollToTop.addEventListener('click', function () {
+            document.body.scrollTop = 0
+            document.documentElement.scrollTop = 0
         })
     }
 
@@ -98,6 +102,29 @@ export class Styles {
 }
 
 export class Toolbox {
+
+    // predifine section display (index 0)
+    setSectionIndex0(sections) {
+        sections.forEach(function (section, index) {
+            if (index != 0) {
+                section.style.display = 'none'
+            }
+        })
+    }
+
+    // hide all sections
+    hideAllSections(sections) {
+        sections.forEach(function (section) {
+            section.style.display = 'none'
+        })
+    }
+
+    // modify sections display
+    changeSectionDisplay(sections, optionIndex) {
+        sections.forEach(function (section, sectionIndex) {
+            section.style.display = sectionIndex === optionIndex ? 'block' : 'none'
+        })
+    }
 
     // format date
     formatDate(date) {
