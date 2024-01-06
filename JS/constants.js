@@ -21,6 +21,7 @@ export class ApiUrls {
 
 export class Colour {
     static WHITE_COLOUR = 'rgb(255, 255, 255)'
-    static DARK_BLUE_COLOUR = 'rgb(17, 60, 124)'
+    static DARK_BLUE_COLOUR = 'rgb(6, 33, 74)'
+    static DARK_BLUE_COLOUR_2 = 'rgb(17, 60, 124)'
     static LIGHT_BLUE_COLOUR = 'rgb(134, 174, 235)'
 }

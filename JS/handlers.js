@@ -2,26 +2,78 @@ import { Colour } from "./constants.js"
 
 export class Interactivity {
 
-    // choose content or time
-    chooseOption(options, choices, sections, functions) {
+    // choose trending content and time
+/*     chooseTrending(options, choices, sections, functions) {
         options.forEach(function (option, optionIndex) {
             option.addEventListener('click', function () {
-                if (optionIndex == 0) {
+                if (optionIndex >= 0) {
                     functions[1](choices, optionIndex)
-                    functions[0](sections, optionIndex)
+                    functions[4](sections)
                 }
-    
-                if (optionIndex == 1) {
-                    functions[1](choices, optionIndex)
-                    functions[0](sections, optionIndex)
+
+                if (options.length == 3) {
+                    if (optionIndex == 0) {
+                        content_0 = true
+                        functions[5](sections[0], time_0)
+                        functions[5](sections[3], time_1)
+                    } else {
+                        content_0 = false
+                    }
+
+                    if (optionIndex == 1) {
+                        content_1 = true
+                        functions[5](sections[1], time_0)
+                        functions[5](sections[4], time_1)
+                    } else {
+                        content_1 = false
+                    }
+
+                    if (optionIndex == 2) {
+                        content_2 = true
+                        functions[5](sections[2], time_0)
+                        functions[5](sections[5], time_1)
+                    } else {
+                        content_2 = false
+                    }
                 }
-    
-                if (optionIndex == 2) {
-                    functions[1](choices, optionIndex)
-                    functions[0](sections, optionIndex)
+
+                if (options.length == 2) {
+                    if (optionIndex == 0) {
+                        time_0 = true
+                        functions[5](sections[0], content_0)
+                        functions[5](sections[1], content_1)
+                        functions[5](sections[2], content_2)
+                    } else {
+                        time_0 = false
+                    }
+
+                    if (optionIndex == 1) {
+                        time_1 = true
+                        functions[5](sections[3], content_0)
+                        functions[5](sections[4], content_1)
+                        functions[5](sections[5], content_2)
+                    } else {
+                        time_1 = false
+                    }
                 }
-    
-                if (optionIndex == 3) {
+            })
+
+            option.addEventListener('mouseover', function () {
+                functions[2](choices, optionIndex)
+            })
+
+            option.addEventListener('mouseout', function () {
+                functions[3](choices)
+            })
+            
+        })
+    } */
+
+    // choose movies and series content
+    chooseMoviesAndSeries(options, choices, sections, functions) {
+        options.forEach(function (option, optionIndex) {
+            option.addEventListener('click', function () {
+                if (optionIndex >= 0) {
                     functions[1](choices, optionIndex)
                     functions[0](sections, optionIndex)
                 }
@@ -65,7 +117,7 @@ export class Styles {
     setChoiceColour(choices) {
         choices.forEach(function (choice, index) {
             if (index == 0) {
-                choice.style.backgroundColor = Colour.DARK_BLUE_COLOUR
+                choice.style.backgroundColor = Colour.DARK_BLUE_COLOUR_2
             }
         })
     }
@@ -73,15 +125,15 @@ export class Styles {
     // modify choices background-color and cursor by click
     changeChoiceStylesByClick(choices, optionIndex) {
         choices.forEach(function (choice, choiceIndex) {
-            choice.style.color = choiceIndex === optionIndex ? Colour.WHITE_COLOUR : Colour.DARK_BLUE_COLOUR
-            choice.style.backgroundColor = choiceIndex === optionIndex ? Colour.DARK_BLUE_COLOUR : Colour.WHITE_COLOUR
+            choice.style.color = choiceIndex === optionIndex ? Colour.WHITE_COLOUR : Colour.DARK_BLUE_COLOUR_2
+            choice.style.backgroundColor = choiceIndex === optionIndex ? Colour.DARK_BLUE_COLOUR_2 : Colour.WHITE_COLOUR
             choice.style.cursor = choiceIndex === optionIndex ? 'default' : 'pointer'
         })
     }
 
     // modify choice background-color and cursor by mouseover
     changeChoiceStylesByMouseover(choices, optionIndex) {
-        if (optionIndex >= 0 && choices[optionIndex].style.backgroundColor !== Colour.DARK_BLUE_COLOUR) {
+        if (optionIndex >= 0 && choices[optionIndex].style.backgroundColor !== Colour.DARK_BLUE_COLOUR_2) {
             choices[optionIndex].style.color = Colour.WHITE_COLOUR
             choices[optionIndex].style.backgroundColor = Colour.LIGHT_BLUE_COLOUR
             choices[optionIndex].style.cursor = 'pointer'
@@ -91,8 +143,8 @@ export class Styles {
     // modify choice background-color and cursor by mouseout
     changeChoiceStylesByMouseout(choices) {
         choices.forEach(function (choice, choiceIndex) {
-            if (choiceIndex >= 0 && choice.style.backgroundColor !== Colour.DARK_BLUE_COLOUR) {
-                choice.style.color = Colour.DARK_BLUE_COLOUR
+            if (choiceIndex >= 0 && choice.style.backgroundColor !== Colour.DARK_BLUE_COLOUR_2) {
+                choice.style.color = Colour.DARK_BLUE_COLOUR_2
                 choice.style.backgroundColor = Colour.WHITE_COLOUR
                 choice.style.cursor = 'pointer'
             }
@@ -117,6 +169,13 @@ export class Toolbox {
         sections.forEach(function (section) {
             section.style.display = 'none'
         })
+    }
+
+    // show one section with if
+    showOneSection(section, choiceType) {
+        if (choiceType) {
+            section.style.display = 'block'
+        }
     }
 
     // modify sections display
