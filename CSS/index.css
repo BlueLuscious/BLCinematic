@@ -1,7 +1,8 @@
 /* VARS */
 :root {
     --white-colour: rgb(255, 255, 255);
-    --dark-blue-colour: rgb(17, 60, 124);
+    --dark-blue-colour: rgb(6, 33, 74);
+    --dark-blue-colour-2: rgb(17, 60, 124);
     --medium-blue-colour: rgb(29, 101, 209);
     --medium-blue-colour-2: rgb(76, 130, 211);
     --light-blue-colour: rgb(134, 174, 235);
@@ -128,13 +129,13 @@ body {
     text-align: center;
     border-radius: 2em;
     color: var(--white-colour);
-    background-color: var(--dark-blue-colour);
+    background-color: var(--dark-blue-colour-2);
     font-size: 1.6em;
 }
 
 .choose_content table,
 .choose_time table {
-    border: 0.2em solid var(--dark-blue-colour);
+    border: 0.2em solid var(--dark-blue-colour-2);
     border-radius: 3em;
     background-color:  var(--light-blue-colour-2);
 }
@@ -151,7 +152,7 @@ body {
     text-align: center;
     border: 1px solid;
     border-radius: 2em;
-    color: var(--dark-blue-colour);
+    color: var(--dark-blue-colour-2);
     background-color: var(--white-colour);
     font-size: 1.6em;
     cursor: pointer;
@@ -162,7 +163,7 @@ body {
 #choose_content_now_playing,
 #choose_content_airing_today {
     color: var(--white-colour);
-    background-color: var(--dark-blue-colour);
+    background-color: var(--dark-blue-colour-2);
     cursor: default;
 }
 
@@ -265,7 +266,7 @@ body::-webkit-scrollbar-thumb:hover,
     justify-content: center;
     border: 3px solid var(--light-blue-colour-2);
     border-radius: 0.2em;
-    color: var(--dark-blue-colour);
+    color: var(--dark-blue-colour-2);
     background-color: var(--light-blue-colour-2);
     font-size: 3.25em;
 }
@@ -276,7 +277,7 @@ body::-webkit-scrollbar-thumb:hover,
     margin-top: 5em;
     width: 100%;
     height: 7.5em;
-    background-color: var(--dark-blue-colour);
+    background-color: var(--dark-blue-colour-2);
 }
 
 .body_footer {
