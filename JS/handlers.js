@@ -196,6 +196,36 @@ export class Styles {
         }
     }
 
+    //
+    changeFontSizeByListemer(items, currentTemplate, listener, sizes) {
+        items.forEach(function (item, index) {
+            item.addEventListener(listener, function () {
+                if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate[0]) {
+                    if (window.innerWidth <= 1600 && index != 0) {
+                        this.style.fontSize = sizes[0]
+                    } else if (window.innerWidth > 1600 && index != 0) {
+                        this.style.fontSize = sizes[1]
+                    }
+                }
+                if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate[1]) {
+                    if (window.innerWidth <= 1600 && index != 1) {
+                        this.style.fontSize = sizes[0]
+                    } else if (window.innerWidth > 1600 && index != 1) {
+                        this.style.fontSize = sizes[1]
+                    }
+                }
+                if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate[2]) {
+                    if (window.innerWidth <= 1600 && index != 2) {
+                        this.style.fontSize = sizes[0]
+                    } else if (window.innerWidth > 1600 && index != 2) {
+                        this.style.fontSize = sizes[1]
+                    }
+                }
+            })
+        })
+    }
+    //
+
 }
 
 export class Toolbox {

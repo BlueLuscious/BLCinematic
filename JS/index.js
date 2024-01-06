@@ -23,48 +23,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     interactivity.templateRedirects(navbarItems)
 
-    // NAVBAR ITEMS COLOR --> BY REDIRECTIONS //
-    navbarItems.forEach(function (navbarItem, index) {
-        navbarItem.addEventListener('mouseover', function () {
-            if (window.location.pathname === '/HTML/index.html') {
-                if (window.innerWidth <= 1600 && index > 0) {
-                    this.style.fontSize = '1.35em'
-                } else if (window.innerWidth > 1600 && index > 0) {
-                    this.style.fontSize = '1.6em'
-                }
-            }
-            if (window.location.pathname === '/HTML/movies.html') {
-                if (index != 1) {
-                    this.style.fontSize = '1.6em'
-                }
-            }
-            if (window.location.pathname === '/HTML/series.html') {
-                if (index != 2) {
-                    this.style.fontSize = '1.6em'
-                }
-            }
-        })
+    const templates = [
+        Template.INDEX_TEMPLATE,
+        Template.MOVIES_TEMPLATE,
+        Template.SERIES_TEMPLATE
+    ]
 
-        navbarItem.addEventListener('mouseout', function () {
-            if (window.location.pathname === '/HTML/index.html') {
-                if (window.innerWidth <= 1600 && index > 0) {
-                    this.style.fontSize = '1.25em'
-                } else if (window.innerWidth > 1600 && index > 0) {
-                    this.style.fontSize = '1.5em'
-                }
-            }
-            if (window.location.pathname === '/HTML/movies.html') {
-                if (index != 1) {
-                    this.style.fontSize = '1.5em'
-                }
-            }
-            if (window.location.pathname === '/HTML/series.html') {
-                if (index != 2) {
-                    this.style.fontSize = '1.5em'
-                }
-            }
-        })
-        // NAVBAR ITEMS COLOR --> BY REDIRECTIONS //
-    })
+    styles.changeFontSizeByListemer(navbarItems, templates, 'mouseover', ['1.35em', '1.6em'])
+    styles.changeFontSizeByListemer(navbarItems, templates, 'mouseout', ['', ''])
+    styles.changeFontSizeByListemer(navbarItems, templates, 'mouseover', ['1.35em', '1.6em'])
+    styles.changeFontSizeByListemer(navbarItems, templates, 'mouseout', ['', ''])
+    styles.changeFontSizeByListemer(navbarItems, templates, 'mouseover', ['1.35em', '1.6em'])
+    styles.changeFontSizeByListemer(navbarItems, templates, 'mouseout', ['', ''])
 
 })
