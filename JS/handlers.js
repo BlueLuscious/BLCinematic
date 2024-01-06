@@ -1,4 +1,4 @@
-import { Colour } from "./constants.js"
+import { Colour, Cursor, Display, Pathname, Template } from "./constants.js"
 
 let content_0 = true
 let content_1 = false
@@ -93,17 +93,49 @@ export class Interactivity {
         })
     }
 
+    // redirects setted templates
+    templateRedirects(items) {
+        items.forEach(function (item, index) {
+            item.addEventListener('click', function () {
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+                    if (index == 1) {
+                        window.location.href = Template.MOVIES_TEMPLATE
+                    }
+                    if (index == 2) {
+                        window.location.href = Template.SERIES_TEMPLATE
+                    }
+                }
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.MOVIES_TEMPLATE) {
+                    if (index == 0) {
+                        window.location.href = Template.INDEX_TEMPLATE
+                    }
+                    if (index == 2) {
+                        window.location.href = Template.SERIES_TEMPLATE
+                    }
+                }
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE) {
+                    if (index == 0) {
+                        window.location.href = Template.INDEX_TEMPLATE
+                    }
+                    if (index == 1) {
+                        window.location.href = Template.MOVIES_TEMPLATE
+                    }
+                }
+            })
+        })
+    }
+
     // scroll top button
     scrollToTop() {
         const scrollToTop = document.getElementById('scrollToTop')
 
-        scrollToTop.style.display = 'none'
+        scrollToTop.style.display = Display.DISPLAY_NONE
     
         window.addEventListener('scroll', function () {
             if (document.body.scrollTop > 890 || document.documentElement.scrollTop > 890) {
-                scrollToTop.style.display = 'block'
+                scrollToTop.style.display = Display.DISPLAY_BLOCK
             } else {
-                scrollToTop.style.display = 'none'
+                scrollToTop.style.display = Display.DISPLAY_NONE
             }
         })
     
@@ -117,7 +149,7 @@ export class Interactivity {
 
 export class Styles {
 
-    // predifine choices background-color (index 0)
+    // predifine choices background-colour (index 0)
     setChoiceColour(choices) {
         choices.forEach(function (choice, index) {
             if (index == 0) {
@@ -126,33 +158,42 @@ export class Styles {
         })
     }
 
-    // modify choices background-color and cursor by click
+    // modify choices background-colour and cursor by click
     changeChoiceStylesByClick(choices, optionIndex) {
         choices.forEach(function (choice, choiceIndex) {
             choice.style.color = choiceIndex === optionIndex ? Colour.WHITE_COLOUR : Colour.DARK_BLUE_COLOUR_2
             choice.style.backgroundColor = choiceIndex === optionIndex ? Colour.DARK_BLUE_COLOUR_2 : Colour.WHITE_COLOUR
-            choice.style.cursor = choiceIndex === optionIndex ? 'default' : 'pointer'
+            choice.style.cursor = choiceIndex === optionIndex ? Cursor.DEFAULT_CURSOR : Cursor.POINTER_CURSOR
         })
     }
 
-    // modify choice background-color and cursor by mouseover
+    // modify choice background-colour and cursor by mouseover
     changeChoiceStylesByMouseover(choices, optionIndex) {
         if (optionIndex >= 0 && choices[optionIndex].style.backgroundColor !== Colour.DARK_BLUE_COLOUR_2) {
             choices[optionIndex].style.color = Colour.WHITE_COLOUR
             choices[optionIndex].style.backgroundColor = Colour.LIGHT_BLUE_COLOUR
-            choices[optionIndex].style.cursor = 'pointer'
+            choices[optionIndex].style.cursor = Cursor.POINTER_CURSOR
         }
     }
 
-    // modify choice background-color and cursor by mouseout
+    // modify choice background-colour and cursor by mouseout
     changeChoiceStylesByMouseout(choices) {
         choices.forEach(function (choice, choiceIndex) {
             if (choiceIndex >= 0 && choice.style.backgroundColor !== Colour.DARK_BLUE_COLOUR_2) {
                 choice.style.color = Colour.DARK_BLUE_COLOUR_2
                 choice.style.backgroundColor = Colour.WHITE_COLOUR
-                choice.style.cursor = 'pointer'
+                choice.style.cursor = Cursor.POINTER_CURSOR
             }
         })
+    }
+    
+    // navbar items colour by URL
+    setNavItemStylesByURL(currentTemplate, navItem) {
+        if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate) {
+            navItem.style.color = Colour.DARK_BLUE_COLOUR
+            navItem.style.borderBottomColor = Colour.DARK_BLUE_COLOUR
+            navItem.style.cursor = Cursor.DEFAULT_CURSOR
+        }
     }
 
 }
@@ -163,7 +204,7 @@ export class Toolbox {
     setSectionIndex0(sections) {
         sections.forEach(function (section, index) {
             if (index != 0) {
-                section.style.display = 'none'
+                section.style.display = Display.DISPLAY_NONE
             }
         })
     }
@@ -171,22 +212,36 @@ export class Toolbox {
     // hide all sections
     hideAllSections(sections) {
         sections.forEach(function (section) {
-            section.style.display = 'none'
+            section.style.display = Display.DISPLAY_NONE
         })
     }
 
     // show one section with if
     showOneSection(section, choiceType) {
         if (choiceType) {
-            section.style.display = 'block'
+            section.style.display = Display.DISPLAY_BLOCK
         }
     }
 
     // modify sections display
     changeSectionDisplay(sections, optionIndex) {
         sections.forEach(function (section, sectionIndex) {
-            section.style.display = sectionIndex === optionIndex ? 'block' : 'none'
+            section.style.display = sectionIndex === optionIndex ? Display.DISPLAY_BLOCK : Display.DISPLAY_NONE
         })
+    }
+
+    // hide/show section from a URL based on the clicked card
+    showSectionByURL(currentTemplate, currentSearches, sections) {
+        if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate) {
+            sections.forEach(function (section, index) {
+                if (index != 0 && window.location.search === currentSearches[0]) {
+                    section.style.display = Display.DISPLAY_NONE
+                }
+                if (index != 1 && window.location.search === currentSearches[1]) {
+                    section.style.display = Display.DISPLAY_NONE
+                }
+            })
+        }
     }
 
     // format date
@@ -240,10 +295,10 @@ export class Toolbox {
         return date
     }
 
-    // load footer //
+    // load footer
     loadFooter() {
         const footer = document.getElementById('id_footer')
-        footer.style.display = 'block'
+        footer.style.display = Display.DISPLAY_BLOCK
     }
 
 }

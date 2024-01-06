@@ -25,3 +25,25 @@ export class Colour {
     static DARK_BLUE_COLOUR_2 = 'rgb(17, 60, 124)'
     static LIGHT_BLUE_COLOUR = 'rgb(134, 174, 235)'
 }
+
+export class Cursor {
+    static DEFAULT_CURSOR = 'default'
+    static POINTER_CURSOR = 'pointer'
+}
+
+export class Display {
+    static DISPLAY_BLOCK = 'block'
+    static DISPLAY_NONE = 'none'
+}
+
+export class Pathname {
+    static HTML_FOLDER = '/HTML/'
+    static CSS_FOLDER = '/CSS/'
+    static JS_FOLDER = '/JS/'
+}
+
+export class Template {
+    static INDEX_TEMPLATE = 'index.html'
+    static MOVIES_TEMPLATE = 'movies.html'
+    static SERIES_TEMPLATE = 'series.html'
+}
