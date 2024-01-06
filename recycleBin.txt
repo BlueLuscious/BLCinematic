@@ -61,3 +61,135 @@ export function getSeries(listItem, card, formatDate) {
     })
 }
 // GET SERIES RESULTS //
+
+
+
+
+
+// choose content //
+    contentOptions.forEach(function (option, optionIndex) {
+
+        option.addEventListener('click', function () {
+            if (optionIndex == 0) {
+                styles.changeChoiceStylesByClick(contentChoices, optionIndex)
+
+                content_0 = true
+
+                toolbox.hideAllSections(trendingSections)
+
+                if (time_0) {
+                    trendingSections[0].style.display = 'block'
+                }
+                if (time_1) {
+                    trendingSections[3].style.display = 'block'
+                }
+            } else {
+                content_0 = false
+            }
+
+            if (optionIndex == 1) {
+                styles.changeChoiceStylesByClick(contentChoices, optionIndex)
+
+                content_1 = true
+
+                toolbox.hideAllSections(trendingSections)
+
+                if (time_0) {
+                    trendingSections[1].style.display = 'block'
+                }
+                if (time_1) {
+                    trendingSections[4].style.display = 'block'
+                }
+            } else {
+                content_1 = false
+            }
+
+            if (optionIndex == 2) {
+                styles.changeChoiceStylesByClick(contentChoices, optionIndex)
+
+                content_2 = true
+
+                toolbox.hideAllSections(trendingSections)
+
+                if (time_0) {
+                    trendingSections[2].style.display = 'block'
+                }
+                if (time_1) {
+                    trendingSections[5].style.display = 'block'
+                }
+            } else {
+                content_2 = false
+            }
+        })
+
+        option.addEventListener('mouseover', function () {
+            styles.changeChoiceStylesByMouseover(contentChoices, optionIndex)
+        })
+
+        option.addEventListener('mouseout', function () {
+            styles.changeChoiceStylesByMouseout(contentChoices)
+        })
+        
+    })
+    // choose content //
+
+    // choose time //
+    timeOptions.forEach(function (option, optionIndex) {
+
+        option.addEventListener('click', function () {
+            if (optionIndex == 0) {
+                styles.changeChoiceStylesByClick(timeChoices, optionIndex)
+
+                time_0 = true
+
+                toolbox.hideAllSections(trendingSections)
+
+                if (content_0) {
+                    trendingSections[0].style.display = 'block'
+                }
+
+                if (content_1) {
+                    trendingSections[1].style.display = 'block'
+                }
+
+                if (content_2) {
+                    trendingSections[2].style.display = 'block'
+                }
+            } else {
+                time_0 = false
+            }
+
+            if (optionIndex == 1) {
+                styles.changeChoiceStylesByClick(timeChoices, optionIndex)
+
+                time_1 = true
+
+                toolbox.hideAllSections(trendingSections)
+
+                if (content_0) {
+                    trendingSections[3].style.display = 'block'
+                }
+
+                if (content_1) {
+                    trendingSections[4].style.display = 'block'
+                }
+
+                if (content_2) {
+                    trendingSections[5].style.display = 'block'
+                }
+            } else {
+                time_1 = false
+            }
+        })
+
+        option.addEventListener('mouseover', function () {
+            styles.changeChoiceStylesByMouseover(timeChoices, optionIndex)
+        })
+
+        option.addEventListener('mouseout', function () {
+            styles.changeChoiceStylesByMouseout(timeChoices)
+        })
+
+    })
+    // choose time //
+    // CHOOSING THINGS //
