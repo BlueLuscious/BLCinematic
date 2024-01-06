@@ -41,85 +41,9 @@ document.addEventListener('DOMContentLoaded', function () {
     interactivity.chooseMoviesAndSeries(moviesOptions, moviesChoices, moviesSections, handlers)
     interactivity.chooseMoviesAndSeries(seriesOptions, seriesChoices, seriesSections, handlers)
 
-
-
-    let content_0 = true
-    let content_1 = false
-    let content_2 = false
-    let time_0 = true
-    let time_1 = false
-
-    chooseTrending(contentOptions, contentChoices, trendingSections, handlers)
-    chooseTrending(timeOptions, timeChoices, trendingSections, handlers)
-
-    function chooseTrending(options, choices, sections, functions) {
-        options.forEach(function (option, optionIndex) {
-
-            option.addEventListener('click', function () {
-                if (optionIndex >= 0) {
-                    functions[1](choices, optionIndex)
-                    functions[4](sections)
-                }
-
-                if (options.length == 3) {
-                    if (optionIndex == 0) {
-                        content_0 = true
-                        functions[5](sections[0], time_0)
-                        functions[5](sections[3], time_1)
-                    } else {
-                        content_0 = false
-                    }
-    
-                    if (optionIndex == 1) {
-                        content_1 = true
-                        functions[5](sections[1], time_0)
-                        functions[5](sections[4], time_1)
-                    } else {
-                        content_1 = false
-                    }
-    
-                    if (optionIndex == 2) {
-                        content_2 = true
-                        functions[5](sections[2], time_0)
-                        functions[5](sections[5], time_1)
-                    } else {
-                        content_2 = false
-                    }
-                }
-
-                if (options.length == 2) {
-                    if (optionIndex == 0) {
-                        time_0 = true
-                        functions[5](sections[0], content_0)
-                        functions[5](sections[1], content_1)
-                        functions[5](sections[2], content_2)
-                    } else {
-                        time_0 = false
-                    }
-    
-                    if (optionIndex == 1) {
-                        time_1 = true
-                        functions[5](sections[3], content_0)
-                        functions[5](sections[4], content_1)
-                        functions[5](sections[5], content_2)
-                    } else {
-                        time_1 = false
-                    }
-                }
-            })
-
-            option.addEventListener('mouseover', function () {
-                functions[2](choices, optionIndex)
-            })
-
-            option.addEventListener('mouseout', function () {
-                functions[3](choices)
-            })
-            
-        })
-    }
+    interactivity.chooseTrending(contentOptions, contentChoices, trendingSections, handlers)
+    interactivity.chooseTrending(timeOptions, timeChoices, trendingSections, handlers)
 
     interactivity.scrollToTop()
     
-
 })

@@ -1,9 +1,14 @@
 import { Colour } from "./constants.js"
 
+let content_0 = true
+let content_1 = false
+let content_2 = false
+let time_0 = true
+let time_1 = false
 export class Interactivity {
 
     // choose trending content and time
-/*     chooseTrending(options, choices, sections, functions) {
+    chooseTrending(options, choices, sections, functions) {
         options.forEach(function (option, optionIndex) {
             option.addEventListener('click', function () {
                 if (optionIndex >= 0) {
@@ -65,9 +70,8 @@ export class Interactivity {
             option.addEventListener('mouseout', function () {
                 functions[3](choices)
             })
-            
         })
-    } */
+    }
 
     // choose movies and series content
     chooseMoviesAndSeries(options, choices, sections, functions) {
