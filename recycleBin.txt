@@ -229,3 +229,12 @@ export function getSeries(listItem, card, formatDate) {
             }
         })
 }
+
+
+
+
+//idt.delete(itemId)
+
+
+
+
