@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const seriesPopularCard = document.getElementById('seriesPopular')
     const seriesTopRatedCard = document.getElementById('seriesTopRated')
 
+    const moviesByIndexCard = document.getElementById('moviesByIndex')
     const seriesByIndexCard = document.getElementById('seriesByIndex')
+    const cards = [moviesByIndexCard, seriesByIndexCard]
 
     const cardClassName = 'main_series_tr'
 
@@ -34,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (itemIds[0] == itemIds[1] || itemIds[0 == itemIds[2] || itemIds[0] == itemIds[3]]) {
                         itemIds = itemIds.filter(id => id !== itemId)
                     }
-                    getResultsByIndexcard(data.results[indexCard], seriesByIndexCard, toolbox.formatDate)
+                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
                 }
             }
         })
@@ -52,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (itemIds[0] == itemIds[1] || itemIds[0 == itemIds[2] || itemIds[0] == itemIds[3]]) {
                         itemIds = itemIds.filter(id => id !== itemId)
                     }
-                    getResultsByIndexcard(data.results[indexCard], seriesByIndexCard, toolbox.formatDate)
+                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
                 }
             }
         })
@@ -70,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (itemIds[0] == itemIds[1] || itemIds[0 == itemIds[2] || itemIds[0] == itemIds[3]]) {
                         itemIds = itemIds.filter(id => id !== itemId)
                     }
-                    getResultsByIndexcard(data.results[indexCard], seriesByIndexCard, toolbox.formatDate)
+                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
                 }
             }
         })
@@ -88,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (itemIds[0] == itemIds[1] || itemIds[0 == itemIds[2] || itemIds[0] == itemIds[3]]) {
                         itemIds = itemIds.filter(id => id !== itemId)
                     }
-                    getResultsByIndexcard(data.results[indexCard], seriesByIndexCard, toolbox.formatDate)
+                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
                 }
             }
         })
