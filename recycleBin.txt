@@ -66,6 +66,7 @@ export function getSeries(listItem, card, formatDate) {
 
 
 
+
 // choose content //
     contentOptions.forEach(function (option, optionIndex) {
 
@@ -193,3 +194,38 @@ export function getSeries(listItem, card, formatDate) {
     })
     // choose time //
     // CHOOSING THINGS //
+
+
+
+
+
+
+ if (indexCard && itemId) {
+    getApiDataByURL(ApiUrls.moviesNowPlaying)
+        .then(data => {
+            if (itemId == data.results[indexCard].id) {
+                getResultsByIndexcard(data.results[indexCard], moviesByIndexCard, toolbox.formatDate)
+            }
+        })
+        
+    getApiDataByURL(ApiUrls.moviesPopular)
+        .then(data => {
+            if (itemId == data.results[indexCard].id) {
+                getResultsByIndexcard(data.results[indexCard], moviesByIndexCard, toolbox.formatDate)
+            }
+        })
+
+    getApiDataByURL(ApiUrls.moviesTopRated)
+        .then(data => {
+            if (itemId == data.results[indexCard].id) {
+                getResultsByIndexcard(data.results[indexCard], moviesByIndexCard, toolbox.formatDate)
+            }
+        })
+
+    getApiDataByURL(ApiUrls.moviesUpcoming)
+        .then(data => {
+            if (itemId == data.results[indexCard].id) {
+                getResultsByIndexcard(data.results[indexCard], moviesByIndexCard, toolbox.formatDate)
+            }
+        })
+}
