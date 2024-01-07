@@ -10,16 +10,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const urlParams = new URLSearchParams(window.location.search)
     const indexCard = urlParams.get('indexCard')
+    const itemId = urlParams.get('itemId')
     const mains = Array.from(document.getElementsByClassName('main_divs'))
 
     styles.setNavItemStylesByURL(Template.INDEX_TEMPLATE, navbarItems[0])
     styles.setNavItemStylesByURL(Template.MOVIES_TEMPLATE, navbarItems[1])
     styles.setNavItemStylesByURL(Template.SERIES_TEMPLATE, navbarItems[2])
 
-    toolbox.showSectionByURL(Template.MOVIES_TEMPLATE, ['', `?indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.MOVIES_TEMPLATE, ['', `?indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?indexCard=${indexCard}`], mains)
+    toolbox.showSectionByURL(Template.MOVIES_TEMPLATE, ['', `?indexCard=${indexCard}&itemId=${itemId}`], mains)
+    toolbox.showSectionByURL(Template.MOVIES_TEMPLATE, ['', `?indexCard=${indexCard}&itemId=${itemId}`], mains)
+    toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?indexCard=${indexCard}&itemId=${itemId}`], mains)
+    toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?indexCard=${indexCard}&itemId=${itemId}`], mains)
 
     interactivity.templateRedirects(navbarItems)
 
