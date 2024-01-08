@@ -262,7 +262,6 @@ body::-webkit-scrollbar-thumb:hover,
     padding: 0;
     border: none;
     background: none;
-    cursor: pointer;
 }
 
 .scroll_to_top .bi {
