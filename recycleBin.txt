@@ -261,3 +261,33 @@ getApiDataByURL(ApiUrls.trendingAllDay)
 
 
 
+templateRedirects(items) {
+    items.forEach(function (item, index) {
+        item.addEventListener('click', function () {
+            if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+                if (index == 1) {
+                    window.location.href = Template.MOVIES_TEMPLATE
+                }
+                if (index == 2) {
+                    window.location.href = Template.SERIES_TEMPLATE
+                }
+            }
+            if (window.location.pathname === Pathname.HTML_FOLDER + Template.MOVIES_TEMPLATE) {
+                if (index == 0) {
+                    window.location.href = Template.INDEX_TEMPLATE
+                }
+                if (index == 2) {
+                    window.location.href = Template.SERIES_TEMPLATE
+                }
+            }
+            if (window.location.pathname === Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE) {
+                if (index == 0) {
+                    window.location.href = Template.INDEX_TEMPLATE
+                }
+                if (index == 1) {
+                    window.location.href = Template.MOVIES_TEMPLATE
+                }
+            }
+        })
+    })
+}
