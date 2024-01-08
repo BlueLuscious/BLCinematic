@@ -94,31 +94,24 @@ export class Interactivity {
     }
 
     // redirects setted templates
-    templateRedirects(items) {
+    templateRedirects(items, currentTemplate) {
+        const templateRedirects = {
+            [Template.INDEX_TEMPLATE]: [null, 1, 2],
+            [Template.MOVIES_TEMPLATE]: [0, null, 2],
+            [Template.SERIES_TEMPLATE]: [0, 1, null],
+        }
+
         items.forEach(function (item, index) {
             item.addEventListener('click', function () {
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    if (index == 1) {
-                        window.location.href = Template.MOVIES_TEMPLATE
-                    }
-                    if (index == 2) {
-                        window.location.href = Template.SERIES_TEMPLATE
-                    }
-                }
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.MOVIES_TEMPLATE) {
-                    if (index == 0) {
+                if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate) {
+                    if (index == templateRedirects[currentTemplate][0]) {
                         window.location.href = Template.INDEX_TEMPLATE
                     }
-                    if (index == 2) {
-                        window.location.href = Template.SERIES_TEMPLATE
-                    }
-                }
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE) {
-                    if (index == 0) {
-                        window.location.href = Template.INDEX_TEMPLATE
-                    }
-                    if (index == 1) {
+                    if (index == templateRedirects[currentTemplate][1]) {
                         window.location.href = Template.MOVIES_TEMPLATE
+                    }
+                    if (index == templateRedirects[currentTemplate][2]) {
+                        window.location.href = Template.SERIES_TEMPLATE
                     }
                 }
             })
@@ -196,28 +189,21 @@ export class Styles {
         }
     }
 
+
     //
-    changeFontSizeByListemer(items, currentTemplate, listener, sizes) {
+    changeFontSizeByListener(items, currentTemplate, listener, sizes) {
+        const templateIndex = {
+            [Template.INDEX_TEMPLATE]: 0,
+            [Template.MOVIES_TEMPLATE]: 1,
+            [Template.SERIES_TEMPLATE]: 2,
+        }
+
         items.forEach(function (item, index) {
             item.addEventListener(listener, function () {
-                if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate[0]) {
-                    if (window.innerWidth <= 1600 && index != 0) {
+                if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate) {
+                    if (window.innerWidth <= 1600 && index != templateIndex[currentTemplate]) {
                         this.style.fontSize = sizes[0]
-                    } else if (window.innerWidth > 1600 && index != 0) {
-                        this.style.fontSize = sizes[1]
-                    }
-                }
-                if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate[1]) {
-                    if (window.innerWidth <= 1600 && index != 1) {
-                        this.style.fontSize = sizes[0]
-                    } else if (window.innerWidth > 1600 && index != 1) {
-                        this.style.fontSize = sizes[1]
-                    }
-                }
-                if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate[2]) {
-                    if (window.innerWidth <= 1600 && index != 2) {
-                        this.style.fontSize = sizes[0]
-                    } else if (window.innerWidth > 1600 && index != 2) {
+                    } else if (window.innerWidth > 1600 && index != templateIndex[currentTemplate]) {
                         this.style.fontSize = sizes[1]
                     }
                 }

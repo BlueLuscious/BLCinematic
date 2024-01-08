@@ -35,19 +35,15 @@ document.addEventListener('DOMContentLoaded', function () {
     toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?serie_popular&indexCard=${indexCard}`], mains)
     toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?serie_top_rated&indexCard=${indexCard}`], mains)
 
-    interactivity.templateRedirects(navbarItems)
+    interactivity.templateRedirects(navbarItems, Template.INDEX_TEMPLATE)
+    interactivity.templateRedirects(navbarItems, Template.MOVIES_TEMPLATE)
+    interactivity.templateRedirects(navbarItems, Template.SERIES_TEMPLATE)
 
-    const templates = [
-        Template.INDEX_TEMPLATE,
-        Template.MOVIES_TEMPLATE,
-        Template.SERIES_TEMPLATE
-    ]
-
-    styles.changeFontSizeByListemer(navbarItems, templates, 'mouseover', ['1.35em', '1.6em'])
-    styles.changeFontSizeByListemer(navbarItems, templates, 'mouseout', ['', ''])
-    styles.changeFontSizeByListemer(navbarItems, templates, 'mouseover', ['1.35em', '1.6em'])
-    styles.changeFontSizeByListemer(navbarItems, templates, 'mouseout', ['', ''])
-    styles.changeFontSizeByListemer(navbarItems, templates, 'mouseover', ['1.35em', '1.6em'])
-    styles.changeFontSizeByListemer(navbarItems, templates, 'mouseout', ['', ''])
+    styles.changeFontSizeByListener(navbarItems, Template.INDEX_TEMPLATE, 'mouseover', ['1.35em', '1.6em'])
+    styles.changeFontSizeByListener(navbarItems, Template.INDEX_TEMPLATE, 'mouseout', ['', ''])
+    styles.changeFontSizeByListener(navbarItems, Template.MOVIES_TEMPLATE, 'mouseover', ['1.35em', '1.6em'])
+    styles.changeFontSizeByListener(navbarItems, Template.MOVIES_TEMPLATE, 'mouseout', ['', ''])
+    styles.changeFontSizeByListener(navbarItems, Template.SERIES_TEMPLATE, 'mouseover', ['1.35em', '1.6em'])
+    styles.changeFontSizeByListener(navbarItems, Template.SERIES_TEMPLATE, 'mouseout', ['', ''])
 
 })
