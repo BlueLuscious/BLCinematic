@@ -123,12 +123,24 @@ export class Interactivity {
         const scrollToTop = document.getElementById('scrollToTop')
 
         scrollToTop.style.display = Display.DISPLAY_NONE
+        scrollToTop.style.opacity = 0;
     
         window.addEventListener('scroll', function () {
             if (document.body.scrollTop > 890 || document.documentElement.scrollTop > 890) {
+                setTimeout(() => {
+                    scrollToTop.style.transition = 'opacity 0.5s ease-in-out'
+                    scrollToTop.style.opacity = 1
+                }, 1000)
                 scrollToTop.style.display = Display.DISPLAY_BLOCK
-            } else {
-                scrollToTop.style.display = Display.DISPLAY_NONE
+            } else if (document.body.scrollTop < 890 || document.documentElement.scrollTop < 890) {
+                setTimeout(() => {
+                    scrollToTop.style.transition = 'opacity 0.5s ease-in-out'
+                    scrollToTop.style.opacity = 0
+                    setTimeout(() => {
+                        if (scrollToTop.style.opacity == 0) {
+                        }
+                    }, 100)
+                }, 1000)
             }
         })
     
