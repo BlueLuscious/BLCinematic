@@ -1,4 +1,4 @@
-import { ApiUrls, Pathname, Template } from "./constants.js"
+import { ApiUrls, CardClassName, Pathname, Template } from "./constants.js"
 import { getApiDataByURL, getResults, getResultsByIndexcard, getClickedCard } from "./api-data.js"
 import { Toolbox } from "./handlers.js"
 const toolbox = new Toolbox
@@ -15,84 +15,75 @@ document.addEventListener('DOMContentLoaded', function () {
     const seriesByIndexCard = document.getElementById('seriesByIndex')
     const cards = [moviesByIndexCard, seriesByIndexCard]
 
-    const cardClassName = 'main_movies_tr'
-
     const urlParams = new URLSearchParams(window.location.search)
     const indexCard = urlParams.get('indexCard')
-    const itemId = urlParams.get('itemId')
 
-    const itemIds = []
-
-    getApiDataByURL(ApiUrls.moviesNowPlaying)
-        .then(data => {
-            if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                getResults(data.results, moviesNowPlayingCard, toolbox.formatDate)
-                getClickedCard(data.results, moviesNowPlayingCard, cardClassName)
-                toolbox.loadFooter()
-            }
-            if (indexCard && itemId) {
-                if (itemId == data.results[indexCard].id) {
-                    itemIds.push(itemId)
-                    if (itemIds[0] == itemIds[1] || itemIds[0 == itemIds[2] || itemIds[0] == itemIds[3]]) {
-                        itemIds = itemIds.filter(id => id !== itemId)
-                    }
+    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
+        window.location.pathname == Pathname.HTML_FOLDER + Template.MOVIES_TEMPLATE && window.location.search == '' ||
+        window.location.search == `?movie_now_playing&indexCard=${indexCard}`
+        ) {
+            getApiDataByURL(ApiUrls.moviesNowPlaying)
+            .then(data => {
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+                    getResults(data.results, moviesNowPlayingCard, toolbox.formatDate)
+                    getClickedCard(data.results, moviesNowPlayingCard, CardClassName.MOVIES_CLASS, 'movie_now_playing')
+                    toolbox.loadFooter()
+                }
+                if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
                 }
-            }
-        })
+            })
+        }
 
-    getApiDataByURL(ApiUrls.moviesPopular)
-        .then(data => {
-            if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                getResults(data.results, moviesPopularCard, toolbox.formatDate)
-                getClickedCard(data.results, moviesPopularCard, cardClassName)
-                toolbox.loadFooter()
-            }
-            if (indexCard && itemId) {
-                if (itemId == data.results[indexCard].id) {
-                    itemIds.push(itemId)
-                    if (itemIds[0] == itemIds[1] || itemIds[0 == itemIds[2] || itemIds[0] == itemIds[3]]) {
-                        itemIds = itemIds.filter(id => id !== itemId)
-                    }
+    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
+        window.location.pathname == Pathname.HTML_FOLDER + Template.MOVIES_TEMPLATE && window.location.search == '' ||
+        window.location.search == `?movie_popular&indexCard=${indexCard}`
+        ) {
+            getApiDataByURL(ApiUrls.moviesPopular)
+            .then(data => {
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+                    getResults(data.results, moviesPopularCard, toolbox.formatDate)
+                    getClickedCard(data.results, moviesPopularCard, CardClassName.MOVIES_CLASS, 'movie_popular')
+                    toolbox.loadFooter()
+                }
+                if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
                 }
-            }
-        })
+            })
+        }
 
-    getApiDataByURL(ApiUrls.moviesTopRated)
-        .then(data => {
-            if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                getResults(data.results, moviesTopRatedCard, toolbox.formatDate)
-                getClickedCard(data.results, moviesTopRatedCard, cardClassName)
-                toolbox.loadFooter()
-            }
-            if (indexCard && itemId) {
-                if (itemId == data.results[indexCard].id) {
-                    itemIds.push(itemId)
-                    if (itemIds[0] == itemIds[1] || itemIds[0 == itemIds[2] || itemIds[0] == itemIds[3]]) {
-                        itemIds = itemIds.filter(id => id !== itemId)
-                    }
+    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
+        window.location.pathname == Pathname.HTML_FOLDER + Template.MOVIES_TEMPLATE && window.location.search == '' ||
+        window.location.search == `?movie_top_rated&indexCard=${indexCard}`
+        ) {
+            getApiDataByURL(ApiUrls.moviesTopRated)
+            .then(data => {
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+                    getResults(data.results, moviesTopRatedCard, toolbox.formatDate)
+                    getClickedCard(data.results, moviesTopRatedCard, CardClassName.MOVIES_CLASS, 'movie_top_rated')
+                    toolbox.loadFooter()
+                }
+                if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
                 }
-            }
-        })
+            })
+        }
 
-    getApiDataByURL(ApiUrls.moviesUpcoming)
-        .then(data => {
-            if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                getResults(data.results, moviesUpcomingCard, toolbox.formatDate)
-                getClickedCard(data.results, moviesUpcomingCard, cardClassName)
-                toolbox.loadFooter()
-            }
-            if (indexCard && itemId) {
-                if (itemId == data.results[indexCard].id) {
-                    itemIds.push(itemId)
-                    if (itemIds[0] == itemIds[1] || itemIds[0 == itemIds[2] || itemIds[0] == itemIds[3]]) {
-                        itemIds = itemIds.filter(id => id !== itemId)
-                    }
+    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
+        window.location.pathname == Pathname.HTML_FOLDER + Template.MOVIES_TEMPLATE && window.location.search == '' ||
+        window.location.search == `?movie_upcoming&indexCard=${indexCard}`
+        ) {
+            getApiDataByURL(ApiUrls.moviesUpcoming)
+            .then(data => {
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+                    getResults(data.results, moviesUpcomingCard, toolbox.formatDate)
+                    getClickedCard(data.results, moviesUpcomingCard, CardClassName.MOVIES_CLASS, 'movie_upcoming')
+                    toolbox.loadFooter()
+                }
+                if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
                 }
-            }
-        })
+            })
+        }
     // MOVIES //
 })

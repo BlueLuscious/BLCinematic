@@ -19,6 +19,12 @@ export class ApiUrls {
     static IMAGE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
 }
 
+export class CardClassName {
+    static TRENDING_CLASS = 'main_trending_tr'
+    static MOVIES_CLASS = 'main_movies_tr'
+    static SERIES_CLASS = 'main_series_tr'
+}
+
 export class Colour {
     static WHITE_COLOUR = 'rgb(255, 255, 255)'
     static DARK_BLUE_COLOUR = 'rgb(6, 33, 74)'

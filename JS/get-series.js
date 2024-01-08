@@ -1,4 +1,4 @@
-import { ApiUrls, Pathname, Template } from "./constants.js"
+import { ApiUrls, CardClassName, Pathname, Template } from "./constants.js"
 import { getApiDataByURL, getResults, getResultsByIndexcard, getClickedCard } from "./api-data.js"
 import { Toolbox } from "./handlers.js"
 const toolbox = new Toolbox
@@ -15,84 +15,75 @@ document.addEventListener('DOMContentLoaded', function () {
     const seriesByIndexCard = document.getElementById('seriesByIndex')
     const cards = [moviesByIndexCard, seriesByIndexCard]
 
-    const cardClassName = 'main_series_tr'
-
     const urlParams = new URLSearchParams(window.location.search)
     const indexCard = urlParams.get('indexCard')
-    const itemId = urlParams.get('itemId')
 
-    const itemIds = []
-
-    getApiDataByURL(ApiUrls.seriesAiringToday)
-        .then(data => {
-            if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                getResults(data.results, seriesAiringTodayCard, toolbox.formatDate)
-                getClickedCard(data.results, seriesAiringTodayCard, cardClassName)
-                toolbox.loadFooter()
-            }
-            if (indexCard && itemId) {
-                if (itemId == data.results[indexCard].id) {
-                    itemIds.push(itemId)
-                    if (itemIds[0] == itemIds[1] || itemIds[0 == itemIds[2] || itemIds[0] == itemIds[3]]) {
-                        itemIds = itemIds.filter(id => id !== itemId)
-                    }
+    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
+        window.location.pathname == Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE && window.location.search == '' ||
+        window.location.search == `?serie_airing_today&indexCard=${indexCard}`
+        ) {
+            getApiDataByURL(ApiUrls.seriesAiringToday)
+            .then(data => {
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+                    getResults(data.results, seriesAiringTodayCard, toolbox.formatDate)
+                    getClickedCard(data.results, seriesAiringTodayCard, CardClassName.SERIES_CLASS, 'serie_airing_today')
+                    toolbox.loadFooter()
+                }
+                if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
                 }
-            }
-        })
+            })
+        }
 
-    getApiDataByURL(ApiUrls.seriesOnTheAir)
-        .then(data => {
-            if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                getResults(data.results, seriesOnTheAirCard, toolbox.formatDate)
-                getClickedCard(data.results, seriesOnTheAirCard, cardClassName)
-                toolbox.loadFooter()
-            }
-            if (indexCard && itemId) {
-                if (itemId == data.results[indexCard].id) {
-                    itemIds.push(itemId)
-                    if (itemIds[0] == itemIds[1] || itemIds[0 == itemIds[2] || itemIds[0] == itemIds[3]]) {
-                        itemIds = itemIds.filter(id => id !== itemId)
-                    }
+    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
+        window.location.pathname == Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE && window.location.search == '' ||
+        window.location.search == `?serie_on_the_air&indexCard=${indexCard}`
+        ) {
+            getApiDataByURL(ApiUrls.seriesOnTheAir)
+            .then(data => {
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+                    getResults(data.results, seriesOnTheAirCard, toolbox.formatDate)
+                    getClickedCard(data.results, seriesOnTheAirCard, CardClassName.SERIES_CLASS, 'serie_on_the_air')
+                    toolbox.loadFooter()
+                }
+                if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
                 }
-            }
-        })
+            })
+        }
 
-    getApiDataByURL(ApiUrls.seriesPopular)
-        .then(data => {
-            if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                getResults(data.results, seriesPopularCard, toolbox.formatDate)
-                getClickedCard(data.results, seriesPopularCard, cardClassName)
-                toolbox.loadFooter()
-            }
-            if (indexCard && itemId) {
-                if (itemId == data.results[indexCard].id) {
-                    itemIds.push(itemId)
-                    if (itemIds[0] == itemIds[1] || itemIds[0 == itemIds[2] || itemIds[0] == itemIds[3]]) {
-                        itemIds = itemIds.filter(id => id !== itemId)
-                    }
+    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
+        window.location.pathname == Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE && window.location.search == '' ||
+        window.location.search == `?serie_popular&indexCard=${indexCard}`
+        ) {
+            getApiDataByURL(ApiUrls.seriesPopular)
+            .then(data => {
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+                    getResults(data.results, seriesPopularCard, toolbox.formatDate)
+                    getClickedCard(data.results, seriesPopularCard, CardClassName.SERIES_CLASS, 'serie_popular')
+                    toolbox.loadFooter()
+                }
+                if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
                 }
-            }
-        })
+            })
+        }
 
-    getApiDataByURL(ApiUrls.seriesTopRated)
-        .then(data => {
-            if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                getResults(data.results, seriesTopRatedCard, toolbox.formatDate)
-                getClickedCard(data.results, seriesTopRatedCard, cardClassName)
-                toolbox.loadFooter()
-            }
-            if (indexCard && itemId) {
-                if (itemId == data.results[indexCard].id) {
-                    itemIds.push(itemId)
-                    if (itemIds[0] == itemIds[1] || itemIds[0 == itemIds[2] || itemIds[0] == itemIds[3]]) {
-                        itemIds = itemIds.filter(id => id !== itemId)
-                    }
+    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
+        window.location.pathname == Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE && window.location.search == '' ||
+        window.location.search == `?serie_top_rated&indexCard=${indexCard}`
+        ) {
+            getApiDataByURL(ApiUrls.seriesTopRated)
+            .then(data => {
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+                    getResults(data.results, seriesTopRatedCard, toolbox.formatDate)
+                    getClickedCard(data.results, seriesTopRatedCard, CardClassName.SERIES_CLASS, 'serie_top_rated')
+                    toolbox.loadFooter()
+                }
+                if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
                 }
-            }
-        })
+            })
+        }
     // SERIES //
 })

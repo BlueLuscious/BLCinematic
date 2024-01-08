@@ -1,4 +1,4 @@
-import { ApiUrls } from "./constants.js"
+import { ApiUrls, CardClassName } from "./constants.js"
 
 // GET APIDATA //
 export async function getApiDataByURL(params) {
@@ -25,17 +25,7 @@ export function getResults(listItem, card, formatDate) {
     listItem.forEach(item => {
         const row = document.createElement('tr')
 
-        if (item.media_type == 'movie' || item.media_type == 'tv') {
-            row.classList.add('main_trending_tr')
-        }
-
-        if (!item.media_type && item.title) {
-            row.classList.add('main_movies_tr')
-        }
-
-        if (!item.media_type && item.name) {
-            row.classList.add('main_series_tr')
-        }
+        setCardClassname(row, item)
 
         const imageData = document.createElement('td')
         const image = document.createElement('img')
@@ -56,17 +46,7 @@ export function getResultsByIndexcard(item, card, formatDate) {
     
     const row = document.createElement('tr')
 
-    if (item.media_type == 'movie' || item.media_type == 'tv') {
-        row.classList.add('main_trending_tr')
-    }
-
-    if (item.title) {
-        row.classList.add('main_movies_tr')
-    }
-
-    if (item.name) {
-        row.classList.add('main_series_tr')
-    }
+    setCardClassname(row, item)
 
     const imageData = document.createElement('td')
     const image = document.createElement('img')
@@ -74,13 +54,13 @@ export function getResultsByIndexcard(item, card, formatDate) {
     imageData.appendChild(image)
     row.appendChild(imageData)
 
-    showResultsByMediaType(row, item, item.title, item.release_date, 'movie', 'main_movies_tr', formatDate)
-    showResultsByMediaType(row, item, item.name, item.first_air_date, 'tv', 'main_series_tr', formatDate)
+    showResultsByMediaType(row, item, item.title, item.release_date, 'movie', CardClassName.MOVIES_CLASS, formatDate)
+    showResultsByMediaType(row, item, item.name, item.first_air_date, 'tv', CardClassName.SERIES_CLASS, formatDate)
 
-    if (item.media_type == 'movie' || row.classList.contains('main_movies_tr')) {
+    if (item.media_type == 'movie' || row.classList.contains(CardClassName.MOVIES_CLASS)) {
         card[0].appendChild(row)
     }
-    if (item.media_type == 'tv' || row.classList.contains('main_series_tr')) {
+    if (item.media_type == 'tv' || row.classList.contains(CardClassName.SERIES_CLASS)) {
         card[1].appendChild(row)
     }
 
@@ -89,17 +69,25 @@ export function getResultsByIndexcard(item, card, formatDate) {
 // GET RESULT BY ID //
 
 // GET CLICKED RESULTS //
-export function getClickedCard(results, card, cardClassName) {
+export function getClickedCard(results, card, cardClassName, category) {
     const mainCards = Array.from(card.getElementsByClassName(cardClassName))
 
     mainCards.forEach(function (mainCard, index) {
         mainCard.addEventListener('click', function () {
-            if (results[index].media_type == 'movie' || mainCard.classList.contains('main_movies_tr')) {
-                window.location.href = `movies.html?indexCard=${index}&itemId=${results[index].id}`
+            if (results[index].media_type == 'movie' && mainCard.classList.contains(CardClassName.TRENDING_CLASS)) {
+                window.location.href = `movies.html?${category}&indexCard=${index}`
             }
 
-            if (results[index].media_type == 'tv' || mainCard.classList.contains('main_series_tr')) {
-                window.location.href = `series.html?indexCard=${index}&itemId=${results[index].id}`
+            if (results[index].media_type == 'tv' && mainCard.classList.contains(CardClassName.TRENDING_CLASS)) {
+                window.location.href = `series.html?${category}&indexCard=${index}`
+            }
+
+            if (results[index].title && mainCard.classList.contains(CardClassName.MOVIES_CLASS)) {
+                window.location.href = `movies.html?${category}&indexCard=${index}`
+            }
+
+            if (results[index].name && mainCard.classList.contains(CardClassName.SERIES_CLASS)) {
+                window.location.href = `series.html?${category}&indexCard=${index}`
             }
         })
     })
@@ -124,5 +112,20 @@ function showResultsByMediaType(row, item, title_, date_, media_type, cardClassN
 
         row.appendChild(title)
         row.appendChild(date)
+    }
+}
+
+// set classname by type and data
+function setCardClassname(row, item) {
+    if (item.media_type == 'movie' || item.media_type == 'tv') {
+        row.classList.add(CardClassName.TRENDING_CLASS)
+    }
+
+    if (!item.media_type && item.title) {
+        row.classList.add(CardClassName.MOVIES_CLASS)
+    }
+
+    if (!item.media_type && item.name) {
+        row.classList.add(CardClassName.SERIES_CLASS)
     }
 }
