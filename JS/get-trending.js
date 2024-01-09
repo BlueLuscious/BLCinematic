@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
+                    toolbox.loadFooter()
                 }
             })
         }
@@ -51,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
+                    toolbox.loadFooter()
                 }
             })
         }
@@ -67,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
+                    toolbox.loadFooter()
                 }
             })
         }
@@ -84,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
+                    toolbox.loadFooter()
                 }
             })
         }
@@ -101,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
+                    toolbox.loadFooter()
                 }
             })
         }
@@ -118,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 if (indexCard) {
                     getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
+                    toolbox.loadFooter()
                 }
             })
         }
