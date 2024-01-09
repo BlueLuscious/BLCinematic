@@ -1,12 +1,14 @@
 /* VARS */
 :root {
     --white-colour: rgb(255, 255, 255);
+    --black-colour-alpha: rgba(255, 255, 255, 0);
     --dark-blue-colour: rgb(6, 33, 74);
     --dark-blue-colour-2: rgb(17, 60, 124);
     --medium-blue-colour: rgb(29, 101, 209);
     --medium-blue-colour-2: rgb(76, 130, 211);
     --light-blue-colour: rgb(134, 174, 235);
     --light-blue-colour-2: rgb(230, 240, 255);
+    --light-blue-colour-2-alpha: rgba(230, 240, 255, 1);
 }
 /* VARS */
 
@@ -85,14 +87,12 @@ body {
 .main_trending_tr,
 .main_movies_tr,
 .main_series_tr  {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 1%;
+    display: grid;
+    margin: 1.5%;
     padding: 1%;
-    height: 32.75em;
-    border-radius: 1em;
-    box-shadow: 0.15em 0.15em 0.15em 0.15em #555;
+    height: 50vh;
+    border-radius: 2vh;
+    box-shadow: 0.35vh 0.40vh 0.35vh 0.40vh var(--dark-blue-colour);
     background-color: var(--white-colour);
     cursor: pointer;
 }
@@ -100,51 +100,58 @@ body {
 .main_trending_tr td,
 .main_movies_tr td,
 .main_series_tr td {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 0.75em;
-    font-size: 1.25em;
+    padding-bottom: 1.5vh;
+    font-size: 2vh;
 }
 
 .main_trending_tr img,
 .main_movies_tr img,
 .main_series_tr img {
-    width: 13.75em;
-    border-radius: 1em;
+    width: 25vh;
+    border-radius: 2vh;
 }
 
 .trending_section,
 .movies_section,
 .series_section {
-    padding-top: 2em;
-    padding-bottom: 2.5em;
+    padding-top: 5vh;
+}
+
+.choice_contents {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .choose_content,
 .choose_time {
-    display: inline-flex;
-    margin-left: 11em;
-    margin-right: 3em;
-    margin-top: 4em;
+    margin-left: 12.5vh;
+    margin-right: 12.5vh;
+    margin-top: 7.5vh;
 
+}
+
+.choose_content:first-of-type {
+    width: 16vh;
 }
 
 .choose_content h1,
 .choose_time h1 {
     margin: 0;
-    padding: 0.5em;
-    width: 5em;
+    padding: 1.5vh;
+    width: 100%;
     text-align: center;
-    border-radius: 2em;
+    border-radius: 5vh;
     color: var(--white-colour);
     background-color: var(--dark-blue-colour-2);
-    font-size: 1.6em;
+    font-size: 3vh;
 }
 
 .choose_content table,
 .choose_time table {
-    border: 0.2em solid var(--dark-blue-colour-2);
-    border-radius: 3em;
+    border: 0.4vh solid var(--dark-blue-colour-2);
+    border-radius: 5vh;
     background-color:  var(--light-blue-colour-2);
 }
 
@@ -155,14 +162,14 @@ body {
 
 .choose_content td,
 .choose_time td {
-    padding: 0.5em;
-    width: 6em;
+    padding: 1.5vh;
+    width: 16vh;
     text-align: center;
-    border: 1px solid;
-    border-radius: 2em;
+    border: 0.3vh solid;
+    border-radius: 5vh;
     color: var(--dark-blue-colour-2);
     background-color: var(--white-colour);
-    font-size: 1.6em;
+    font-size: 3vh;
     cursor: pointer;
 }
 
@@ -184,38 +191,29 @@ body {
     position: relative;
     left: 4.25%;
     width: 92%;
-}
 
-.trending_content::before,
-.trending_content::after,
-.movies_content::before,
-.movies_content::after,
-.series_content::before,
-.series_content::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    height: 95%;
-    backdrop-filter: blur(0.05em);
-    pointer-events: none;
-}
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        height: 95%;
+        backdrop-filter: blur(0.05vh);
+        pointer-events: none;
+    }
 
-.trending_content::before,
-.movies_content::before,
-.series_content::before {
-    width: 2.5%;
-    left: 0;
-    background: linear-gradient(to left, rgba(255, 255, 255, 0), rgb(230, 240, 255, 1));
+    &::before {
+        width: 2.5%;
+        left: 0;
+        background: linear-gradient(to left, var(--black-colour-alpha), var(--light-blue-colour-2-alpha));
+    }
 
-}
-
-.trending_content::after,
-.movies_content::after,
-.series_content::after  {
-    width: 5%;
-    right: 0;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(230, 240, 255, 1));
+    &::after {
+        width: 5%;
+        right: 0;
+        background: linear-gradient(to right, var(--black-colour-alpha), var(--light-blue-colour-2-alpha));
+    }
 }
 
 .trending_tables,
