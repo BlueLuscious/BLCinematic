@@ -1,77 +1,132 @@
 @media screen {
-    /* PC */
-    @media (max-width: 1860px) {
+    
+    /* MacBook Pro, Nest Hub Max */
+    @media (max-width: 1440px) {
         .header_navbar_item:first-of-type {
-            margin-left: 5em;
-            margin-right: 6.5em;
+            margin-left: 2.5vh;
+            margin-right: 5vh;
         }
-        .header_navbar_item:last-of-type {
-            margin-left: 6.5em;
+        
+        .header_navbar_item:nth-of-type(2) {
+            margin-left: 5vh;
         }
-        .header_navbar_item input {
-            padding: 0.85em;
-            width: 28em;
-            font-size: 1.15em;
+        
+        .header_navbar_item:nth-of-type(3) {
+            margin-left: 7.5vh;
         }
 
         .choose_content,
         .choose_time {
-            margin-left: 8.75em;
-            margin-right: 2em;
+            margin-left: 5vh;
+            margin-right: 5vh;
+            margin-top: 7.5vh;
+        }
+
+        .choose_content h1,
+        .choose_time h1 {
+            width: 14vh;
+            font-size: 2.5vh;
+        }
+
+        .choose_content td,
+        .choose_time td {
+            width: 14vh;
+            font-size: 2.5vh;
         }
     }
+    /* MacBook Pro, Nest Hub Max */
 
-    @media (max-width: 1750px) {
-        .header_navbar_item:first-of-type {
-            margin-left: 5em;
-            margin-right: 5.5em;
-        }
-        .header_navbar_item:last-of-type {
-            margin-left: 5.5em;
-        }
-        .header_navbar_item input {
-            padding: 0.60em;
-            width: 26em;
-            font-size: 1.05em;
+    /* Nest Hub, iPad Pro */
+    @media (max-width: 1024px) {
+        .header_navbar_item:nth-of-type(2),
+        .header_navbar_item:nth-of-type(3) {
+            display: none;
         }
 
-        .header_navbar_td {
-            font-size: 1.5em;
-        }
-
-        .choose_content,
-        .choose_time {
-            margin-left: 6.75em;
-            margin-right: 1em;
+        .expand_button {
+            display: block;
+            margin-left: 50vh;
         }
     }
+    /* Nest Hub, iPad Pro */
 
-    @media (max-width: 1600px) {
-        .header_navbar_item:first-of-type {
-            margin-left: 5em;
-            margin-right: 4.5em;
-        }
-        .header_navbar_item:last-of-type {
-            margin-left: 4.5em;
-        }
-        .header_navbar_item input {
-            width: 24em;
+    /* Surface Pro 7, iPad Air */
+    @media (max-width: 912px) {
+        .expandable_navbar div:nth-of-type(2) {
+            margin-top: 1vh;
         }
 
-        .header_navbar_td {
-            font-size: 1.25em;
+        .expandable_navbar div:nth-of-type(3) {
+            margin-top: 2vh;
         }
 
-        .choose_content,
-        .choose_time {
-            margin-left: 4.75em;
-            margin-right: 0;
+        .expand_button {
+            display: block;
+            margin-left: 40vh;
         }
     }
+    /* Surface Pro 7, iPad Air */
 
-    @media (max-width: 1480px) {
-        /* hacer tres puntitos con nav expandible */
-        /* los mismo para los choose content */
+    /* iPad Mini */
+    @media (max-width: 768px) {
+        .expand_button {
+            display: block;
+            margin-left: 42.5vh;
+        }
     }
-    /* PC */
+    /* iPad Mini */
+
+    /* Surface Duo */
+    @media (max-width: 540px) {
+        .expand_button {
+            display: block;
+            margin-left: 35vh;
+        }
+    }
+    /* Surface Duo */
+
+    /* iPhone Pro Max, iPhone XR, Samsung Galaxy S20 Ultra, Samsung Galaxy A51/71 */
+    @media (max-width: 430px) {
+        .expand_button {
+            display: block;
+            margin-left: 12vh;
+        }
+    }
+    /* iPhone Pro Max, iPhone XR, Samsung Galaxy S20 Ultra, Samsung Galaxy A51/71 */
+
+    /* iPhone 12 Pro */
+    @media (max-width: 390px) {
+        .expand_button {
+            display: block;
+            margin-left: 8vh;
+        }
+    }
+    /* iPhone 12 Pro */
+
+    /* iPhone SE */
+    @media (max-width: 375px) {
+        .expand_button {
+            display: block;
+            margin-left: 14vh;
+        }
+    }
+    /* iPhone SE */
+
+    /* Samsung Galaxy S8+ */
+    @media (max-width: 360px) {
+        .expand_button {
+            display: block;
+            margin-left: 10vh;
+        }
+    }
+    /* Samsung Galaxy S8+ */
+
+    /* Galaxy Fold */
+    @media (max-width: 280px) {
+        .expand_button {
+            display: block;
+            margin-left: 1vh;
+        }
+    }
+    /* Galaxy Fold */
 }

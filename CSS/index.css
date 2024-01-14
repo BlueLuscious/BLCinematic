@@ -20,7 +20,6 @@ body {
     margin: 0;
     padding: 0;
     overflow-y: scroll;
-    overflow-x: scroll;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: var(--light-blue-colour-2);
 }
@@ -48,7 +47,7 @@ body {
     margin-left: 10vh;
 }
 
-.header_navbar_item:last-of-type {
+.header_navbar_item:nth-of-type(3) {
     margin-left: 20vh;
 }
 
@@ -56,7 +55,8 @@ body {
     color: var(--white-colour);
 }
 
-.header_navbar_item input {
+.header_navbar_item input,
+.expandable_navbar input {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,6 +80,33 @@ body {
     color: var(--white-colour);
     font-size: 2.5vh;
     cursor: pointer;
+}
+
+.expand_button {
+    display: none;
+}
+
+.expandable_navbar {
+    position: fixed;
+    background-color: white;
+    padding: 20px;
+    border-radius: 0 0 1vh 1vh;
+    background-color: var(--medium-blue-colour-2);
+    z-index: 1;
+}
+
+.expandable_navbar div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.expandable_navbar div:nth-of-type(2) {
+    margin-top: 3vh;
+}
+
+.expandable_navbar div:nth-of-type(3) {
+    margin-top: 5vh;
 }
 /* HEADER */
 
@@ -132,16 +159,13 @@ body {
 
 }
 
-.choose_content:first-of-type {
-    width: 16vh;
-}
-
 .choose_content h1,
 .choose_time h1 {
     margin: 0;
     padding: 1.5vh;
-    width: 100%;
+    width: 16vh;
     text-align: center;
+    border: 0.3vh solid var(--dark-blue-colour-2);
     border-radius: 5vh;
     color: var(--white-colour);
     background-color: var(--dark-blue-colour-2);
@@ -165,7 +189,7 @@ body {
     padding: 1.5vh;
     width: 16vh;
     text-align: center;
-    border: 0.3vh solid;
+    border: 0.3vh solid var(--dark-blue-colour-2);
     border-radius: 5vh;
     color: var(--dark-blue-colour-2);
     background-color: var(--white-colour);
@@ -210,8 +234,8 @@ body {
     }
 
     &::after {
-        width: 5%;
-        right: 0;
+        width: 5.5%;
+        right: -0.25%;
         background: linear-gradient(to right, var(--black-colour-alpha), var(--light-blue-colour-2-alpha));
     }
 }
