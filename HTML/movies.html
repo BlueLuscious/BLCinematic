@@ -37,7 +37,37 @@
                     </tr>
                 </table>
             </div>
+            <div class="expand_button">
+                <button id="expandNavbarButton">Expand</button>
+            </div>
         </nav>
+        <div id="expandableNavbar" class="expandable_navbar">
+            <div>
+                <input type="text" id="expandableSearchBar" name="search" placeholder="Search for Movies or TV Shows...">
+            </div>
+            <div>
+                <table>
+                    <tr class="expandable_navbar_tr">
+                        <td class="expandable_navbar_td">Home</td>
+                    </tr>
+                    <tr class="expandable_navbar_tr">
+                        <td class="expandable_navbar_td">Movies</td>
+                    </tr>
+                    <tr class="expandable_navbar_tr">
+                        <td class="expandable_navbar_td">Series</td>
+                    </tr>
+                    <tr class="expandable_navbar_tr">
+                        <td class="expandable_navbar_td">Genres</td>
+                    </tr>
+                    <tr class="expandable_navbar_tr">
+                        <td class="expandable_navbar_td">Favourites</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <button id="closeNavbarButton">Close</button>
+            </div>
+        </div>
     </header>
     <!-- HEADER -->
 
@@ -78,7 +108,8 @@
 </body>
 <script type="module" src="../JS/get-trending.js"></script>
 <script type="module" src="../JS/get-movies.js"></script>
-<script type="module" src="../JS/index.js"></script>
+<script type="module" src="../JS/global.js"></script>
+<script type="module" src="../JS/responsive.js"></script>
 <script
     src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
