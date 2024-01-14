@@ -1,49 +1,45 @@
-import { Template } from "./constants.js"
 import { Interactivity, Styles, Toolbox } from "./handlers.js"
 const interactivity = new Interactivity
 const styles = new Styles
 const toolbox = new Toolbox
 
 document.addEventListener('DOMContentLoaded', function () {
+    
+    const trendingSections = Array.from(document.getElementsByClassName('trending_section'))
+    const contentOptions = Array.from(document.getElementsByClassName('choose_content_option'))
+    const contentChoices = Array.from(document.getElementsByClassName('content_choice'))
+    const timeOptions = Array.from(document.getElementsByClassName('choose_time_option'))
+    const timeChoices = Array.from(document.getElementsByClassName('time_choice'))
 
-    const navbarItems = Array.from(document.getElementsByClassName('header_navbar_td'))
+    const moviesSections = Array.from(document.getElementsByClassName('movies_section'))
+    const moviesOptions = Array.from(document.getElementsByClassName('choose_movies_option'))
+    const moviesChoices = Array.from(document.getElementsByClassName('movies_choice'))
 
-    const urlParams = new URLSearchParams(window.location.search)
-    const indexCard = urlParams.get('indexCard')
-    const mains = Array.from(document.getElementsByClassName('main_divs'))
+    const seriesSections = Array.from(document.getElementsByClassName('series_section'))
+    const seriesOptions = Array.from(document.getElementsByClassName('choose_series_option'))
+    const seriesChoices = Array.from(document.getElementsByClassName('series_choice'))
 
-    styles.setNavItemStylesByURL(Template.INDEX_TEMPLATE, navbarItems[0])
-    styles.setNavItemStylesByURL(Template.MOVIES_TEMPLATE, navbarItems[1])
-    styles.setNavItemStylesByURL(Template.SERIES_TEMPLATE, navbarItems[2])
+    const handlers = [
+        toolbox.changeSectionDisplay, 
+        styles.changeChoiceStylesByClick, 
+        styles.changeChoiceStylesByMouseover, 
+        styles.changeChoiceStylesByMouseout,
+        toolbox.hideAllSections,
+        toolbox.showOneSection
+    ]
 
-    toolbox.showSectionByURL(Template.MOVIES_TEMPLATE, ['', `?trending_all_day&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?trending_all_day&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.MOVIES_TEMPLATE, ['', `?trending_movie_day&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?trending_serie_day&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.MOVIES_TEMPLATE, ['', `?trending_all_week&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?trending_all_week&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.MOVIES_TEMPLATE, ['', `?trending_movie_week&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?trending_serie_week&indexCard=${indexCard}`], mains)
+    toolbox.setSectionIndex0(trendingSections)
+    styles.setChoiceColour(contentChoices)
+    styles.setChoiceColour(timeChoices)
+    interactivity.chooseTrending(contentOptions, contentChoices, trendingSections, handlers)
+    interactivity.chooseTrending(timeOptions, timeChoices, trendingSections, handlers)
 
-    toolbox.showSectionByURL(Template.MOVIES_TEMPLATE, ['', `?movie_now_playing&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.MOVIES_TEMPLATE, ['', `?movie_popular&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.MOVIES_TEMPLATE, ['', `?movie_top_rated&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.MOVIES_TEMPLATE, ['', `?movie_upcoming&indexCard=${indexCard}`], mains)
+    toolbox.setSectionIndex0(moviesSections)
+    styles.setChoiceColour(moviesChoices)
+    interactivity.chooseMoviesAndSeries(moviesOptions, moviesChoices, moviesSections, handlers)
 
-    toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?serie_airing_today&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?serie_on_the_air&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?serie_popular&indexCard=${indexCard}`], mains)
-    toolbox.showSectionByURL(Template.SERIES_TEMPLATE, ['', `?serie_top_rated&indexCard=${indexCard}`], mains)
-
-    interactivity.templateRedirects(navbarItems, Template.INDEX_TEMPLATE)
-    interactivity.templateRedirects(navbarItems, Template.MOVIES_TEMPLATE)
-    interactivity.templateRedirects(navbarItems, Template.SERIES_TEMPLATE)
-
-    styles.changeFontSizeByListener(navbarItems, Template.INDEX_TEMPLATE, 'mouseover', ['1.35em', '1.6em'])
-    styles.changeFontSizeByListener(navbarItems, Template.INDEX_TEMPLATE, 'mouseout', ['', ''])
-    styles.changeFontSizeByListener(navbarItems, Template.MOVIES_TEMPLATE, 'mouseover', ['1.35em', '1.6em'])
-    styles.changeFontSizeByListener(navbarItems, Template.MOVIES_TEMPLATE, 'mouseout', ['', ''])
-    styles.changeFontSizeByListener(navbarItems, Template.SERIES_TEMPLATE, 'mouseover', ['1.35em', '1.6em'])
-    styles.changeFontSizeByListener(navbarItems, Template.SERIES_TEMPLATE, 'mouseout', ['', ''])
+    toolbox.setSectionIndex0(seriesSections)
+    styles.setChoiceColour(seriesChoices)
+    interactivity.chooseMoviesAndSeries(seriesOptions, seriesChoices, seriesSections, handlers)
 
 })

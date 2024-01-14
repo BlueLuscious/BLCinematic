@@ -166,6 +166,7 @@ export class Styles {
     changeChoiceStylesByClick(choices, optionIndex) {
         choices.forEach(function (choice, choiceIndex) {
             choice.style.color = choiceIndex === optionIndex ? Colour.WHITE_COLOUR : Colour.DARK_BLUE_COLOUR_2
+            choice.style.borderColor = choiceIndex === optionIndex ? Colour.DARK_BLUE_COLOUR_2 : Colour.DARK_BLUE_COLOUR_2
             choice.style.backgroundColor = choiceIndex === optionIndex ? Colour.DARK_BLUE_COLOUR_2 : Colour.WHITE_COLOUR
             choice.style.cursor = choiceIndex === optionIndex ? Cursor.DEFAULT_CURSOR : Cursor.POINTER_CURSOR
         })
@@ -175,6 +176,7 @@ export class Styles {
     changeChoiceStylesByMouseover(choices, optionIndex) {
         if (optionIndex >= 0 && choices[optionIndex].style.backgroundColor !== Colour.DARK_BLUE_COLOUR_2) {
             choices[optionIndex].style.color = Colour.WHITE_COLOUR
+            choices[optionIndex].style.borderColor = Colour.WHITE_COLOUR
             choices[optionIndex].style.backgroundColor = Colour.LIGHT_BLUE_COLOUR
             choices[optionIndex].style.cursor = Cursor.POINTER_CURSOR
         }
@@ -185,6 +187,7 @@ export class Styles {
         choices.forEach(function (choice, choiceIndex) {
             if (choiceIndex >= 0 && choice.style.backgroundColor !== Colour.DARK_BLUE_COLOUR_2) {
                 choice.style.color = Colour.DARK_BLUE_COLOUR_2
+                choice.style.borderColor = Colour.DARK_BLUE_COLOUR_2
                 choice.style.backgroundColor = Colour.WHITE_COLOUR
                 choice.style.cursor = Cursor.POINTER_CURSOR
             }
@@ -201,8 +204,8 @@ export class Styles {
     }
 
 
-    //
-    changeFontSizeByListener(items, currentTemplate, listener, sizes) {
+    // change font-size by some event listener
+    changeFontSizeByListener(items, currentTemplate, listener, size) {
         const templateIndex = {
             [Template.INDEX_TEMPLATE]: 0,
             [Template.MOVIES_TEMPLATE]: 1,
@@ -213,15 +216,14 @@ export class Styles {
             item.addEventListener(listener, function () {
                 if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate) {
                     if (window.innerWidth <= 1600 && index != templateIndex[currentTemplate]) {
-                        this.style.fontSize = sizes[0]
+                        this.style.fontSize = size
                     } else if (window.innerWidth > 1600 && index != templateIndex[currentTemplate]) {
-                        this.style.fontSize = sizes[1]
+                        this.style.fontSize = size
                     }
                 }
             })
         })
     }
-    //
 
 }
 
