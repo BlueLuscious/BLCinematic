@@ -11,6 +11,7 @@
 <body>
     <!-- HEADER -->
     <header class="header">
+        <!-- NAVBAR -->
         <nav class="header_navbar">
             <div class="header_navbar_item">
                 <img src="BLCinematic-Logo.png" alt="BLCinematic-Logo">
@@ -37,10 +38,14 @@
                     </tr>
                 </table>
             </div>
-            <div class="expand_button">
-                <button id="expandNavbarButton">Expand</button>
+            <div id="expandButtonBox" class="expand_button">
+                <button type="button" id="expandNavbarButton"><i class="bi bi-list"></i></button>
+                <!-- <i class="bi bi-x-lg"></i> -->
             </div>
         </nav>
+        <!-- NAVBAR -->
+
+        <!-- EXPANDABLE NAVBAR -->
         <div id="expandableNavbar" class="expandable_navbar">
             <div>
                 <input type="text" id="expandableSearchBar" name="search" placeholder="Search for Movies or TV Shows...">
@@ -65,42 +70,65 @@
                 </table>
             </div>
             <div>
-                <button id="closeNavbarButton">Close</button>
+                <button type="button" id="closeNavbarButton">Close</button>
             </div>
         </div>
+        <!-- EXPANDABLE NAVBAR -->
     </header>
     <!-- HEADER -->
 
     <!-- MAIN -->
     <main class="main">
         <!-- trending section -->
-        <div class="choice_contents">
-            <div class="choose_content">
-                <h1>Trending</h1>
+        <div class="contents">
+            <!-- CHOICE -->
+            <div class="choice_contents">
+                <div class="choose_content">
+                    <h1>Trending</h1>
+                </div>
+                <div class="choose_content">
+                    <table>
+                        <tr class="choose_content_option">
+                            <td class="content_choice" id="choose_content_all"><strong>All</strong></td>
+                        </tr>
+                        <tr class="choose_content_option">
+                            <td class="content_choice"><strong>Movies</strong></td>
+                        </tr>
+                        <tr class="choose_content_option">
+                            <td class="content_choice"><strong>Series</strong></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="choose_time">
+                    <table>
+                        <tr class="choose_time_option">
+                            <td class="time_choice" id="choose_time_day"><strong>Day</strong></td>
+                        </tr>
+                        <tr class="choose_time_option">
+                            <td class="time_choice"><strong>Week</strong></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="choose_content">
-                <table>
-                    <tr class="choose_content_option">
-                        <td class="content_choice" id="choose_content_all"><strong>All</strong></td>
-                    </tr>
-                    <tr class="choose_content_option">
-                        <td class="content_choice"><strong>Movies</strong></td>
-                    </tr>
-                    <tr class="choose_content_option">
-                        <td class="content_choice"><strong>Series</strong></td>
-                    </tr>
-                </table>
+            <!-- CHOICE -->
+
+            <!-- SELECT -->
+            <div class="select_contents">
+                <div class="select_content_time">
+                    <select name="content" id="select_content">
+                        <option value="all" selected>All</option>
+                        <option value="movies">Movies</option>
+                        <option value="series">Series</option>
+                    </select>
+                </div>
+                <div class="select_content_time">
+                    <select name="time" id="select_time">
+                        <option value="day" selected>Day</option>
+                        <option value="week">Week</option>
+                    </select>
+                </div>
             </div>
-            <div class="choose_time">
-                <table>
-                    <tr class="choose_time_option">
-                        <td class="time_choice" id="choose_time_day"><strong>Day</strong></td>
-                    </tr>
-                    <tr class="choose_time_option">
-                        <td class="time_choice"><strong>Week</strong></td>
-                    </tr>
-                </table>
-            </div>
+            <!-- SELECT -->
         </div>
         <section class="trending_section">
             <div class="trending_content">
@@ -136,26 +164,43 @@
         <!-- trending section -->
         <br><br><br>
         <!-- movies section -->
-        <div class="choice_contents">
-            <div class="choose_content">
-                <h1>Movies</h1>
+        <div class="contents">
+            <!-- CHOICE -->
+            <div class="choice_contents">
+                <div class="choose_content">
+                    <h1>Movies</h1>
+                </div>
+                <div class="choose_content">
+                    <table>
+                        <tr class="choose_movies_option">
+                            <td class="movies_choice" id="choose_content_now_playing"><strong>Now Playing</strong></td>
+                        </tr>
+                        <tr class="choose_movies_option">
+                            <td class="movies_choice"><strong>Popular</strong></td>
+                        </tr>
+                        <tr class="choose_movies_option">
+                            <td class="movies_choice"><strong>Top Rated</strong></td>
+                        </tr>
+                        <tr class="choose_movies_option">
+                            <td class="movies_choice"><strong>Upcoming</strong></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="choose_content">
-                <table>
-                    <tr class="choose_movies_option">
-                        <td class="movies_choice" id="choose_content_now_playing"><strong>Now Playing</strong></td>
-                    </tr>
-                    <tr class="choose_movies_option">
-                        <td class="movies_choice"><strong>Popular</strong></td>
-                    </tr>
-                    <tr class="choose_movies_option">
-                        <td class="movies_choice"><strong>Top Rated</strong></td>
-                    </tr>
-                    <tr class="choose_movies_option">
-                        <td class="movies_choice"><strong>Upcoming</strong></td>
-                    </tr>
-                </table>
+            <!-- CHOICE -->
+
+            <!-- SELECT -->
+            <div class="select_contents">
+                <div class="select_content_time">
+                    <select name="content" id="select_movies">
+                        <option value="nowPlaying">Now Playing</option>
+                        <option value="popular">Popular</option>
+                        <option value="topRated">Top Rated</option>
+                        <option value="upcoming">Upcoming</option>
+                    </select>
+                </div>
             </div>
+            <!-- SELECT -->
         </div>
         <section class="movies_section">
             <div class="movies_content">
@@ -180,26 +225,43 @@
         <!-- movies section -->
         <br><br><br>
         <!-- series section -->
-        <div class="choice_contents">
-            <div class="choose_content">
-                <h1>Series</h1>
+        <div class="contents">
+            <!-- CHOICE -->
+            <div class="choice_contents">
+                <div class="choose_content">
+                    <h1>Series</h1>
+                </div>
+                <div class="choose_content">
+                    <table>
+                        <tr class="choose_series_option">
+                            <td class="series_choice" id="choose_content_airing_today"><strong>Airing Today</strong></td>
+                        </tr>
+                        <tr class="choose_series_option">
+                            <td class="series_choice"><strong>On The Air</strong></td>
+                        </tr>
+                        <tr class="choose_series_option">
+                            <td class="series_choice"><strong>Popular</strong></td>
+                        </tr>
+                        <tr class="choose_series_option">
+                            <td class="series_choice"><strong>Top Rated</strong></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="choose_content">
-                <table>
-                    <tr class="choose_series_option">
-                        <td class="series_choice" id="choose_content_airing_today"><strong>Airing Today</strong></td>
-                    </tr>
-                    <tr class="choose_series_option">
-                        <td class="series_choice"><strong>On The Air</strong></td>
-                    </tr>
-                    <tr class="choose_series_option">
-                        <td class="series_choice"><strong>Popular</strong></td>
-                    </tr>
-                    <tr class="choose_series_option">
-                        <td class="series_choice"><strong>Top Rated</strong></td>
-                    </tr>
-                </table>
+            <!-- CHOICE -->
+
+            <!-- SELECT -->
+            <div class="select_contents">
+                <div class="select_content_time">
+                    <select name="content" id="select_series">
+                        <option value="airingToday">Airing Today</option>
+                        <option value="onTheAir">On The Air</option>
+                        <option value="popular">Popular</option>
+                        <option value="topRated">Top Rated</option>
+                    </select>
+                </div>
             </div>
+            <!-- SELECT -->
         </div>
         <section class="series_section">
             <div class="series_content">
