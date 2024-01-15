@@ -1,3 +1,4 @@
+import { ApiContents } from "./constants.js"
 import { Interactivity, Styles, Toolbox } from "./handlers.js"
 const interactivity = new Interactivity
 const styles = new Styles
@@ -19,6 +20,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const seriesOptions = Array.from(document.getElementsByClassName('choose_series_option'))
     const seriesChoices = Array.from(document.getElementsByClassName('series_choice'))
 
+    const selectContent = document.getElementById('select_content')
+    const selectTime = document.getElementById('select_time')
+    const selectMovies = document.getElementById('select_movies')
+    const selectSeries = document.getElementById('select_series')
+
     const handlers = [
         toolbox.changeSectionDisplay, 
         styles.changeChoiceStylesByClick, 
@@ -36,10 +42,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
     toolbox.setSectionIndex0(moviesSections)
     styles.setChoiceColour(moviesChoices)
-    interactivity.chooseMoviesAndSeries(moviesOptions, moviesChoices, moviesSections, handlers)
+    interactivity.chooseMoviesOrSeries(moviesOptions, moviesChoices, moviesSections, handlers)
 
     toolbox.setSectionIndex0(seriesSections)
     styles.setChoiceColour(seriesChoices)
-    interactivity.chooseMoviesAndSeries(seriesOptions, seriesChoices, seriesSections, handlers)
+    interactivity.chooseMoviesOrSeries(seriesOptions, seriesChoices, seriesSections, handlers)
 
+    if (window.innerWidth <= 1024 && window.innerHeight > 600) {
+        const trendingContents = [
+            ApiContents.TRENDING_ALL,
+            ApiContents.TRENDING_MOVIES,
+            ApiContents.TRENDING_SERIES,
+            ApiContents.TRENDING_DAY,
+            ApiContents.TRENDING_WEEK
+        ]
+
+        const movieContents = [
+            ApiContents.MOVIES_NOW_PLAYING,
+            ApiContents.MOVIES_POPULAR,
+            ApiContents.MOVIES_TOP_RATED,
+            ApiContents.MOVIES_UPCOMING
+        ]
+
+        const serieContents = [
+            ApiContents.SERIES_AIRING_TODAY,
+            ApiContents.SERIES_ON_THE_AIR,
+            ApiContents.SERIES_POPULAR,
+            ApiContents.SERIES_TOP_RATED
+        ]
+
+        interactivity.selectTrending(selectContent, selectTime, trendingSections, trendingContents, handlers)
+        interactivity.selectTrending(selectTime, selectContent, trendingSections, trendingContents, handlers)
+
+        interactivity.selectMoviesOrSeries(selectMovies, moviesSections, movieContents, handlers)
+        interactivity.selectMoviesOrSeries(selectSeries, seriesSections, serieContents, handlers)
+    }
 })

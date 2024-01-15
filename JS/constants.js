@@ -19,6 +19,24 @@ export class ApiUrls {
     static IMAGE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
 }
 
+export class ApiContents {
+    static TRENDING_ALL = 'all'
+    static TRENDING_MOVIES = 'movies'
+    static TRENDING_SERIES = 'series'
+    static TRENDING_DAY = 'day'
+    static TRENDING_WEEK = 'week'
+
+    static MOVIES_NOW_PLAYING = 'nowPlaying'
+    static MOVIES_POPULAR = 'popular'
+    static MOVIES_TOP_RATED = 'topRated'
+    static MOVIES_UPCOMING = 'upcoming'
+
+    static SERIES_AIRING_TODAY = 'airingToday'
+    static SERIES_ON_THE_AIR = 'onTheAir'
+    static SERIES_POPULAR = 'popular'
+    static SERIES_TOP_RATED = 'topRated'
+}
+
 export class CardClassName {
     static TRENDING_CLASS = 'main_trending_tr'
     static MOVIES_CLASS = 'main_movies_tr'

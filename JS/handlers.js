@@ -74,7 +74,7 @@ export class Interactivity {
     }
 
     // choose movies and series content
-    chooseMoviesAndSeries(options, choices, sections, functions) {
+    chooseMoviesOrSeries(options, choices, sections, functions) {
         options.forEach(function (option, optionIndex) {
             option.addEventListener('click', function () {
                 if (optionIndex >= 0) {
@@ -90,6 +90,86 @@ export class Interactivity {
             option.addEventListener('mouseout', function () {
                 functions[3](choices)
             })
+        })
+    }
+
+    // select trending content and time
+    selectTrending(options, options_2, sections, trendingContents, functions) {
+        options.addEventListener('change', function () {
+            functions[4](sections)
+
+            if (options.length == 3){
+                if (options.value === trendingContents[0]) {
+                    if (options_2.value === trendingContents[3]) {
+                        sections[0].style.display = Display.DISPLAY_BLOCK
+                    }
+                    if (options_2.value === trendingContents[4]) {
+                        sections[3].style.display = Display.DISPLAY_BLOCK
+                    }
+                }
+                if (options.value === trendingContents[1]) {
+                    if (options_2.value === trendingContents[3]) {
+                        sections[1].style.display = Display.DISPLAY_BLOCK
+                    }
+                    if (options_2.value === trendingContents[4]) {
+                        sections[4].style.display = Display.DISPLAY_BLOCK
+                    }
+                }
+                if (options.value === trendingContents[2]) {
+                    if (options_2.value === trendingContents[3]) {
+                        sections[2].style.display = Display.DISPLAY_BLOCK
+                    }
+                    if (options_2.value === trendingContents[4]) {
+                        sections[5].style.display = Display.DISPLAY_BLOCK
+                    }
+                }
+            }
+
+            if (options.length == 2) {
+                if (options.value === trendingContents[3]) {
+                    if (options_2.value === trendingContents[0]) {
+                        sections[0].style.display = Display.DISPLAY_BLOCK
+                    }
+                    if (options_2.value === trendingContents[1]) {
+                        sections[1].style.display = Display.DISPLAY_BLOCK
+                    }
+                    if (options_2.value === trendingContents[2]) {
+                        sections[2].style.display = Display.DISPLAY_BLOCK
+                    }
+                }
+                if (options.value === trendingContents[4]) {
+                    if (options_2.value === trendingContents[0]) {
+                        sections[3].style.display = Display.DISPLAY_BLOCK
+                    }
+                    if (options_2.value === trendingContents[1]) {
+                        sections[4].style.display = Display.DISPLAY_BLOCK
+                    }
+                    if (options_2.value === trendingContents[2]) {
+                        sections[5].style.display = Display.DISPLAY_BLOCK
+                    }
+                }
+            }
+
+        })
+    }
+
+    // select movies and series content
+    selectMoviesOrSeries(options, sections, contents, functions) {
+        options.addEventListener('change', function () {
+            functions[4](sections)
+
+            if (options.value === contents[0]) {
+                sections[0].style.display = Display.DISPLAY_BLOCK
+            }
+            if (options.value === contents[1]) {
+                sections[1].style.display = Display.DISPLAY_BLOCK
+            }
+            if (options.value === contents[2]) {
+                sections[2].style.display = Display.DISPLAY_BLOCK
+            }
+            if (options.value === contents[3]) {
+                sections[3].style.display = Display.DISPLAY_BLOCK
+            }
         })
     }
 
@@ -252,10 +332,38 @@ export class Toolbox {
         }
     }
 
+    // hide or show something
+    displaySomething(things, display) {
+        things.forEach(function (thing) {
+            thing.style.display = display
+        })
+    }
+
+    // hide or show navbar by listener
+    displayNavbarByListener(button, expandableNavbar, display, listener) {
+        button.addEventListener(listener, function () {
+            expandableNavbar.style.display = display
+        })
+    }
+
     // modify sections display
     changeSectionDisplay(sections, optionIndex) {
         sections.forEach(function (section, sectionIndex) {
             section.style.display = sectionIndex === optionIndex ? Display.DISPLAY_BLOCK : Display.DISPLAY_NONE
+        })
+    }
+
+    // add classname to an array
+    addClassListToArray(things, classname) {
+        things.forEach(function(thing) {
+            thing.classList.add(classname)
+        })
+    }
+
+    // remove attribute to an array
+    removeAttributeToArray(things, attr) {
+        things.forEach(function(thing) {
+            thing.removeAttribute(attr)
         })
     }
 

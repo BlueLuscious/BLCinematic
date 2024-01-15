@@ -1,7 +1,8 @@
-import { Template } from "./constants.js"
-import { Interactivity, Styles } from "./handlers.js"
+import { Display, Template } from "./constants.js"
+import { Interactivity, Styles, Toolbox } from "./handlers.js"
 const interactivity = new Interactivity
 const styles = new Styles
+const toolbox = new Toolbox
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -11,29 +12,40 @@ document.addEventListener('DOMContentLoaded', function () {
     const expandableNavbarRows = Array.from(document.getElementsByClassName('expandable_navbar_tr'))
 
     const expandableNavbar = document.getElementById('expandableNavbar')
-    const expandableSearchBar = document.getElementById('expandableSearchBar')
+    const expandBtnBox = document.getElementById('expandButtonBox')
     const expandNavbarBtn = document.getElementById('expandNavbarButton')
     const closeNavbarBtn = document.getElementById('closeNavbarButton')
 
-    expandableNavbar.style.display = 'none'
+    const chooseContentBox = Array.from(document.getElementsByClassName('choose_content'))
+    const chooseTimeBox = Array.from(document.getElementsByClassName('choose_time'))
+    const selectContentTime = Array.from(document.getElementsByClassName('select_content_time'))
+
+    expandableNavbar.style.display = Display.DISPLAY_NONE
+
+    toolbox.displaySomething(selectContentTime, Display.DISPLAY_NONE)
+    toolbox.displayNavbarByListener(closeNavbarBtn, expandableNavbar, Display.DISPLAY_NONE, 'click')
+
+    window.addEventListener('scroll', function () {
+        if (scrollY) {
+            expandableNavbar.style.display = Display.DISPLAY_NONE
+        }
+    })
+
+    document.addEventListener('keyup', function (event) {
+        if (event.key === 'Escape') {
+            expandableNavbar.style.display = Display.DISPLAY_NONE
+        }
+    });
 
     /* MacBook Pro, Nest Hub Max */
     if (window.innerWidth > 1024) {
-        navbarItems.forEach(function(item) {
-            item.classList.add('header_navbar_td')
-        })
-        expandableNavbarItems.forEach(function(item) {
-            item.removeAttribute('class')
-            item.classList.add('expandable_navbar_td')
-        })
+        toolbox.addClassListToArray(navbarItems, 'header_navbar_td')
+        toolbox.removeAttributeToArray(expandableNavbarItems, 'class')
+        toolbox.addClassListToArray(expandableNavbarItems, 'expandable_navbar_td')
 
-        navbarRows.forEach(function(row) {
-            row.classList.add('header_navbar_tr')
-        })
-        expandableNavbarRows.forEach(function(row) {
-            row.removeAttribute('class')
-            row.classList.add('expandable_navbar_tr')
-        })
+        toolbox.addClassListToArray(navbarRows, 'header_navbar_tr')
+        toolbox.removeAttributeToArray(expandableNavbarRows, 'class')
+        toolbox.addClassListToArray(expandableNavbarRows, 'expandable_navbar_tr')
 
         styles.setNavItemStylesByURL(Template.INDEX_TEMPLATE, navbarItems[0])
         styles.setNavItemStylesByURL(Template.MOVIES_TEMPLATE, navbarItems[1])
@@ -54,21 +66,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /* Nest Hub */
     if (window.innerWidth <= 1024) {
-        navbarItems.forEach(function(item) {
-            item.removeAttribute('class')
-        })
-        expandableNavbarItems.forEach(function(item) {
-            item.removeAttribute('class')
-            item.classList.add('header_navbar_td')
-        })
-        
-        navbarRows.forEach(function(row) {
-            row.removeAttribute('class')
-        })
-        expandableNavbarRows.forEach(function(row) {
-            row.removeAttribute('class')
-            row.classList.add('header_navbar_tr')
-        })
+        toolbox.removeAttributeToArray(navbarItems, 'class')
+        toolbox.removeAttributeToArray(expandableNavbarItems, 'class')
+        toolbox.addClassListToArray(expandableNavbarItems, 'header_navbar_td')
+
+        toolbox.removeAttributeToArray(navbarRows, 'class')
+        toolbox.removeAttributeToArray(expandableNavbarRows, 'class')
+        toolbox.addClassListToArray(expandableNavbarRows, 'header_navbar_tr')
 
         styles.setNavItemStylesByURL(Template.INDEX_TEMPLATE, expandableNavbarItems[0])
         styles.setNavItemStylesByURL(Template.MOVIES_TEMPLATE, expandableNavbarItems[1])
@@ -85,53 +89,25 @@ document.addEventListener('DOMContentLoaded', function () {
         styles.changeFontSizeByListener(expandableNavbarItems, Template.SERIES_TEMPLATE, 'mouseover', '2.75vh')
         styles.changeFontSizeByListener(expandableNavbarItems, Template.SERIES_TEMPLATE, 'mouseout', '')
 
-        expandNavbarBtn.addEventListener('click', function () {
-            expandableNavbar.style.right = '0'
-            expandableNavbar.style.left = '0'
-            expandableNavbar.style.top = '7.5vh'
-            expandableNavbar.style.display = 'block'
-        })
+        toolbox.displayNavbarByListener(expandNavbarBtn, expandableNavbar, Display.DISPLAY_BLOCK, 'click')
+
+        if (window.innerHeight <= 600) {
+            expandBtnBox.style.marginLeft = '130vh'
+        }
     }
     /* Nest Hub */
 
     /* iPad Pro */
     if (window.innerWidth <= 1024 && window.innerHeight > 600) {
-        expandNavbarBtn.addEventListener('click', function () {
-            expandableNavbar.style.top = '5.5vh'
+        chooseContentBox.forEach(function (choose, index) {
+            if (index != 0 && index != 2 && index != 4) {
+                choose.style.display = Display.DISPLAY_NONE
+            }
         })
 
-        expandableSearchBar.style.padding = '1.5vh'
-        expandableSearchBar.style.fontSize = '1.8vh'
+        toolbox.displaySomething(chooseTimeBox, Display.DISPLAY_NONE)
+        toolbox.displaySomething(selectContentTime, Display.DISPLAY_BLOCK)
     }
     /* iPad Pro */
-
-    /* Surface Pro 7, iPad Air */
-    if (window.innerWidth <= 912) {
-        expandableNavbarRows.forEach(function(row) {
-            row.style.display = 'flex'
-            row.style.justifyContent = 'center'
-            row.style.alignItems = 'center'
-        })
-    }
-    /* Surface Pro 7, iPad Air */
-
-    /* iPad Mini, Surface Duo */
-    if (window.innerWidth <= 768) {}
-    /* iPad Mini, Surface Duo */
-
-    /* iPhone 14 Pro Max, iPhone XR, Samsung Galaxy S20 Ultra, Samsung Galaxy A51/71, iPhone 12 Pro, iPhone SE, Samsung Galaxy S8+, Galaxy Fold */
-    if (window.innerWidth <= 430) {}
-    /* iPhone 14 Pro Max, iPhone XR, Samsung Galaxy S20 Ultra, Samsung Galaxy A51/71, iPhone 12 Pro, iPhone SE, Samsung Galaxy S8+, Galaxy Fold */
-    
-
-    closeNavbarBtn.addEventListener('click', function () {
-        expandableNavbar.style.display = 'none'
-    })
-
-    window.addEventListener('scroll', function () {
-        if (this.scrollY) {
-            expandableNavbar.style.display = 'none'
-        }
-    })
 
 })
