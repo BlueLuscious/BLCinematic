@@ -5,8 +5,6 @@ const toolbox = new Toolbox
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    // const apiKey = 'cfac909fcba4ab5a5293e810bfda6d52'
-
     // TRENDING //
     const trendingAllDayCard = document.getElementById('trendingAllDay')
     const trendingMoviesDayCard = document.getElementById('trendingMoviesDay')
