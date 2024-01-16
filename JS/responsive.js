@@ -14,28 +14,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const expandableNavbar = document.getElementById('expandableNavbar')
     const expandBtnBox = document.getElementById('expandButtonBox')
     const expandNavbarBtn = document.getElementById('expandNavbarButton')
-    const closeNavbarBtn = document.getElementById('closeNavbarButton')
+    const expandBtnIcon = document.getElementById('expandButtonIcon')
 
     const chooseContentBox = Array.from(document.getElementsByClassName('choose_content'))
     const chooseTimeBox = Array.from(document.getElementsByClassName('choose_time'))
     const selectContentTime = Array.from(document.getElementsByClassName('select_content_time'))
 
     expandableNavbar.style.display = Display.DISPLAY_NONE
-
-    toolbox.displaySomething(selectContentTime, Display.DISPLAY_NONE)
-    toolbox.displayNavbarByListener(closeNavbarBtn, expandableNavbar, Display.DISPLAY_NONE, 'click')
-
-    window.addEventListener('scroll', function () {
-        if (scrollY) {
-            expandableNavbar.style.display = Display.DISPLAY_NONE
-        }
-    })
-
-    document.addEventListener('keyup', function (event) {
-        if (event.key === 'Escape') {
-            expandableNavbar.style.display = Display.DISPLAY_NONE
-        }
-    });
+    toolbox.displayArray(selectContentTime, Display.DISPLAY_NONE)
 
     /* MacBook Pro, Nest Hub Max */
     if (window.innerWidth > 1024) {
@@ -89,7 +75,58 @@ document.addEventListener('DOMContentLoaded', function () {
         styles.changeFontSizeByListener(expandableNavbarItems, Template.SERIES_TEMPLATE, 'mouseover', '2.75vh')
         styles.changeFontSizeByListener(expandableNavbarItems, Template.SERIES_TEMPLATE, 'mouseout', '')
 
-        toolbox.displayNavbarByListener(expandNavbarBtn, expandableNavbar, Display.DISPLAY_BLOCK, 'click')
+        let openIt = true
+        let closeIt = false
+
+        expandNavbarBtn.addEventListener('click', function () {
+            if (openIt) {
+                toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_BLOCK)
+                expandableNavbar.classList.remove('expandable_navbar_slide_out')
+                expandableNavbar.classList.add('expandable_navbar')
+                expandBtnIcon.classList.add('bi_x')
+                $('.icon').removeClass('bi bi-list').addClass('bi bi-x-lg')
+                openIt = false
+                closeIt = true
+            } else if (closeIt) {
+                expandableNavbar.classList.remove('expandable_navbar')
+                expandableNavbar.classList.add('expandable_navbar_slide_out')
+                setTimeout(() => {
+                    toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_NONE)
+                }, 300)
+                expandBtnIcon.classList.remove('bi_x')
+                $('.icon').removeClass('bi bi-x-lg').addClass('bi bi-list')
+                closeIt = false
+                openIt = true
+            }
+        })
+
+        window.addEventListener('scroll', function () {
+            if (scrollY) {
+               expandableNavbar.classList.remove('expandable_navbar')
+                expandableNavbar.classList.add('expandable_navbar_slide_out')
+                setTimeout(() => {
+                    toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_NONE)
+                }, 300)
+                expandBtnIcon.classList.remove('bi_x')
+                $('.icon').removeClass('bi bi-x-lg').addClass('bi bi-list')
+                closeIt = false
+                openIt = true
+            }
+        })
+    
+        document.addEventListener('keyup', function (event) {
+            if (event.key === 'Escape') {
+               expandableNavbar.classList.remove('expandable_navbar')
+                expandableNavbar.classList.add('expandable_navbar_slide_out')
+                setTimeout(() => {
+                    toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_NONE)
+                }, 300)
+                expandBtnIcon.classList.remove('bi_x')
+                $('.icon').removeClass('bi bi-x-lg').addClass('bi bi-list')
+                closeIt = false
+                openIt = true
+            }
+        });
 
         if (window.innerHeight <= 600) {
             expandBtnBox.style.marginLeft = '130vh'
@@ -105,8 +142,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
 
-        toolbox.displaySomething(chooseTimeBox, Display.DISPLAY_NONE)
-        toolbox.displaySomething(selectContentTime, Display.DISPLAY_BLOCK)
+        toolbox.displayArray(chooseTimeBox, Display.DISPLAY_NONE)
+        toolbox.displayArray(selectContentTime, Display.DISPLAY_BLOCK)
     }
     /* iPad Pro */
 

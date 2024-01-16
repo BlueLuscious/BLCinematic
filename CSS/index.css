@@ -4,6 +4,7 @@
     --black-colour-alpha: rgba(255, 255, 255, 0);
     --dark-blue-colour: rgb(6, 33, 74);
     --dark-blue-colour-2: rgb(17, 60, 124);
+    --dark-blue-colour-3: rgb(20, 72, 150);
     --medium-blue-colour: rgb(29, 101, 209);
     --medium-blue-colour-2: rgb(76, 130, 211);
     --light-blue-colour: rgb(134, 174, 235);
@@ -54,6 +55,7 @@ body {
 
 button,
 select {
+    outline: transparent;
     cursor: pointer;
 }
 /* ELEMENTS */
@@ -92,7 +94,8 @@ select {
 }
 
 .header_navbar_item input,
-.expandable_navbar input {
+.expandable_navbar input,
+.expandable_navbar_slide_out input {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,7 +124,7 @@ select {
     display: none;
 
     & button {
-        width: 6vh;
+        width: 5.5vh;
         height: 5vh;
         border: transparent;
         border-radius: 0.5vh;
@@ -131,10 +134,17 @@ select {
     & .bi {
         color: var(--white-colour);
         font-size: 3.5vh;
+        opacity: 1;
+    }
+
+    & .bi_x {
+        font-size: 3vh;
+        opacity: 1;
     }
 }
 
-.expandable_navbar {
+.expandable_navbar,
+.expandable_navbar_slide_out {
     position: fixed;
     top: 0;
     left: 0;
@@ -151,15 +161,12 @@ select {
     }
 
     & div:first-of-type {
-        margin-top: 8vh;
+        margin-top: 8.5vh;
     }
 
     & div:nth-of-type(2) {
         margin-top: 3vh;
-    }
-
-    & div:nth-of-type(3) {
-        margin-top: 5vh;
+        margin-bottom: 3vh;
     }
 }
 /* HEADER */
@@ -339,39 +346,38 @@ select {
     }
 }
 
-/* revisar de aca para abajo */
 .scroll_to_top {
     position: fixed;
-    bottom: 5%;
-    right: 1.25%;
-    margin: 0;
-    padding: 0;
-    border: none;
-    background: none;
+    bottom: 2.5vh;
+    right: 2.5vh;
+
+    & button {
+        width: 6vh;
+        height: 5.5vh;
+        border: transparent;
+        border-radius: 0.5vh;
+        background-color: var(--dark-blue-colour-2);
+    }
 
     & .bi {
-        display: flex;
-        justify-content: center;
-        border: 3px solid var(--light-blue-colour-2);
-        border-radius: 0.2em;
-        color: var(--dark-blue-colour-2);
-        background-color: var(--light-blue-colour-2);
-        font-size: 3.25em;
+        color: var(--white-colour);
+        background-color: var(--dark-blue-colour-2);
+        font-size: 3.5vh;
     }
 }
 /* MAIN */
 
 /* FOOTER */
 .top_footer {
-    margin-top: 5em;
+    margin-top: 15vh;
     width: 100%;
-    height: 7.5em;
-    background-color: var(--dark-blue-colour-2);
+    height: 15vh;
+    background-color: var(--dark-blue-colour-3);
 }
 
 .body_footer {
     width: 100%;
-    height: 22.5em;
+    height: 45vh;
     background-color: var(--medium-blue-colour-2);
 }
 
