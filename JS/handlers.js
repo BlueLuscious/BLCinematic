@@ -333,17 +333,15 @@ export class Toolbox {
     }
 
     // hide or show something
-    displaySomething(things, display) {
+    displayArray(things, display) {
         things.forEach(function (thing) {
             thing.style.display = display
         })
     }
 
     // hide or show navbar by listener
-    displayNavbarByListener(button, expandableNavbar, display, listener) {
-        button.addEventListener(listener, function () {
-            expandableNavbar.style.display = display
-        })
+    displayOneThing(thing, display) {
+        thing.style.display = display
     }
 
     // modify sections display
@@ -355,14 +353,14 @@ export class Toolbox {
 
     // add classname to an array
     addClassListToArray(things, classname) {
-        things.forEach(function(thing) {
+        things.forEach(function (thing) {
             thing.classList.add(classname)
         })
     }
 
     // remove attribute to an array
     removeAttributeToArray(things, attr) {
-        things.forEach(function(thing) {
+        things.forEach(function (thing) {
             thing.removeAttribute(attr)
         })
     }
