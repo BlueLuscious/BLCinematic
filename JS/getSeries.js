@@ -1,5 +1,5 @@
 import { ApiUrls, CardClassName, Pathname, Template } from "./constants.js"
-import { getApiDataByURL, getResults, getResultsByIndexcard, getClickedCard } from "./api-data.js"
+import { getApiDataByURL, getResults, getResultsByIndexcard, getClickedCard } from "./apiData.js"
 import { Toolbox } from "./handlers.js"
 const toolbox = new Toolbox
 
