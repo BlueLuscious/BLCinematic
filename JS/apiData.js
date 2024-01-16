@@ -1,4 +1,4 @@
-import { ApiUrls, CardClassName } from "./constants.js"
+import { ApiUrls, CardClassName, Key } from "./constants.js"
 
 // GET APIDATA //
 export async function getApiDataByURL(params) {
@@ -6,7 +6,7 @@ export async function getApiDataByURL(params) {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZmFjOTA5ZmNiYTRhYjVhNTI5M2U4MTBiZmRhNmQ1MiIsInN1YiI6IjY1NGI2NTVjMjg2NmZhMDBhYjEzMTMwNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XFfnp-1dM_GVvRUASsPgjUiMvYB9u7gsd8RlLWCGU3Y'
+            Authorization: `Bearer ${Key.ACCESS_TOKEN}`
         }
     }
 

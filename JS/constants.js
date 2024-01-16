@@ -60,6 +60,11 @@ export class Display {
     static DISPLAY_NONE = 'none'
 }
 
+export class Key {
+    static ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZmFjOTA5ZmNiYTRhYjVhNTI5M2U4MTBiZmRhNmQ1MiIsInN1YiI6IjY1NGI2NTVjMjg2NmZhMDBhYjEzMTMwNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XFfnp-1dM_GVvRUASsPgjUiMvYB9u7gsd8RlLWCGU3Y'
+    static API_KEY = 'cfac909fcba4ab5a5293e810bfda6d52'
+}
+
 export class Pathname {
     static HTML_FOLDER = '/HTML/'
     static CSS_FOLDER = '/CSS/'
