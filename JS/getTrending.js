@@ -21,17 +21,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const indexCard = urlParams.get('indexCard')
 
     // trending day //
-    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE || 
-        window.location.pathname == Template.INDEX_TEMPLATE ||
-        window.location.pathname == '/' ||
+    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
         window.location.search == `?trending_all_day&indexCard=${indexCard}`
         ) {
             getApiDataByURL(ApiUrls.trendingAllDay)
             .then(data => {
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
-                    window.location.pathname === Template.INDEX_TEMPLATE ||
-                    window.location.pathname === '/'
-                    ) {
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
                     getResults(data.results, trendingAllDayCard, toolbox.formatDate)
                     getClickedCard(data.results, trendingAllDayCard, CardClassName.TRENDING_CLASS, 'trending_all_day')
                     toolbox.loadFooter()
