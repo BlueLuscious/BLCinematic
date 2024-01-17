@@ -27,7 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
         ) {
             getApiDataByURL(ApiUrls.trendingAllDay)
             .then(data => {
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
+                    window.location.pathname === Template.INDEX_TEMPLATE
+                    ) {
                     getResults(data.results, trendingAllDayCard, toolbox.formatDate)
                     getClickedCard(data.results, trendingAllDayCard, CardClassName.TRENDING_CLASS, 'trending_all_day')
                     toolbox.loadFooter()
