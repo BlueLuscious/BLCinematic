@@ -23,12 +23,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // trending day //
     if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE || 
         window.location.pathname == Template.INDEX_TEMPLATE ||
+        window.location.pathname == '/' ||
         window.location.search == `?trending_all_day&indexCard=${indexCard}`
         ) {
             getApiDataByURL(ApiUrls.trendingAllDay)
             .then(data => {
                 if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
-                    window.location.pathname === Template.INDEX_TEMPLATE
+                    window.location.pathname === Template.INDEX_TEMPLATE ||
+                    window.location.pathname === '/'
                     ) {
                     getResults(data.results, trendingAllDayCard, toolbox.formatDate)
                     getClickedCard(data.results, trendingAllDayCard, CardClassName.TRENDING_CLASS, 'trending_all_day')
