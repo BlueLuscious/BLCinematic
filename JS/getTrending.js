@@ -3,7 +3,7 @@ import { getApiDataByURL, getResults, getResultsByIndexcard, getClickedCard } fr
 import { Toolbox } from "./handlers.js"
 const toolbox = new Toolbox
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 
     // TRENDING //
     const trendingAllDayCard = document.getElementById('trendingAllDay')

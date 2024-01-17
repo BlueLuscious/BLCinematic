@@ -4,7 +4,7 @@ const interactivity = new Interactivity
 const styles = new Styles
 const toolbox = new Toolbox
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     
     const trendingSections = Array.from(document.getElementsByClassName('trending_section'))
     const contentOptions = Array.from(document.getElementsByClassName('choose_content_option'))

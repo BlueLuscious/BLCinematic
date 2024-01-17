@@ -9,8 +9,8 @@ export class Interactivity {
 
     // choose trending content and time
     chooseTrending(options, choices, sections, functions) {
-        options.forEach(function (option, optionIndex) {
-            option.addEventListener('click', function () {
+        options.forEach((option, optionIndex) => {
+            option.addEventListener('click', () => {
                 if (optionIndex >= 0) {
                     functions[1](choices, optionIndex)
                     functions[4](sections)
@@ -63,11 +63,11 @@ export class Interactivity {
                 }
             })
 
-            option.addEventListener('mouseover', function () {
+            option.addEventListener('mouseover', () => {
                 functions[2](choices, optionIndex)
             })
 
-            option.addEventListener('mouseout', function () {
+            option.addEventListener('mouseout', () => {
                 functions[3](choices)
             })
         })
@@ -75,19 +75,19 @@ export class Interactivity {
 
     // choose movies and series content
     chooseMoviesOrSeries(options, choices, sections, functions) {
-        options.forEach(function (option, optionIndex) {
-            option.addEventListener('click', function () {
+        options.forEach((option, optionIndex) => {
+            option.addEventListener('click', () => {
                 if (optionIndex >= 0) {
                     functions[1](choices, optionIndex)
                     functions[0](sections, optionIndex)
                 }
             })
     
-            option.addEventListener('mouseover', function () {
+            option.addEventListener('mouseover', () => {
                 functions[2](choices, optionIndex)
             })
     
-            option.addEventListener('mouseout', function () {
+            option.addEventListener('mouseout', () => {
                 functions[3](choices)
             })
         })
@@ -95,7 +95,7 @@ export class Interactivity {
 
     // select trending content and time
     selectTrending(options, options_2, sections, trendingContents, functions) {
-        options.addEventListener('change', function () {
+        options.addEventListener('change', () => {
             functions[4](sections)
 
             if (options.length == 3){
@@ -155,7 +155,7 @@ export class Interactivity {
 
     // select movies and series content
     selectMoviesOrSeries(options, sections, contents, functions) {
-        options.addEventListener('change', function () {
+        options.addEventListener('change', () => {
             functions[4](sections)
 
             if (options.value === contents[0]) {
@@ -181,8 +181,8 @@ export class Interactivity {
             [Template.SERIES_TEMPLATE]: [0, 1, null],
         }
 
-        items.forEach(function (item, index) {
-            item.addEventListener('click', function () {
+        items.forEach((item, index) => {
+            item.addEventListener('click', () => {
                 if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate) {
                     if (index == templateRedirects[currentTemplate][0]) {
                         window.location.href = Template.INDEX_TEMPLATE
@@ -204,7 +204,7 @@ export class Interactivity {
 
         scrollToTop.style.display = Display.DISPLAY_NONE
     
-        window.addEventListener('scroll', function () {
+        window.addEventListener('scroll', () => {
             if (document.body.scrollTop > 890 || document.documentElement.scrollTop > 890) {
                 scrollToTop.disabled = false
                 scrollToTop.style.cursor = Cursor.POINTER_CURSOR
@@ -223,7 +223,7 @@ export class Interactivity {
             }
         })
     
-        scrollToTop.addEventListener('click', function () {
+        scrollToTop.addEventListener('click', () => {
             document.body.scrollTop = 0
             document.documentElement.scrollTop = 0
         })
@@ -235,7 +235,7 @@ export class Styles {
 
     // predifine choices background-colour (index 0)
     setChoiceColour(choices) {
-        choices.forEach(function (choice, index) {
+        choices.forEach((choice, index) => {
             if (index == 0) {
                 choice.style.backgroundColor = Colour.DARK_BLUE_COLOUR_2
             }
@@ -244,7 +244,7 @@ export class Styles {
 
     // modify choices background-colour and cursor by click
     changeChoiceStylesByClick(choices, optionIndex) {
-        choices.forEach(function (choice, choiceIndex) {
+        choices.forEach((choice, choiceIndex) => {
             choice.style.color = choiceIndex === optionIndex ? Colour.WHITE_COLOUR : Colour.DARK_BLUE_COLOUR_2
             choice.style.borderColor = choiceIndex === optionIndex ? Colour.DARK_BLUE_COLOUR_2 : Colour.DARK_BLUE_COLOUR_2
             choice.style.backgroundColor = choiceIndex === optionIndex ? Colour.DARK_BLUE_COLOUR_2 : Colour.WHITE_COLOUR
@@ -264,7 +264,7 @@ export class Styles {
 
     // modify choice background-colour and cursor by mouseout
     changeChoiceStylesByMouseout(choices) {
-        choices.forEach(function (choice, choiceIndex) {
+        choices.forEach((choice, choiceIndex) => {
             if (choiceIndex >= 0 && choice.style.backgroundColor !== Colour.DARK_BLUE_COLOUR_2) {
                 choice.style.color = Colour.DARK_BLUE_COLOUR_2
                 choice.style.borderColor = Colour.DARK_BLUE_COLOUR_2
@@ -292,8 +292,8 @@ export class Styles {
             [Template.SERIES_TEMPLATE]: 2,
         }
 
-        items.forEach(function (item, index) {
-            item.addEventListener(listener, function () {
+        items.forEach((item, index) => {
+            item.addEventListener(listener, () => {
                 if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate) {
                     if (window.innerWidth <= 1600 && index != templateIndex[currentTemplate]) {
                         this.style.fontSize = size
@@ -311,7 +311,7 @@ export class Toolbox {
 
     // predifine section display (index 0)
     setSectionIndex0(sections) {
-        sections.forEach(function (section, index) {
+        sections.forEach((section, index) => {
             if (index != 0) {
                 section.style.display = Display.DISPLAY_NONE
             }
@@ -320,7 +320,7 @@ export class Toolbox {
 
     // hide all sections
     hideAllSections(sections) {
-        sections.forEach(function (section) {
+        sections.forEach((section) => {
             section.style.display = Display.DISPLAY_NONE
         })
     }
@@ -334,7 +334,7 @@ export class Toolbox {
 
     // hide or show something
     displayArray(things, display) {
-        things.forEach(function (thing) {
+        things.forEach((thing) => {
             thing.style.display = display
         })
     }
@@ -346,21 +346,21 @@ export class Toolbox {
 
     // modify sections display
     changeSectionDisplay(sections, optionIndex) {
-        sections.forEach(function (section, sectionIndex) {
+        sections.forEach((section, sectionIndex) => {
             section.style.display = sectionIndex === optionIndex ? Display.DISPLAY_BLOCK : Display.DISPLAY_NONE
         })
     }
 
     // add classname to an array
     addClassListToArray(things, classname) {
-        things.forEach(function (thing) {
+        things.forEach((thing) => {
             thing.classList.add(classname)
         })
     }
 
     // remove attribute to an array
     removeAttributeToArray(things, attr) {
-        things.forEach(function (thing) {
+        things.forEach((thing) => {
             thing.removeAttribute(attr)
         })
     }
@@ -368,7 +368,7 @@ export class Toolbox {
     // hide/show section from a URL based on the clicked card
     showSectionByURL(currentTemplate, currentSearches, sections) {
         if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate) {
-            sections.forEach(function (section, index) {
+            sections.forEach((section, index) => {
                 if (index != 0 && window.location.search === currentSearches[0]) {
                     section.style.display = Display.DISPLAY_NONE
                 }
