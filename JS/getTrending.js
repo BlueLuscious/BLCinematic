@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const indexCard = urlParams.get('indexCard')
 
     // trending day //
-    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
+    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE || 
+        window.location.pathname == Template.INDEX_TEMPLATE ||
         window.location.search == `?trending_all_day&indexCard=${indexCard}`
         ) {
             getApiDataByURL(ApiUrls.trendingAllDay)
