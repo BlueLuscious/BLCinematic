@@ -3,7 +3,7 @@ import { Interactivity, Toolbox } from "./handlers.js"
 const interactivity = new Interactivity
 const toolbox = new Toolbox
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 
     const urlParams = new URLSearchParams(window.location.search)
     const indexCard = urlParams.get('indexCard')

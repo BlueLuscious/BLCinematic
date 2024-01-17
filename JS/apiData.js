@@ -24,7 +24,6 @@ export async function getApiDataByURL(params) {
 export function getResults(listItem, card, formatDate) {
     listItem.forEach(item => {
         const row = document.createElement('tr')
-
         setCardClassname(row, item)
 
         const imageData = document.createElement('td')
@@ -33,8 +32,10 @@ export function getResults(listItem, card, formatDate) {
         imageData.appendChild(image)
         row.appendChild(imageData)
 
-        showResultsByMediaType(row, item, item.title, item.release_date, 'movie', 'main_movies_tr', formatDate)
-        showResultsByMediaType(row, item, item.name, item.first_air_date, 'tv', 'main_series_tr', formatDate)
+        const movieData = [item.title, item.release_date]
+        const serieData = [item.name, item.first_air_date]
+        showResultsByMediaType(row, item, movieData, 'movie', CardClassName.MOVIES_CLASS, formatDate)
+        showResultsByMediaType(row, item, serieData, 'tv', CardClassName.SERIES_CLASS, formatDate)
 
         card.appendChild(row)
     })
@@ -43,9 +44,7 @@ export function getResults(listItem, card, formatDate) {
 
 // GET RESULT BY ID //
 export function getResultsByIndexcard(item, card, formatDate) {
-    
     const row = document.createElement('tr')
-
     setCardClassname(row, item)
 
     const imageData = document.createElement('td')
@@ -54,8 +53,10 @@ export function getResultsByIndexcard(item, card, formatDate) {
     imageData.appendChild(image)
     row.appendChild(imageData)
 
-    showResultsByMediaType(row, item, item.title, item.release_date, 'movie', CardClassName.MOVIES_CLASS, formatDate)
-    showResultsByMediaType(row, item, item.name, item.first_air_date, 'tv', CardClassName.SERIES_CLASS, formatDate)
+    const movieData = [item.title, item.release_date]
+    const serieData = [item.name, item.first_air_date]
+    showResultsByMediaType(row, item, movieData, 'movie', CardClassName.MOVIES_CLASS, formatDate)
+    showResultsByMediaType(row, item, serieData, 'tv', CardClassName.SERIES_CLASS, formatDate)
 
     if (item.media_type == 'movie' || row.classList.contains(CardClassName.MOVIES_CLASS)) {
         card[0].appendChild(row)
@@ -63,7 +64,6 @@ export function getResultsByIndexcard(item, card, formatDate) {
     if (item.media_type == 'tv' || row.classList.contains(CardClassName.SERIES_CLASS)) {
         card[1].appendChild(row)
     }
-
 
 }
 // GET RESULT BY ID //
@@ -73,7 +73,7 @@ export function getClickedCard(results, card, cardClassName, category) {
     const mainCards = Array.from(card.getElementsByClassName(cardClassName))
 
     mainCards.forEach(function (mainCard, index) {
-        mainCard.addEventListener('click', function () {
+        mainCard.addEventListener('click', () => {
             if (results[index].media_type == 'movie' && mainCard.classList.contains(CardClassName.TRENDING_CLASS)) {
                 window.location.href = `movies.html?${category}&indexCard=${index}`
             }
@@ -95,18 +95,18 @@ export function getClickedCard(results, card, cardClassName, category) {
 // GET CLICKED RESULTS //
 
 // show data results by media_type
-function showResultsByMediaType(row, item, title_, date_, media_type, cardClassName, formatDate) {
+function showResultsByMediaType(row, item, dataItem, media_type, cardClassName, formatDate) {
     if (item.media_type == media_type || row.classList.contains(cardClassName)) {
         const title = document.createElement('td')
         const titleBold = document.createElement('strong')
-        titleBold.textContent = title_
+        titleBold.textContent = dataItem[0]
         title.appendChild(titleBold)
 
         const date = document.createElement('td')
         if (item.release_date == '') {
             date.textContent = ''
         } else {
-            const formattedDate = formatDate(date_)
+            const formattedDate = formatDate(dataItem[1])
             date.textContent = formattedDate
         }
 
