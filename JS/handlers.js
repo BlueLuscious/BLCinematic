@@ -293,11 +293,9 @@ export class Styles {
         }
 
         items.forEach((item, index) => {
-            item.addEventListener(listener, () => {
+            item.addEventListener(listener, function () {
                 if (window.location.pathname === Pathname.HTML_FOLDER + currentTemplate) {
-                    if (window.innerWidth <= 1600 && index != templateIndex[currentTemplate]) {
-                        this.style.fontSize = size
-                    } else if (window.innerWidth > 1600 && index != templateIndex[currentTemplate]) {
+                    if (index != templateIndex[currentTemplate]) {
                         this.style.fontSize = size
                     }
                 }
