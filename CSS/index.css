@@ -187,24 +187,4 @@
         border-radius: 2vh;
     }
 }
-
-.scroll_to_top {
-    position: fixed;
-    bottom: 2.5vh;
-    right: 2.5vh;
-
-    & button {
-        width: 6vh;
-        height: 5.5vh;
-        border: transparent;
-        border-radius: 0.5vh;
-        background-color: var(--dark-blue-colour-2);
-    }
-
-    & .bi {
-        color: var(--white-colour);
-        background-color: var(--dark-blue-colour-2);
-        font-size: 3.5vh;
-    }
-}
 /* MAIN */
