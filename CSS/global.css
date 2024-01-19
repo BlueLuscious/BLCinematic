@@ -1,0 +1,213 @@
+/* VARS */
+:root {
+    --white-colour: rgb(255, 255, 255);
+    --black-colour-alpha: rgba(255, 255, 255, 0);
+    --dark-blue-colour: rgb(6, 33, 74);
+    --dark-blue-colour-2: rgb(17, 60, 124);
+    --dark-blue-colour-3: rgb(20, 72, 150);
+    --medium-blue-colour: rgb(29, 101, 209);
+    --medium-blue-colour-2: rgb(76, 130, 211);
+    --light-blue-colour: rgb(134, 174, 235);
+    --light-blue-colour-2: rgb(230, 240, 255);
+    --light-blue-colour-2-alpha: rgba(230, 240, 255, 1);
+}
+/* VARS */
+
+/* ELEMENTS */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: var(--light-blue-colour-2);
+
+    &::-webkit-scrollbar {
+        width: 2.75vh;
+        height: 2.75vh;
+        background-color: var(--medium-blue-colour-2);
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 3vh;
+        background-color: var(--white-colour);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        border-radius: 3vh;
+        background-color: var(--medium-blue-colour-2);
+        cursor: grab;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--medium-blue-colour);
+        cursor: grab;
+    }
+    
+    &::-webkit-scrollbar-thumb:active {
+        background-color: var(--dark-blue-colour-2);
+        cursor: grabbing;
+    }
+}
+
+button,
+select {
+    outline: transparent;
+    cursor: pointer;
+}
+/* ELEMENTS */
+
+/* HEADER */
+.header {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    background-color: var(--medium-blue-colour-2);
+}
+
+.header_navbar {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.header_navbar_item:first-of-type {
+    margin-left: 5vh;
+    margin-right: 10vh;
+}
+
+.header_navbar_item:nth-of-type(2) {
+    margin-left: 10vh;
+}
+
+.header_navbar_item:nth-of-type(3) {
+    margin-left: 20vh;
+}
+
+.header_navbar_item img {
+    color: var(--white-colour);
+}
+
+.header_navbar_item input,
+.expandable_navbar input,
+.expandable_navbar_slide_out input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2vh;
+    width: 50vh;
+    border: var(--white-colour);
+    border-radius: 5vh;
+    outline: transparent;
+    font-size: 2vh;
+}
+
+.header_navbar_tr {
+    display: inline;
+    margin: 2vh;
+}
+
+.header_navbar_td {
+    display: inline;
+    border-bottom: 0.3vh var(--white-colour) solid;
+    color: var(--white-colour);
+    font-size: 2.5vh;
+    cursor: pointer;
+}
+
+.expand_button {
+    display: none;
+
+    & button {
+        width: 5.5vh;
+        height: 5vh;
+        border: transparent;
+        border-radius: 0.5vh;
+        background-color: var(--dark-blue-colour-2);
+    }
+
+    & .bi {
+        color: var(--white-colour);
+        font-size: 3.5vh;
+        opacity: 1;
+    }
+
+    & .bi_x {
+        font-size: 3vh;
+        opacity: 1;
+    }
+}
+
+.expandable_navbar,
+.expandable_navbar_slide_out {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 2.5vh;
+    border-radius: 0 0 1vh 1vh;
+    background-color: var(--medium-blue-colour-2);
+    z-index: 1;
+
+    & div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    & div:first-of-type {
+        margin-top: 8.5vh;
+    }
+
+    & div:nth-of-type(2) {
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+    }
+}
+/* HEADER */
+
+/* MAIN */
+.scroll_to_top {
+    position: fixed;
+    bottom: 2.5vh;
+    right: 2.5vh;
+
+    & button {
+        width: 6vh;
+        height: 5.5vh;
+        border: transparent;
+        border-radius: 0.5vh;
+        background-color: var(--dark-blue-colour-2);
+    }
+
+    & .bi {
+        color: var(--white-colour);
+        background-color: var(--dark-blue-colour-2);
+        font-size: 3.5vh;
+    }
+}
+/* MAIN */
+
+/* FOOTER */
+.top_footer {
+    margin-top: 15vh;
+    width: 100%;
+    height: 15vh;
+    background-color: var(--dark-blue-colour-3);
+}
+
+.body_footer {
+    width: 100%;
+    height: 45vh;
+    background-color: var(--medium-blue-colour-2);
+}
+
+.footer {
+    display: none;
+}
+/* FOOTER */
