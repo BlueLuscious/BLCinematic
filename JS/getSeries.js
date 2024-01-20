@@ -1,11 +1,10 @@
 import { ApiUrls, CardClassName, Pathname, Template } from "./constants.js"
-import { getApiDataByURL, getResults, getResultsByIndexcard, getClickedCard } from "./apiData.js"
-import { Toolbox } from "./handlers.js"
-const toolbox = new Toolbox
+import { ApiHandlers } from "./apiData.js"
+
+const api = new ApiHandlers
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // SERIES //
     const seriesAiringTodayCard = document.getElementById('seriesAiringToday')
     const seriesOnTheAirCard = document.getElementById('seriesOnTheAir')
     const seriesPopularCard = document.getElementById('seriesPopular')
@@ -13,81 +12,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const moviesByIndexCard = document.getElementById('moviesByIndex')
     const seriesByIndexCard = document.getElementById('seriesByIndex')
-    const cards = [moviesByIndexCard, seriesByIndexCard]
+    const cardsByIndex = [moviesByIndexCard, seriesByIndexCard]
 
     const urlParams = new URLSearchParams(window.location.search)
     const indexCard = urlParams.get('indexCard')
 
-    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
-        window.location.pathname == Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE && window.location.search == '' ||
-        window.location.search == `?serie_airing_today&indexCard=${indexCard}`
-        ) {
-            getApiDataByURL(ApiUrls.seriesAiringToday)
-            .then(data => {
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    getResults(data.results, seriesAiringTodayCard, toolbox.formatDate)
-                    getClickedCard(data.results, seriesAiringTodayCard, CardClassName.SERIES_CLASS, 'serie_airing_today')
-                    toolbox.loadFooter()
-                }
-                if (indexCard) {
-                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
-                    toolbox.loadFooter()
-                }
-            })
-        }
+    handleSeriesData(ApiUrls.seriesAiringToday, seriesAiringTodayCard, cardsByIndex, 'serie_airing_today', indexCard)
+    handleSeriesData(ApiUrls.seriesOnTheAir, seriesOnTheAirCard, cardsByIndex, 'serie_on_the_air', indexCard)
+    handleSeriesData(ApiUrls.seriesPopular, seriesPopularCard, cardsByIndex, 'serie_popular', indexCard)
+    handleSeriesData(ApiUrls.seriesTopRated, seriesTopRatedCard, cardsByIndex, 'serie_top_rated', indexCard)
 
-    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
-        window.location.pathname == Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE && window.location.search == '' ||
-        window.location.search == `?serie_on_the_air&indexCard=${indexCard}`
+    function handleSeriesData(apiUrl, cardAll, cardsByIndex, category, indexCard) {
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
+            window.location.pathname === Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE && window.location.search == '' ||
+            window.location.search === `?${category}&indexCard=${indexCard}`
         ) {
-            getApiDataByURL(ApiUrls.seriesOnTheAir)
-            .then(data => {
+            api.getApiDataByURL(apiUrl).then(data => {
                 if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    getResults(data.results, seriesOnTheAirCard, toolbox.formatDate)
-                    getClickedCard(data.results, seriesOnTheAirCard, CardClassName.SERIES_CLASS, 'serie_on_the_air')
-                    toolbox.loadFooter()
+                    api.getResults(data.results, cardAll)
+                    api.getClickedCard(data.results, cardAll, CardClassName.SERIES_CLASS, category)
                 }
                 if (indexCard) {
-                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
-                    toolbox.loadFooter()
+                    api.getResultsByIndexcard(data.results[indexCard], cardsByIndex)
                 }
             })
         }
+    }
 
-    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
-        window.location.pathname == Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE && window.location.search == '' ||
-        window.location.search == `?serie_popular&indexCard=${indexCard}`
-        ) {
-            getApiDataByURL(ApiUrls.seriesPopular)
-            .then(data => {
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    getResults(data.results, seriesPopularCard, toolbox.formatDate)
-                    getClickedCard(data.results, seriesPopularCard, CardClassName.SERIES_CLASS, 'serie_popular')
-                    toolbox.loadFooter()
-                }
-                if (indexCard) {
-                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
-                    toolbox.loadFooter()
-                }
-            })
-        }
-
-    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
-        window.location.pathname == Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE && window.location.search == '' ||
-        window.location.search == `?serie_top_rated&indexCard=${indexCard}`
-        ) {
-            getApiDataByURL(ApiUrls.seriesTopRated)
-            .then(data => {
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    getResults(data.results, seriesTopRatedCard, toolbox.formatDate)
-                    getClickedCard(data.results, seriesTopRatedCard, CardClassName.SERIES_CLASS, 'serie_top_rated')
-                    toolbox.loadFooter()
-                }
-                if (indexCard) {
-                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
-                    toolbox.loadFooter()
-                }
-            })
-        }
-    // SERIES //
 })

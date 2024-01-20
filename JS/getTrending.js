@@ -1,11 +1,10 @@
 import { ApiUrls, CardClassName, Pathname, Template } from "./constants.js"
-import { getApiDataByURL, getResults, getResultsByIndexcard, getClickedCard } from "./apiData.js"
-import { Toolbox } from "./handlers.js"
-const toolbox = new Toolbox
+import { ApiHandlers } from "./apiData.js"
+
+const api = new ApiHandlers
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // TRENDING //
     const trendingAllDayCard = document.getElementById('trendingAllDay')
     const trendingMoviesDayCard = document.getElementById('trendingMoviesDay')
     const trendingSeriesDayCard = document.getElementById('trendingSeriesDay')
@@ -15,115 +14,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const moviesByIndexCard = document.getElementById('moviesByIndex')
     const seriesByIndexCard = document.getElementById('seriesByIndex')
-    const cards = [moviesByIndexCard, seriesByIndexCard]
+    const cardsByIndex = [moviesByIndexCard, seriesByIndexCard]
 
     const urlParams = new URLSearchParams(window.location.search)
     const indexCard = urlParams.get('indexCard')
 
-    // trending day //
-    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
-        window.location.search == `?trending_all_day&indexCard=${indexCard}`
-        ) {
-            getApiDataByURL(ApiUrls.trendingAllDay)
-            .then(data => {
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    getResults(data.results, trendingAllDayCard, toolbox.formatDate)
-                    getClickedCard(data.results, trendingAllDayCard, CardClassName.TRENDING_CLASS, 'trending_all_day')
-                    toolbox.loadFooter()
-                }
-                if (indexCard) {
-                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
-                    toolbox.loadFooter()
-                }
-            })
-        }
+    handleTrendingData(ApiUrls.trendingAllDay, trendingAllDayCard, cardsByIndex, 'trending_all_day', indexCard)
+    handleTrendingData(ApiUrls.trendingMoviesDay, trendingMoviesDayCard, cardsByIndex, 'trending_movie_day', indexCard)
+    handleTrendingData(ApiUrls.trendingSeriesDay, trendingSeriesDayCard, cardsByIndex, 'trending_serie_day', indexCard)
+    handleTrendingData(ApiUrls.trendingAllWeek, trendingAllWeekCard, cardsByIndex, 'trending_all_week', indexCard)
+    handleTrendingData(ApiUrls.trendingMoviesWeek, trendingMoviesWeekCard, cardsByIndex, 'trending_movie_week', indexCard)
+    handleTrendingData(ApiUrls.trendingSeriesWeek, trendingSeriesWeekCard, cardsByIndex, 'trending_serie_week', indexCard)
 
-    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
-        window.location.search == `?trending_movie_day&indexCard=${indexCard}`
+    function handleTrendingData(apiUrl, cardAll, cardsByIndex, category, indexCard) {
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
+            window.location.search === `?${category}&indexCard=${indexCard}`
         ) {
-            getApiDataByURL(ApiUrls.trendingMoviesDay)
-            .then(data => {
+            api.getApiDataByURL(apiUrl).then(data => {
                 if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    getResults(data.results, trendingMoviesDayCard, toolbox.formatDate)
-                    getClickedCard(data.results, trendingMoviesDayCard, CardClassName.TRENDING_CLASS, 'trending_movie_day')
-                    toolbox.loadFooter()
+                    api.getResults(data.results, cardAll)
+                    api.getClickedCard(data.results, cardAll, CardClassName.TRENDING_CLASS, category)
                 }
                 if (indexCard) {
-                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
-                    toolbox.loadFooter()
+                    api.getResultsByIndexcard(data.results[indexCard], cardsByIndex)
                 }
             })
         }
-        
-    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
-        window.location.search == `?trending_serie_day&indexCard=${indexCard}`
-        ) {
-            getApiDataByURL(ApiUrls.trendingSeriesDay)
-            .then(data => {
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    getResults(data.results, trendingSeriesDayCard, toolbox.formatDate)
-                    getClickedCard(data.results, trendingSeriesDayCard, CardClassName.TRENDING_CLASS, 'trending_serie_day')
-                    toolbox.loadFooter()
-                }
-                if (indexCard) {
-                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
-                    toolbox.loadFooter()
-                }
-            })
-        }
+    }
 
-    // trending week //
-    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
-        window.location.search == `?trending_all_week&indexCard=${indexCard}`
-        ) {
-            getApiDataByURL(ApiUrls.trendingAllWeek)
-            .then(data => {
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    getResults(data.results, trendingAllWeekCard, toolbox.formatDate)
-                    getClickedCard(data.results, trendingAllWeekCard, CardClassName.TRENDING_CLASS, 'trending_all_week')
-                    toolbox.loadFooter()
-                }
-                if (indexCard) {
-                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
-                    toolbox.loadFooter()
-                }
-            })
-        }
-
-        
-    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
-        window.location.search == `?trending_movie_week&indexCard=${indexCard}`
-        ) {
-            getApiDataByURL(ApiUrls.trendingMoviesWeek)
-            .then(data => {
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    getResults(data.results, trendingMoviesWeekCard, toolbox.formatDate)
-                    getClickedCard(data.results, trendingMoviesWeekCard, CardClassName.TRENDING_CLASS, 'trending_movie_week')
-                    toolbox.loadFooter()
-                }
-                if (indexCard) {
-                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
-                    toolbox.loadFooter()
-                }
-            })
-        }
-
-
-    if (window.location.pathname == Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE ||
-        window.location.search == `?trending_serie_week&indexCard=${indexCard}`
-        ) {
-            getApiDataByURL(ApiUrls.trendingSeriesWeek)
-            .then(data => {
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    getResults(data.results, trendingSeriesWeekCard, toolbox.formatDate)
-                    getClickedCard(data.results, trendingSeriesWeekCard, CardClassName.TRENDING_CLASS, 'trending_serie_week')
-                    toolbox.loadFooter()
-                }
-                if (indexCard) {
-                    getResultsByIndexcard(data.results[indexCard], cards, toolbox.formatDate)
-                    toolbox.loadFooter()
-                }
-            })
-        }
-    // TRENDING //
 })

@@ -1,5 +1,6 @@
 import { Display, Template } from "./constants.js"
 import { Interactivity, Styles, Toolbox } from "./handlers.js"
+
 const interactivity = new Interactivity
 const styles = new Styles
 const toolbox = new Toolbox
@@ -16,14 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const expandNavbarBtn = document.getElementById('expandNavbarButton')
     const expandBtnIcon = document.getElementById('expandButtonIcon')
 
-    const chooseContentBox = Array.from(document.getElementsByClassName('choose_content'))
-    const chooseTimeBox = Array.from(document.getElementsByClassName('choose_time'))
-    const selectContentTime = Array.from(document.getElementsByClassName('select_content_time'))
+    toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_NONE)
 
-    expandableNavbar.style.display = Display.DISPLAY_NONE
-    toolbox.displayArray(selectContentTime, Display.DISPLAY_NONE)
-
-    /* MacBook Pro, Nest Hub Max */
+    // MacBook Pro, Nest Hub Max
     if (window.innerWidth > 1024) {
         toolbox.addClassListToArray(navbarItems, 'header_navbar_td')
         toolbox.removeAttributeToArray(expandableNavbarItems, 'class')
@@ -33,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
         toolbox.removeAttributeToArray(expandableNavbarRows, 'class')
         toolbox.addClassListToArray(expandableNavbarRows, 'expandable_navbar_tr')
 
-        styles.setNavItemStylesByURL(Template.INDEX_TEMPLATE, navbarItems[0])
-        styles.setNavItemStylesByURL(Template.MOVIES_TEMPLATE, navbarItems[1])
-        styles.setNavItemStylesByURL(Template.SERIES_TEMPLATE, navbarItems[2])
+        styles.setNavItemStylesByURL(navbarItems[0], Template.INDEX_TEMPLATE)
+        styles.setNavItemStylesByURL(navbarItems[1], Template.MOVIES_TEMPLATE)
+        styles.setNavItemStylesByURL(navbarItems[2], Template.SERIES_TEMPLATE)
         
         interactivity.templateRedirects(navbarItems, Template.INDEX_TEMPLATE)
         interactivity.templateRedirects(navbarItems, Template.MOVIES_TEMPLATE)
@@ -48,9 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
         styles.changeFontSizeByListener(navbarItems, Template.SERIES_TEMPLATE, 'mouseover', '2.75vh')
         styles.changeFontSizeByListener(navbarItems, Template.SERIES_TEMPLATE, 'mouseout', '')
     }
-    /* MacBook Pro, Nest Hub Max */
 
-    /* Nest Hub */
+    // Nest Hub
     if (window.innerWidth <= 1024) {
         toolbox.removeAttributeToArray(navbarItems, 'class')
         toolbox.removeAttributeToArray(expandableNavbarItems, 'class')
@@ -60,9 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
         toolbox.removeAttributeToArray(expandableNavbarRows, 'class')
         toolbox.addClassListToArray(expandableNavbarRows, 'header_navbar_tr')
 
-        styles.setNavItemStylesByURL(Template.INDEX_TEMPLATE, expandableNavbarItems[0])
-        styles.setNavItemStylesByURL(Template.MOVIES_TEMPLATE, expandableNavbarItems[1])
-        styles.setNavItemStylesByURL(Template.SERIES_TEMPLATE, expandableNavbarItems[2])
+        styles.setNavItemStylesByURL(expandableNavbarItems[0], Template.INDEX_TEMPLATE)
+        styles.setNavItemStylesByURL(expandableNavbarItems[1], Template.MOVIES_TEMPLATE)
+        styles.setNavItemStylesByURL(expandableNavbarItems[2], Template.SERIES_TEMPLATE)
 
         interactivity.templateRedirects(expandableNavbarItems, Template.INDEX_TEMPLATE)
         interactivity.templateRedirects(expandableNavbarItems, Template.MOVIES_TEMPLATE)
@@ -75,76 +70,34 @@ document.addEventListener('DOMContentLoaded', () => {
         styles.changeFontSizeByListener(expandableNavbarItems, Template.SERIES_TEMPLATE, 'mouseover', '2.75vh')
         styles.changeFontSizeByListener(expandableNavbarItems, Template.SERIES_TEMPLATE, 'mouseout', '')
 
-        let openIt = true
-        let closeIt = false
+        let isOpen = false
 
+        const toggleNavbar = (isVisible) => {
+            setTimeout(() => {
+                toolbox.displayOneThing(expandableNavbar, isVisible ? Display.DISPLAY_BLOCK : Display.DISPLAY_NONE)
+            }, isVisible ? 0 : 500)
+            expandableNavbar.classList.toggle('expandable_navbar', isVisible)
+            expandableNavbar.classList.toggle('expandable_navbar_slide_out', !isVisible)
+            expandBtnIcon.classList.toggle('bi_x', isVisible)
+            $('.icon').toggleClass('bi-list', !isVisible).toggleClass('bi-x-lg', isVisible)
+            isOpen = isVisible
+        }
+        
         expandNavbarBtn.addEventListener('click', () => {
-            if (openIt) {
-                toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_BLOCK)
-                expandableNavbar.classList.remove('expandable_navbar_slide_out')
-                expandableNavbar.classList.add('expandable_navbar')
-                expandBtnIcon.classList.add('bi_x')
-                $('.icon').removeClass('bi bi-list').addClass('bi bi-x-lg')
-                openIt = false
-                closeIt = true
-            } else if (closeIt) {
-                setTimeout(() => {
-                    toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_NONE)
-                }, 300)
-                expandableNavbar.classList.remove('expandable_navbar')
-                expandableNavbar.classList.add('expandable_navbar_slide_out')
-                expandBtnIcon.classList.remove('bi_x')
-                $('.icon').removeClass('bi bi-x-lg').addClass('bi bi-list')
-                closeIt = false
-                openIt = true
-            }
+            toggleNavbar(!isOpen)
         })
-
+        
         window.addEventListener('scroll', () => {
-            if (scrollY) {
-                setTimeout(() => {
-                    toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_NONE)
-                }, 300)
-                expandableNavbar.classList.remove('expandable_navbar')
-                expandableNavbar.classList.add('expandable_navbar_slide_out')
-                expandBtnIcon.classList.remove('bi_x')
-                $('.icon').removeClass('bi bi-x-lg').addClass('bi bi-list')
-                closeIt = false
-                openIt = true
-            }
+            if (scrollY) { toggleNavbar(false) }
         })
-    
+        
         document.addEventListener('keyup', (event) => {
-            if (event.key === 'Escape') {
-                setTimeout(() => {
-                    toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_NONE)
-                }, 300)
-                expandableNavbar.classList.remove('expandable_navbar')
-                expandableNavbar.classList.add('expandable_navbar_slide_out')
-                expandBtnIcon.classList.remove('bi_x')
-                $('.icon').removeClass('bi bi-x-lg').addClass('bi bi-list')
-                closeIt = false
-                openIt = true
-            }
+            if (event.key) { toggleNavbar(false) }
         })
 
         if (window.innerHeight <= 600) {
             expandBtnBox.style.marginLeft = '130vh'
         }
     }
-    /* Nest Hub */
-
-    /* iPad Pro */
-    if (window.innerWidth <= 1024 && window.innerHeight > 600) {
-        chooseContentBox.forEach((choose, index) => {
-            if (index != 0 && index != 2 && index != 4) {
-                choose.style.display = Display.DISPLAY_NONE
-            }
-        })
-
-        toolbox.displayArray(chooseTimeBox, Display.DISPLAY_NONE)
-        toolbox.displayArray(selectContentTime, Display.DISPLAY_BLOCK)
-    }
-    /* iPad Pro */
 
 })
