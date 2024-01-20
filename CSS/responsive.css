@@ -2,17 +2,19 @@
 
     /* MacBook Pro, Nest Hub Max */
     @media (max-width: 1440px) {
-        .header_navbar_item:first-of-type {
-            margin-left: 2.5vh;
-            margin-right: 5vh;
-        }
-        
-        .header_navbar_item:nth-of-type(2) {
-            margin-left: 5vh;
-        }
-        
-        .header_navbar_item:nth-of-type(3) {
-            margin-left: 7.5vh;
+        .header_navbar_item {
+            &:first-of-type {
+                margin-left: 2.5vh;
+                margin-right: 5vh;
+            }
+            
+            &:nth-of-type(2) {
+                margin-left: 5vh;
+            }
+            
+            &:nth-of-type(3) {
+                margin-left: 7.5vh;
+            }
         }
 
         .choose_content,
@@ -36,9 +38,11 @@
 
     /* Nest Hub, iPad Pro */
     @media (max-width: 1024px) {
-        .header_navbar_item:nth-of-type(2),
-        .header_navbar_item:nth-of-type(3) {
-            display: none;
+        .header_navbar_item {
+            &:nth-of-type(2),
+            &:nth-of-type(3) {
+                display: none;
+            }
         }
 
         .expand_button {
