@@ -1,5 +1,6 @@
-import { ApiContents } from "./constants.js"
+import { Colour, Display } from "./constants.js"
 import { Interactivity, Styles, Toolbox } from "./handlers.js"
+
 const interactivity = new Interactivity
 const styles = new Styles
 const toolbox = new Toolbox
@@ -20,61 +21,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const seriesOptions = Array.from(document.getElementsByClassName('choose_series_option'))
     const seriesChoices = Array.from(document.getElementsByClassName('series_choice'))
 
+    const chooseContentBox = Array.from(document.getElementsByClassName('choose_content'))
+    const chooseTimeBox = Array.from(document.getElementsByClassName('choose_time'))
+    const selectContentTime = Array.from(document.getElementsByClassName('select_content_time'))
+
     const selectContent = document.getElementById('select_content')
     const selectTime = document.getElementById('select_time')
     const selectMovies = document.getElementById('select_movies')
     const selectSeries = document.getElementById('select_series')
 
-    const handlers = [
-        toolbox.changeSectionDisplay, 
-        styles.changeChoiceStylesByClick, 
-        styles.changeChoiceStylesByMouseover, 
-        styles.changeChoiceStylesByMouseout,
-        toolbox.hideAllSections,
-        toolbox.showOneSection
-    ]
+    toolbox.displayArray(selectContentTime, Display.DISPLAY_NONE)
+    toolbox.displayIndex0(trendingSections, Display.DISPLAY_BLOCK, Display.DISPLAY_NONE)
+    toolbox.displayIndex0(moviesSections, Display.DISPLAY_BLOCK, Display.DISPLAY_NONE)
+    toolbox.displayIndex0(seriesSections, Display.DISPLAY_BLOCK, Display.DISPLAY_NONE)
 
-    toolbox.setSectionIndex0(trendingSections)
-    styles.setChoiceColour(contentChoices)
-    styles.setChoiceColour(timeChoices)
-    interactivity.chooseTrending(contentOptions, contentChoices, trendingSections, handlers)
-    interactivity.chooseTrending(timeOptions, timeChoices, trendingSections, handlers)
+    styles.setColourIndex0(contentChoices, Colour.DARK_BLUE_COLOUR_2)
+    styles.setColourIndex0(timeChoices, Colour.DARK_BLUE_COLOUR_2)
+    styles.setColourIndex0(moviesChoices, Colour.DARK_BLUE_COLOUR_2)
+    styles.setColourIndex0(seriesChoices, Colour.DARK_BLUE_COLOUR_2)
 
-    toolbox.setSectionIndex0(moviesSections)
-    styles.setChoiceColour(moviesChoices)
-    interactivity.chooseMoviesOrSeries(moviesOptions, moviesChoices, moviesSections, handlers)
+    interactivity.chooseTrending(contentOptions, contentChoices, trendingSections)
+    interactivity.chooseTrending(timeOptions, timeChoices, trendingSections)
+    interactivity.chooseMoviesOrSeries(moviesOptions, moviesChoices, moviesSections)
+    interactivity.chooseMoviesOrSeries(seriesOptions, seriesChoices, seriesSections)
 
-    toolbox.setSectionIndex0(seriesSections)
-    styles.setChoiceColour(seriesChoices)
-    interactivity.chooseMoviesOrSeries(seriesOptions, seriesChoices, seriesSections, handlers)
-
+    /* -iPad Pro */
     if (window.innerWidth <= 1024 && window.innerHeight > 600) {
-        const trendingContents = [
-            ApiContents.TRENDING_ALL,
-            ApiContents.TRENDING_MOVIES,
-            ApiContents.TRENDING_SERIES,
-            ApiContents.TRENDING_DAY,
-            ApiContents.TRENDING_WEEK
-        ]
+        interactivity.selectTrending(selectContent, selectTime, trendingSections)
+        interactivity.selectTrending(selectTime, selectContent, trendingSections)
+        interactivity.selectMoviesOrSeries(selectMovies, moviesSections)
+        interactivity.selectMoviesOrSeries(selectSeries, seriesSections)
 
-        const movieContents = [
-            ApiContents.MOVIES_NOW_PLAYING,
-            ApiContents.MOVIES_POPULAR,
-            ApiContents.MOVIES_TOP_RATED,
-            ApiContents.MOVIES_UPCOMING
-        ]
+        chooseContentBox.forEach((choose, index) => {
+            index != 0 && index != 2 && index != 4 ? choose.style.display = Display.DISPLAY_NONE : false
+        })
 
-        const serieContents = [
-            ApiContents.SERIES_AIRING_TODAY,
-            ApiContents.SERIES_ON_THE_AIR,
-            ApiContents.SERIES_POPULAR,
-            ApiContents.SERIES_TOP_RATED
-        ]
-
-        interactivity.selectTrending(selectContent, selectTime, trendingSections, trendingContents, handlers)
-        interactivity.selectTrending(selectTime, selectContent, trendingSections, trendingContents, handlers)
-
-        interactivity.selectMoviesOrSeries(selectMovies, moviesSections, movieContents, handlers)
-        interactivity.selectMoviesOrSeries(selectSeries, seriesSections, serieContents, handlers)
+        toolbox.displayArray(chooseTimeBox, Display.DISPLAY_NONE)
+        toolbox.displayArray(selectContentTime, Display.DISPLAY_BLOCK)
     }
+    
 })

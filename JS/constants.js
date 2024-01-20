@@ -27,14 +27,14 @@ export class ApiContents {
     static TRENDING_WEEK = 'week'
 
     static MOVIES_NOW_PLAYING = 'nowPlaying'
-    static MOVIES_POPULAR = 'popular'
-    static MOVIES_TOP_RATED = 'topRated'
+    static MOVIES_POPULAR = 'popularMov'
+    static MOVIES_TOP_RATED = 'topRatedMov'
     static MOVIES_UPCOMING = 'upcoming'
 
     static SERIES_AIRING_TODAY = 'airingToday'
     static SERIES_ON_THE_AIR = 'onTheAir'
-    static SERIES_POPULAR = 'popular'
-    static SERIES_TOP_RATED = 'topRated'
+    static SERIES_POPULAR = 'popularSer'
+    static SERIES_TOP_RATED = 'topRatedSer'
 }
 
 export class CardClassName {

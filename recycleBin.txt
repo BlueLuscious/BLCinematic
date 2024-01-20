@@ -291,3 +291,92 @@ templateRedirects(items) {
         })
     })
 }
+
+
+
+
+
+scrollToTop(button) {
+    button.style.display = Display.DISPLAY_NONE
+
+    window.addEventListener('scroll', () => {
+        if (document.body.scrollTop > 890 || document.documentElement.scrollTop > 890) {
+            button.disabled = false
+            button.style.cursor = Cursor.POINTER_CURSOR
+            setTimeout(() => {
+                button.style.transition = 'opacity 0.5s ease-in-out'
+                button.style.opacity = 1
+            }, 500)
+            button.style.display = Display.DISPLAY_BLOCK
+        } else {
+            button.disabled = true
+            button.style.cursor = Cursor.DEFAULT_CURSOR
+            setTimeout(() => {
+                button.style.transition = 'opacity 0.5s ease-in-out'
+                button.style.opacity = 0
+            }, 500)
+        }
+    })
+
+    button.addEventListener('click', () => {
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+    })
+}
+
+
+
+
+
+let openIt = true
+let closeIt = false
+
+expandNavbarBtn.addEventListener('click', () => {
+    if (openIt) {
+        toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_BLOCK)
+        expandableNavbar.classList.remove('expandable_navbar_slide_out')
+        expandableNavbar.classList.add('expandable_navbar')
+        expandBtnIcon.classList.add('bi_x')
+        $('.icon').removeClass('bi bi-list').addClass('bi bi-x-lg')
+        openIt = false
+        closeIt = true
+    } else if (closeIt) {
+        setTimeout(() => {
+            toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_NONE)
+        }, 300)
+        expandableNavbar.classList.remove('expandable_navbar')
+        expandableNavbar.classList.add('expandable_navbar_slide_out')
+        expandBtnIcon.classList.remove('bi_x')
+        $('.icon').removeClass('bi bi-x-lg').addClass('bi bi-list')
+        closeIt = false
+        openIt = true
+    }
+})
+
+window.addEventListener('scroll', () => {
+    if (scrollY) {
+        setTimeout(() => {
+            toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_NONE)
+        }, 300)
+        expandableNavbar.classList.remove('expandable_navbar')
+        expandableNavbar.classList.add('expandable_navbar_slide_out')
+        expandBtnIcon.classList.remove('bi_x')
+        $('.icon').removeClass('bi bi-x-lg').addClass('bi bi-list')
+        closeIt = false
+        openIt = true
+    }
+})
+
+document.addEventListener('keyup', (event) => {
+    if (event.key === 'Escape') {
+        setTimeout(() => {
+            toolbox.displayOneThing(expandableNavbar, Display.DISPLAY_NONE)
+        }, 300)
+        expandableNavbar.classList.remove('expandable_navbar')
+        expandableNavbar.classList.add('expandable_navbar_slide_out')
+        expandBtnIcon.classList.remove('bi_x')
+        $('.icon').removeClass('bi bi-x-lg').addClass('bi bi-list')
+        closeIt = false
+        openIt = true
+    }
+})
