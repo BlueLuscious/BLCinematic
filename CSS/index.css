@@ -182,6 +182,10 @@
         font-size: 2vh;
     }
 
+    & td:nth-of-type(2) {
+        font-weight: bold;
+    }
+
     & img {
         width: 25vh;
         border-radius: 2vh;
