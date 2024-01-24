@@ -54,15 +54,6 @@
         #select_series {
             width: 22.5vh;
         }
-
-        .trending_content,
-        .movies_content,
-        .series_content {
-            &::before,
-            &::after {
-                height: 100%;
-            }
-        }
     }
     /* Nest Hub, iPad Pro */
 
@@ -137,6 +128,15 @@
             & select {
                 width: 14vh;
                 font-size: 2vh;
+            }
+        }
+
+        .trending_content,
+        .movies_content,
+        .series_content {
+            &::before,
+            &::after {
+                height: 96%;
             }
         }
     }

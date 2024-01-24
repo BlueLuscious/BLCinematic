@@ -1,4 +1,4 @@
-import { ApiUrls, CardClassName, Key } from "./constants.js"
+import { ApiUrls, CardClassName, Key, Pathname, Template } from "./constants.js"
 import { Toolbox } from "./handlers.js"
 
 const toolbox = new Toolbox
@@ -70,23 +70,45 @@ export class ApiHandlers {
 
         mainCards.forEach(function (mainCard, index) {
             mainCard.addEventListener('click', () => {
-                if (results[index].media_type == 'movie' && mainCard.classList.contains(CardClassName.TRENDING_CLASS)) {
+                if (results[index].media_type == 'movie' && mainCard.classList.contains(CardClassName.TRENDING_CLASS) ||
+                    results[index].title && mainCard.classList.contains(CardClassName.MOVIES_CLASS)
+                ) {
                     window.location.href = `movies.html?${category}&indexCard=${index}`
                 }
 
-                if (results[index].media_type == 'tv' && mainCard.classList.contains(CardClassName.TRENDING_CLASS)) {
-                    window.location.href = `series.html?${category}&indexCard=${index}`
-                }
-
-                if (results[index].title && mainCard.classList.contains(CardClassName.MOVIES_CLASS)) {
-                    window.location.href = `movies.html?${category}&indexCard=${index}`
-                }
-
-                if (results[index].name && mainCard.classList.contains(CardClassName.SERIES_CLASS)) {
+                if (results[index].media_type == 'tv' && mainCard.classList.contains(CardClassName.TRENDING_CLASS) ||
+                    results[index].name && mainCard.classList.contains(CardClassName.SERIES_CLASS)
+                ) {
                     window.location.href = `series.html?${category}&indexCard=${index}`
                 }
             })
         })
+    }
+
+    // handle api data
+    handleApiData(apiUrl, cardAll, cardsByIndex, category, template, cardClassName) {
+        const urlParams = new URLSearchParams(window.location.search)
+        const indexCard = urlParams.get('indexCard')
+
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE && window.location.search == '' ||
+            window.location.pathname === Pathname.HTML_FOLDER + template && window.location.search == '' ||
+            window.location.search === `?${category}&indexCard=${indexCard}`
+        ) {
+            this.getApiDataByURL(apiUrl).then(data => {
+                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+                    this.getResults(data.results, cardAll)
+                    this.getClickedCard(data.results, cardAll, cardClassName, category)
+                }
+                if (indexCard) {
+                    this.getResultsByIndexcard(data.results[indexCard], cardsByIndex)
+                }
+            })
+        }
+        
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE && window.location.search !== '') {
+            window.location.href = 'error.html'
+        }
+
     }
 
 }

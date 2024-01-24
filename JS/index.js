@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     interactivity.chooseMoviesOrSeries(moviesOptions, moviesChoices, moviesSections)
     interactivity.chooseMoviesOrSeries(seriesOptions, seriesChoices, seriesSections)
 
-    /* -iPad Pro */
+    // -iPad Pro
     if (window.innerWidth <= 1024 && window.innerHeight > 600) {
         interactivity.selectTrending(selectContent, selectTime, trendingSections)
         interactivity.selectTrending(selectTime, selectContent, trendingSections)
@@ -59,5 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
         toolbox.displayArray(chooseTimeBox, Display.DISPLAY_NONE)
         toolbox.displayArray(selectContentTime, Display.DISPLAY_BLOCK)
     }
+
+    // Temporarily refresh the page until responsive.js is finished.
+    let isAboveThreshold = window.innerWidth > 1024
+
+    window.addEventListener('resize', () => {
+        const isCurrentlyAboveThreshold = window.innerWidth > 1024
+
+        if (isAboveThreshold !== isCurrentlyAboveThreshold) {
+            isAboveThreshold = isCurrentlyAboveThreshold
+            window.location.reload()
+        }
+    })
     
 })
