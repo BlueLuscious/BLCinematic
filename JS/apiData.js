@@ -1,4 +1,4 @@
-import { ApiUrls, CardClassName, Key, Pathname, Template } from "./constants.js"
+import { ApiUrls, Card, CardClassName, Category, Key, Pathname, Template } from "./constants.js"
 import { Toolbox } from "./handlers.js"
 
 const toolbox = new Toolbox
@@ -73,39 +73,60 @@ export class ApiHandlers {
                 if (results[index].media_type == 'movie' && mainCard.classList.contains(CardClassName.TRENDING_CLASS) ||
                     results[index].title && mainCard.classList.contains(CardClassName.MOVIES_CLASS)
                 ) {
-                    window.location.href = `movies.html?${category}&indexCard=${index}`
+                    window.location.href = `movies.html?category=${category}&indexCard=${index}`
                 }
 
                 if (results[index].media_type == 'tv' && mainCard.classList.contains(CardClassName.TRENDING_CLASS) ||
                     results[index].name && mainCard.classList.contains(CardClassName.SERIES_CLASS)
                 ) {
-                    window.location.href = `series.html?${category}&indexCard=${index}`
+                    window.location.href = `series.html?category=${category}&indexCard=${index}`
                 }
             })
         })
     }
 
     // handle api data
-    handleApiData(apiUrl, cardAll, cardsByIndex, category, template, cardClassName) {
+    handleApiData(apiUrl, cardsByIndex, template, cardClassName) {
+        const categories = {
+            [ApiUrls.trendingAllDay]: [Card.trendingAllDayCard, Category.apiCategories[0]],
+            [ApiUrls.trendingMoviesDay]: [Card.trendingMoviesDayCard, Category.apiCategories[1]],
+            [ApiUrls.trendingSeriesDay]: [Card.trendingSeriesDayCard, Category.apiCategories[2]],
+            [ApiUrls.trendingAllWeek]: [Card.trendingAllWeekCard, Category.apiCategories[3]],
+            [ApiUrls.trendingMoviesWeek]: [Card.trendingMoviesWeekCard, Category.apiCategories[4]],
+            [ApiUrls.trendingSeriesWeek]: [Card.trendingSeriesWeekCard, Category.apiCategories[5]],
+            [ApiUrls.moviesNowPlaying]: [Card.moviesNowPlayingCard, Category.apiCategories[6]],
+            [ApiUrls.moviesPopular]: [Card.moviesPopularCard, Category.apiCategories[7]],
+            [ApiUrls.moviesTopRated]: [Card.moviesTopRatedCard, Category.apiCategories[8]],
+            [ApiUrls.moviesUpcoming]: [Card.moviesUpcomingCard, Category.apiCategories[9]],
+            [ApiUrls.seriesAiringToday]: [Card.seriesAiringTodayCard, Category.apiCategories[10]],
+            [ApiUrls.seriesOnTheAir]: [Card.seriesOnTheAirCard, Category.apiCategories[11]],
+            [ApiUrls.seriesPopular]: [Card.seriesPopularCard, Category.apiCategories[12]],
+            [ApiUrls.seriesTopRated]: [Card.seriesTopRatedCard, Category.apiCategories[13]],
+        }
+        
         const urlParams = new URLSearchParams(window.location.search)
+        const category = urlParams.get('category')
         const indexCard = urlParams.get('indexCard')
 
-        if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE && window.location.search == '' ||
-            window.location.pathname === Pathname.HTML_FOLDER + template && window.location.search == '' ||
-            window.location.search === `?${category}&indexCard=${indexCard}`
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE && window.location.search === '' ||
+            window.location.pathname === Pathname.HTML_FOLDER + template && window.location.search === '' ||
+            window.location.search === `?category=${categories[apiUrl][1]}&indexCard=${indexCard}`
         ) {
             this.getApiDataByURL(apiUrl).then(data => {
                 if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    this.getResults(data.results, cardAll)
-                    this.getClickedCard(data.results, cardAll, cardClassName, category)
-                }
-                if (indexCard) {
+                    this.getResults(data.results, categories[apiUrl][0])
+                    this.getClickedCard(data.results, categories[apiUrl][0], cardClassName, categories[apiUrl][1])
+                } else {
                     this.getResultsByIndexcard(data.results[indexCard], cardsByIndex)
                 }
             })
         }
-        
-        if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE && window.location.search !== '') {
+
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE && window.location.search !== '' ||
+            window.location.pathname === Pathname.HTML_FOLDER + template && window.location.search !== '' &&
+            (!urlParams.has('category') || category === '' || !Category.apiCategories.includes(category) ||
+            !urlParams.has('indexCard') || indexCard === '' || isNaN(indexCard))
+        ) {
             window.location.href = 'error.html'
         }
 
