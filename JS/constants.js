@@ -25,22 +25,56 @@ export class ApiContents {
     static TRENDING_SERIES = 'series'
     static TRENDING_DAY = 'day'
     static TRENDING_WEEK = 'week'
-
     static MOVIES_NOW_PLAYING = 'nowPlaying'
     static MOVIES_POPULAR = 'popularMov'
     static MOVIES_TOP_RATED = 'topRatedMov'
     static MOVIES_UPCOMING = 'upcoming'
-
     static SERIES_AIRING_TODAY = 'airingToday'
     static SERIES_ON_THE_AIR = 'onTheAir'
     static SERIES_POPULAR = 'popularSer'
     static SERIES_TOP_RATED = 'topRatedSer'
 }
 
+export class Card {
+    static trendingAllDayCard = document.getElementById('trendingAllDay')
+    static trendingMoviesDayCard = document.getElementById('trendingMoviesDay')
+    static trendingSeriesDayCard = document.getElementById('trendingSeriesDay')
+    static trendingAllWeekCard = document.getElementById('trendingAllWeek')
+    static trendingMoviesWeekCard = document.getElementById('trendingMoviesWeek')
+    static trendingSeriesWeekCard = document.getElementById('trendingSeriesWeek')
+    static moviesNowPlayingCard = document.getElementById('moviesNowPlaying')
+    static moviesPopularCard = document.getElementById('moviesPopular')
+    static moviesTopRatedCard = document.getElementById('moviesTopRated')
+    static moviesUpcomingCard = document.getElementById('moviesUpcoming')
+    static seriesAiringTodayCard = document.getElementById('seriesAiringToday')
+    static seriesOnTheAirCard = document.getElementById('seriesOnTheAir')
+    static seriesPopularCard = document.getElementById('seriesPopular')
+    static seriesTopRatedCard = document.getElementById('seriesTopRated')
+}
+
 export class CardClassName {
     static TRENDING_CLASS = 'main_trending_tr'
     static MOVIES_CLASS = 'main_movies_tr'
     static SERIES_CLASS = 'main_series_tr'
+}
+
+export class Category {
+    static apiCategories = [
+        'trending_all_day',
+        'trending_movie_day',
+        'trending_serie_day',
+        'trending_all_week',
+        'trending_movie_week',
+        'trending_serie_week',
+        'movie_now_playing',
+        'movie_popular',
+        'movie_top_rated',
+        'movie_upcoming',
+        'serie_airing_today',
+        'serie_on_the_air',
+        'serie_popular',
+        'serie_top_rated'
+    ]
 }
 
 export class Colour {

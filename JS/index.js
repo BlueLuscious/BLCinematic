@@ -60,16 +60,4 @@ document.addEventListener('DOMContentLoaded', () => {
         toolbox.displayArray(selectContentTime, Display.DISPLAY_BLOCK)
     }
 
-    // Temporarily refresh the page until responsive.js is finished.
-    let isAboveThreshold = window.innerWidth > 1024
-
-    window.addEventListener('resize', () => {
-        const isCurrentlyAboveThreshold = window.innerWidth > 1024
-
-        if (isAboveThreshold !== isCurrentlyAboveThreshold) {
-            isAboveThreshold = isCurrentlyAboveThreshold
-            window.location.reload()
-        }
-    })
-    
 })
