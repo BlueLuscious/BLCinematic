@@ -1,18 +1,56 @@
-/* VARS */
-:root {
-    --white-colour: rgb(255, 255, 255);
-    --black-colour-alpha: rgba(255, 255, 255, 0);
-    --dark-blue-colour: rgb(6, 33, 74);
-    --dark-blue-colour-2: rgb(17, 60, 124);
-    --dark-blue-colour-3: rgb(20, 72, 150);
-    --medium-blue-colour: rgb(29, 101, 209);
-    --medium-blue-colour-2: rgb(76, 130, 211);
-    --light-blue-colour: rgb(134, 174, 235);
-    --light-blue-colour-2: rgb(230, 240, 255);
-    --light-blue-colour-2-alpha: rgba(230, 240, 255, 1);
-}
-/* VARS */
-
 /* MAIN */
+
+.movie_section_by_index {
+    position: relative;
+    width: 100%;
+    margin-top: 7.5vh;
+    background-color: rgba(6, 33, 74);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left calc((50vw - 170px) - 315.5px) top;
+    z-index: 1;
+
+    & .movie_overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 25%;
+        /* hacer responsive el left - achicar porcentaje */
+        background: linear-gradient(to right, rgba(6, 33, 74, 1), rgba(6, 33, 74, 0.75));
+        z-index: 2;
+    }
+
+    & .movie_content {
+        display: flex;
+        flex-direction: row;
+        gap: 7.5vh;
+        align-items: center;
+        position: relative;
+        z-index: 3;
+    }
+
+    & .movie_poster {
+        margin-top: 7.5vh;
+        margin-bottom: 7.5vh;
+        margin-left: 7.5vh;
+        color: var(--white-colour);
+
+        & img {
+            width: 35vh;
+            border-radius: 2vh;
+        }
+    }
+
+    & .movie_title {
+        color: var(--white-colour);
+        font-size: 3.5vh;
+    }
+
+    & .movie_date {
+        color: var(--white-colour);
+        font-size: 2vh;
+    }
+}
 
 /* MAIN */
