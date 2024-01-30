@@ -1,3 +1,4 @@
+/* NAVBAR */
 #expandNavbarButton:focus {
     & .bi {
         animation: fadeOut 1s ease-in-out;
@@ -46,4 +47,27 @@
         top: -75%;
         opacity: 0;
     }
+}
+
+/* CARD */
+.main_trending_tr,
+.main_movies_tr,
+.main_series_tr  {
+    &:hover {
+        animation: pulse .75s ease-in-out 1.25s infinite alternate-reverse;
+    }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 var(--dark-blue-colour-2); }
+    10% { box-shadow: 0 0 0.1vh 0.1vh var(--dark-blue-colour-2); }
+    20% { box-shadow: 0 0 0.2vh 0.2vh var(--dark-blue-colour-2); }
+    30% { box-shadow: 0 0 0.3vh 0.3vh var(--dark-blue-colour-2); }
+    40% { box-shadow: 0 0 0.4vh 0.4vh var(--dark-blue-colour-2); }
+    50% { box-shadow: 0 0 0.5vh 0.5vh var(--dark-blue-colour-2); }
+    60% { box-shadow: 0 0 0.6vh 0.6vh var(--dark-blue-colour-2); }
+    70% { box-shadow: 0 0 0.7vh 0.7vh var(--dark-blue-colour-2); }
+    80% { box-shadow: 0 0 0.8vh 0.8vh var(--dark-blue-colour-2); }
+    90% { box-shadow: 0 0 0.9vh 0.9vh var(--dark-blue-colour-2); }
+    100% { box-shadow: 0 0 1vh 1vh var(--dark-blue-colour-2); }
 }

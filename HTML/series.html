@@ -75,16 +75,26 @@
     <!-- MAIN -->
     <main class="main">
         <div class="main_divs">
-            <section class="series_section">
+            <section class="serie_section">
                 <h1>Holaaaa</h1>
             </section>
         </div>
 
         <div class="main_divs">
-            <section class="series_section">
-                <h1>Hola series</h1>
-                <div class="series_content">
-                    <table id="seriesByIndex" class="movies_tables"></table>
+            <section class="serie_section_by_index" id="container">
+                <div class="serie_overlay"></div>
+                <div class="serie_content">
+                    <div class="serie_poster">
+                        <img id="poster">
+                    </div>
+                    <div class="serie_info">
+                        <div class="serie_title">
+                            <h1 id="title"></h1>
+                        </div>
+                        <div class="serie_date">
+                            <h1 id="date"></h1>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

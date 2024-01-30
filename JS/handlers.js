@@ -309,13 +309,26 @@ export class Toolbox {
         })
     }
 
+    removeAfterFromTables(things) {
+        things.forEach((thing) => {
+            thing.addEventListener('scroll', function() {
+                const scrollLeft = thing.scrollLeft
+                const scrollWidth = thing.scrollWidth
+                const clientWidth = thing.clientWidth
+                const scrollEnd = scrollWidth - clientWidth
+            
+                scrollLeft === scrollEnd ? thing.classList.add('at-scroll-end') : thing.classList.remove('at-scroll-end')
+            })
+        })
+    }
+
     // reverse an array by indexes
-    reverseArrayByIndex(miArray, cutValue, concatValue) {
+    reverseArrayByIndex(myArray, cutValue, concatValue) {
         cutValue.length >= 2 ? cutValue = cutValue.slice(0, 2) : false
         concatValue.length >= 2 ? concatValue = concatValue.slice(0, 2) : false
 
-        miArray = miArray.slice(...cutValue).reverse().concat(miArray.slice(...concatValue))
-        return miArray
+        myArray = myArray.slice(...cutValue).reverse().concat(myArray.slice(...concatValue))
+        return myArray
     }
 
 }

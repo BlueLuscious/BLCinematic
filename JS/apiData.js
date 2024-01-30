@@ -40,28 +40,28 @@ export class ApiHandlers {
             this.api_toolbox.setCardImage(row, item, imageData, image)
 
             const title = document.createElement('td')
+            this.api_toolbox.setCardTitle(row, false, item, title)
+
             const date = document.createElement('td')
-            this.api_toolbox.setCardTitleAndDate(row, item, title, date)
+            this.api_toolbox.setCardDate(row, false, item, date)
 
             card.appendChild(row)
         })
     }
 
     // get result by id
-    getResultsByIndexcard(item, card) {
-        const row = document.createElement('tr')
-        this.api_toolbox.setCardClassname(row, item)
+    getResultsByIndexcard(item) {
+        const container = document.getElementById('container')
+        container.style.backgroundImage = `url(${ApiUrls.IMAGE_URL_1920X800 + item.backdrop_path})`
 
-        const imageData = document.createElement('td')
-        const image = document.createElement('img')
-        this.api_toolbox.setCardImage(row, item, imageData, image)
+        const image = document.getElementById('poster')
+        this.api_toolbox.setCardImage(false, item, false, image)
 
-        const title = document.createElement('td')
-        const date = document.createElement('td')
-        this.api_toolbox.setCardTitleAndDate(row, item, title, date)
-
-        item.media_type == 'movie' || row.classList.contains(CardClassName.MOVIES_CLASS) ? card[0].appendChild(row) : false
-        item.media_type == 'tv' || row.classList.contains(CardClassName.SERIES_CLASS) ? card[1].appendChild(row) : false
+        const title = document.getElementById('title')
+        this.api_toolbox.setCardTitle(false, container, item, title)
+        
+        const date = document.getElementById('date')
+        this.api_toolbox.setCardDate(false, container, item, date)
     }
 
     // get clicked results
@@ -86,7 +86,7 @@ export class ApiHandlers {
     }
 
     // handle api data
-    handleApiData(apiUrl, cardsByIndex, template, cardClassName) {
+    handleApiData(apiUrl, template, cardClassName) {
         const categories = {
             [ApiUrls.trendingAllDay]: [Card.trendingAllDayCard, Category.apiCategories[0]],
             [ApiUrls.trendingMoviesDay]: [Card.trendingMoviesDayCard, Category.apiCategories[1]],
@@ -117,7 +117,7 @@ export class ApiHandlers {
                     this.getResults(data.results, categories[apiUrl][0])
                     this.getClickedCard(data.results, categories[apiUrl][0], cardClassName, categories[apiUrl][1])
                 } else {
-                    this.getResultsByIndexcard(data.results[indexCard], cardsByIndex)
+                    this.getResultsByIndexcard(data.results[indexCard])
                 }
             })
         }
@@ -129,7 +129,6 @@ export class ApiHandlers {
         ) {
             window.location.href = 'error.html'
         }
-
     }
 
 }
@@ -145,26 +144,61 @@ class ApiToolbox {
 
     // set image or default
     setCardImage(row, item, imageData, image) {
-        item.poster_path == '' ? image.src = '../IMG/default_no_image.jpg' : image.src = `${ApiUrls.IMAGE_URL + item.poster_path}`
-        item.poster_path == null ? image.src = '../IMG/default_no_image.jpg' : image.src = `${ApiUrls.IMAGE_URL + item.poster_path}`
-        imageData.appendChild(image)
-        row.appendChild(imageData)
+        if (!row && !imageData) {
+            item.poster_path == '' ? image.src = '../IMG/default_no_image.jpg' : image.src = `${ApiUrls.IMAGE_URL_600x900 + item.poster_path}`
+            item.poster_path == null ? image.src = '../IMG/default_no_image.jpg' : image.src = `${ApiUrls.IMAGE_URL_600x900 + item.poster_path}`
+        } else {
+            item.poster_path == '' ? image.src = '../IMG/default_no_image.jpg' : image.src = `${ApiUrls.IMAGE_URL_600x900 + item.poster_path}`
+            item.poster_path == null ? image.src = '../IMG/default_no_image.jpg' : image.src = `${ApiUrls.IMAGE_URL_600x900 + item.poster_path}`
+            imageData.appendChild(image)
+            row.appendChild(imageData)
+        }
     }
 
-    // show data results by media_type
-    setCardTitleAndDate(row, item, title, date) {
-        if (item.media_type == 'movie' || row.classList.contains(CardClassName.MOVIES_CLASS)) {
-            item.title == '' ? title.textContent = '' : title.textContent = item.title
-            item.release_date == '' ? date.textContent = '' : date.textContent = toolbox.formatDate(item.release_date)
+    // set date
+    setCardDate(row, container, item, date) {
+        if (!row && container) {
+            if (item.media_type == 'movie' || container.classList.contains(CardClassName.MOVIE_BY_INDEX)) {
+                item.release_date == '' ? date.textContent = '' : date.textContent = toolbox.formatDate(item.release_date)
+            }
+    
+            if (item.media_type == 'tv' || container.classList.contains(CardClassName.SERIE_BY_INDEX)) {
+                item.first_air_date == '' ? date.textContent = '' : date.textContent = toolbox.formatDate(item.first_air_date)
+            }
+        } else {
+            if (item.media_type == 'movie' || row.classList.contains(CardClassName.MOVIES_CLASS)) {
+                item.release_date == '' ? date.textContent = '' : date.textContent = toolbox.formatDate(item.release_date)
+            }
+    
+            if (item.media_type == 'tv' || row.classList.contains(CardClassName.SERIES_CLASS)) {
+                item.first_air_date == '' ? date.textContent = '' : date.textContent = toolbox.formatDate(item.first_air_date)
+            }
+    
+            row.appendChild(date)
         }
+    }
 
-        if (item.media_type == 'tv' || row.classList.contains(CardClassName.SERIES_CLASS)) {
-            item.name == '' ? title.textContent = '' : title.textContent = item.name
-            item.first_air_date == '' ? date.textContent = '' : date.textContent = toolbox.formatDate(item.first_air_date)
+    // set title
+    setCardTitle(row, container, item, title) {
+        if (!row && container) {
+            if (item.media_type == 'movie' || container.classList.contains(CardClassName.MOVIE_BY_INDEX)) {
+                item.title == '' ? title.textContent = '' : title.textContent = item.title
+            }
+    
+            if (item.media_type == 'tv' || container.classList.contains(CardClassName.SERIE_BY_INDEX)) {
+                item.name == '' ? title.textContent = '' : title.textContent = item.name
+            }
+        } else {
+            if (item.media_type == 'movie' || row.classList.contains(CardClassName.MOVIES_CLASS)) {
+                item.title == '' ? title.textContent = '' : title.textContent = item.title
+            }
+    
+            if (item.media_type == 'tv' || row.classList.contains(CardClassName.SERIES_CLASS)) {
+                item.name == '' ? title.textContent = '' : title.textContent = item.name
+            }
+    
+            row.appendChild(title)
         }
-
-        row.appendChild(title)
-        row.appendChild(date)
     }
 
 }

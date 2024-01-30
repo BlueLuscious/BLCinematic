@@ -75,16 +75,26 @@
     <!-- MAIN -->
     <main class="main">
         <div class="main_divs">
-            <section class="movies_section">
+            <section class="movie_section">
                 <h1>Holaaaa</h1>
             </section>
         </div>
 
         <div class="main_divs">
-            <section class="movies_section">
-                <h1>Hola movies</h1>
-                <div class="movies_content">
-                    <table id="moviesByIndex" class="movies_tables"></table>
+            <section class="movie_section_by_index" id="container">
+                <div class="movie_overlay"></div>
+                <div class="movie_content">
+                    <div class="movie_poster">
+                        <img id="poster">
+                    </div>
+                    <div class="movie_info">
+                        <div class="movie_title">
+                            <h1 id="title"></h1>
+                        </div>
+                        <div class="movie_date">
+                            <h1 id="date"></h1>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

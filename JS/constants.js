@@ -16,7 +16,10 @@ export class ApiUrls {
     static seriesPopular = 'https://api.themoviedb.org/3/tv/popular?language=en-US&page=1'
     static seriesTopRated = 'https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1'
 
-    static IMAGE_URL = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
+    static IMAGE_URL_220x330 = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
+    static IMAGE_URL_300x450 = 'https://www.themoviedb.org/t/p/w300_and_h450_face'
+    static IMAGE_URL_600x900 = 'https://www.themoviedb.org/t/p/w600_and_h900_face'
+    static IMAGE_URL_1920X800 = 'https://www.themoviedb.org/t/p/w1920_and_h800_face'
 }
 
 export class ApiContents {
@@ -56,6 +59,8 @@ export class CardClassName {
     static TRENDING_CLASS = 'main_trending_tr'
     static MOVIES_CLASS = 'main_movies_tr'
     static SERIES_CLASS = 'main_series_tr'
+    static MOVIE_BY_INDEX = 'movie_section_by_index'
+    static SERIE_BY_INDEX = 'serie_section_by_index'
 }
 
 export class Category {

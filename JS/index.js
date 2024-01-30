@@ -7,16 +7,19 @@ const toolbox = new Toolbox
 
 document.addEventListener('DOMContentLoaded', () => {
     
+    const trendingTables = Array.from(document.getElementsByClassName('trending_tables'))
     const trendingSections = Array.from(document.getElementsByClassName('trending_section'))
     const contentOptions = Array.from(document.getElementsByClassName('choose_content_option'))
     const contentChoices = Array.from(document.getElementsByClassName('content_choice'))
     const timeOptions = Array.from(document.getElementsByClassName('choose_time_option'))
     const timeChoices = Array.from(document.getElementsByClassName('time_choice'))
 
+    const moviesTables = Array.from(document.getElementsByClassName('movies_tables'))
     const moviesSections = Array.from(document.getElementsByClassName('movies_section'))
     const moviesOptions = Array.from(document.getElementsByClassName('choose_movies_option'))
     const moviesChoices = Array.from(document.getElementsByClassName('movies_choice'))
 
+    const seriesTables = Array.from(document.getElementsByClassName('series_tables'))
     const seriesSections = Array.from(document.getElementsByClassName('series_section'))
     const seriesOptions = Array.from(document.getElementsByClassName('choose_series_option'))
     const seriesChoices = Array.from(document.getElementsByClassName('series_choice'))
@@ -44,6 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
     interactivity.chooseTrending(timeOptions, timeChoices, trendingSections)
     interactivity.chooseMoviesOrSeries(moviesOptions, moviesChoices, moviesSections)
     interactivity.chooseMoviesOrSeries(seriesOptions, seriesChoices, seriesSections)
+
+    toolbox.removeAfterFromTables(trendingTables)
+    toolbox.removeAfterFromTables(moviesTables)
+    toolbox.removeAfterFromTables(seriesTables)
 
     // -iPad Pro
     if (window.innerWidth <= 1024 && window.innerHeight > 600) {
