@@ -1,4 +1,4 @@
-import { ApiContents, Colour, Cursor, Display, Pathname, Template } from "./constants.js"
+import { ApiContents, Category, Colour, Cursor, Display, Pathname, Template } from "./constants.js"
 
 let content_0 = true
 let content_1 = false
@@ -296,10 +296,49 @@ export class Toolbox {
 
     // format date
     formatDate(date) {
+        const urlParams = new URLSearchParams(window.location.search)
+        const category = urlParams.get('category')
         const [year, month, day] = date.split('-')
-        const months = ['Invalid', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        const monthAbbr = months[Number(month)] || 'Invalid'
-        return `${monthAbbr} ${day}, ${year}`
+
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+            const months = ['Invalid', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            const monthAbbr = months[Number(month)] || 'Invalid'
+            return `${monthAbbr} ${day}, ${year}`
+        } 
+        
+        if (Category.apiCategories.includes(category)) {
+            return `${year}`
+        }
+        
+    }
+
+    // handle select arrow display
+    handleSelectArrow(selects, selectsBox) {
+        selects.forEach((select, index) => {
+            select.addEventListener('click', () => toggleClasses(index))
+          
+            select.addEventListener('focusout', () => resetClasses(index))
+          
+            window.addEventListener('scroll', () => resetClasses(index))
+          
+            document.addEventListener('wheel', () => resetClasses(index))
+          
+            document.addEventListener('keyup', (event) => {
+                if (event.key === 'Escape') {
+                    toggleClasses(index)
+                }
+            })
+        })
+          
+        function toggleClasses(index) {
+            selectsBox[index].classList.toggle('select_content_time')
+            selectsBox[index].classList.toggle('select_content_time_2')
+        }
+          
+        function resetClasses(index) {
+            selectsBox[index].classList.remove('select_content_time_2')
+            selectsBox[index].classList.add('select_content_time')
+        }
     }
 
     // remove attribute to an array
@@ -309,6 +348,7 @@ export class Toolbox {
         })
     }
 
+    // remove pseudoelement after by classes
     removeAfterFromTables(things) {
         things.forEach((thing) => {
             thing.addEventListener('scroll', function() {

@@ -16,10 +16,15 @@ export class ApiUrls {
     static seriesPopular = 'https://api.themoviedb.org/3/tv/popular?language=en-US&page=1'
     static seriesTopRated = 'https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1'
 
+    static movieListGenres = 'https://api.themoviedb.org/3/genre/movie/list?language=en'
+    static serieListGenres = 'https://api.themoviedb.org/3/genre/tv/list?language=en'
+
     static IMAGE_URL_220x330 = 'https://www.themoviedb.org/t/p/w220_and_h330_face'
     static IMAGE_URL_300x450 = 'https://www.themoviedb.org/t/p/w300_and_h450_face'
     static IMAGE_URL_600x900 = 'https://www.themoviedb.org/t/p/w600_and_h900_face'
     static IMAGE_URL_1920X800 = 'https://www.themoviedb.org/t/p/w1920_and_h800_face'
+
+    // TODO hacer que pueda ingresar el numero de pagina en las urls de movies y series
 }
 
 export class ApiContents {
@@ -38,7 +43,7 @@ export class ApiContents {
     static SERIES_TOP_RATED = 'topRatedSer'
 }
 
-export class Card {
+class Card {
     static trendingAllDayCard = document.getElementById('trendingAllDay')
     static trendingMoviesDayCard = document.getElementById('trendingMoviesDay')
     static trendingSeriesDayCard = document.getElementById('trendingSeriesDay')
@@ -102,6 +107,25 @@ export class Display {
 export class Key {
     static ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZmFjOTA5ZmNiYTRhYjVhNTI5M2U4MTBiZmRhNmQ1MiIsInN1YiI6IjY1NGI2NTVjMjg2NmZhMDBhYjEzMTMwNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XFfnp-1dM_GVvRUASsPgjUiMvYB9u7gsd8RlLWCGU3Y'
     static API_KEY = 'cfac909fcba4ab5a5293e810bfda6d52'
+}
+
+export class MappedApiUrls {
+    static urlAssociation  = {
+        [ApiUrls.trendingAllDay]: [Card.trendingAllDayCard, Category.apiCategories[0]],
+        [ApiUrls.trendingMoviesDay]: [Card.trendingMoviesDayCard, Category.apiCategories[1]],
+        [ApiUrls.trendingSeriesDay]: [Card.trendingSeriesDayCard, Category.apiCategories[2]],
+        [ApiUrls.trendingAllWeek]: [Card.trendingAllWeekCard, Category.apiCategories[3]],
+        [ApiUrls.trendingMoviesWeek]: [Card.trendingMoviesWeekCard, Category.apiCategories[4]],
+        [ApiUrls.trendingSeriesWeek]: [Card.trendingSeriesWeekCard, Category.apiCategories[5]],
+        [ApiUrls.moviesNowPlaying]: [Card.moviesNowPlayingCard, Category.apiCategories[6]],
+        [ApiUrls.moviesPopular]: [Card.moviesPopularCard, Category.apiCategories[7]],
+        [ApiUrls.moviesTopRated]: [Card.moviesTopRatedCard, Category.apiCategories[8]],
+        [ApiUrls.moviesUpcoming]: [Card.moviesUpcomingCard, Category.apiCategories[9]],
+        [ApiUrls.seriesAiringToday]: [Card.seriesAiringTodayCard, Category.apiCategories[10]],
+        [ApiUrls.seriesOnTheAir]: [Card.seriesOnTheAirCard, Category.apiCategories[11]],
+        [ApiUrls.seriesPopular]: [Card.seriesPopularCard, Category.apiCategories[12]],
+        [ApiUrls.seriesTopRated]: [Card.seriesTopRatedCard, Category.apiCategories[13]],
+    }
 }
 
 export class Pathname {
