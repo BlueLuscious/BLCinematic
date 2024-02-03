@@ -380,3 +380,90 @@ document.addEventListener('keyup', (event) => {
         openIt = true
     }
 })
+
+
+
+
+
+setGenresName(item, box, genres) {
+    if (item.media_type == 'movie' || container.classList.contains(CardClassName.MOVIE_BY_INDEX)) {
+        genres = genres[0]
+    }
+
+    if (item.media_type == 'tv' || container.classList.contains(CardClassName.SERIE_BY_INDEX)) {
+        genres = genres[1]
+    }
+    
+    this.api_data.getApiDataByURL(genres).then(genre_data => {
+        const genres_list = genre_data.genres
+        const content_genres = item.genre_ids
+        
+        genres_list.forEach(genre_item => {
+            content_genres.forEach((content_genre, index) => {
+                if (genre_item.id === content_genre) {
+                    const genre_names_box = document.createElement('h3')
+                    
+                    if (index < content_genres.length - 1) {
+                        genre_item.name = document.createTextNode(`${genre_item.name},`)
+                    } else {
+                        genre_item.name = document.createTextNode(genre_item.name)
+                    }
+
+                    genre_names_box.appendChild(genre_item.name)
+                    box.appendChild(genre_names_box)
+                }
+            })
+        })
+    })
+}
+
+
+
+
+
+selects.forEach((select, index) => {
+    let is_clicked = false
+
+    select.addEventListener('click', () => {
+        is_clicked = !is_clicked
+
+        if (is_clicked) {
+            selectContentTime[index].classList.remove('select_content_time')
+            selectContentTime[index].classList.add('select_content_time_2')
+        } else {
+            selectContentTime[index].classList.remove('select_content_time_2')
+            selectContentTime[index].classList.add('select_content_time')
+        }
+    })
+
+    select.addEventListener('focusout', () => {
+        is_clicked = !is_clicked
+        selectContentTime[index].classList.remove('select_content_time_2')
+        selectContentTime[index].classList.add('select_content_time')
+    })
+
+    window.addEventListener('scroll', () => {
+        if (scrollY) {
+            is_clicked = false
+            selectContentTime[index].classList.remove('select_content_time_2')
+            selectContentTime[index].classList.add('select_content_time')
+        }
+    })
+
+    document.addEventListener('wheel', (event) => {
+        if (event.deltaY) {
+            is_clicked = false
+            selectContentTime[index].classList.remove('select_content_time_2')
+            selectContentTime[index].classList.add('select_content_time')
+        }
+    })
+    
+    document.addEventListener('keyup', (event) => {
+        if (event.key === 'Escape') {
+            is_clicked = !is_clicked
+            selectContentTime[index].classList.remove('select_content_time_2')
+            selectContentTime[index].classList.add('select_content_time')
+        }
+    })
+
+})
