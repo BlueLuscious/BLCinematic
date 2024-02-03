@@ -178,11 +178,15 @@ option {
     z-index: 10;
 
     & button {
+        display: none;
         width: 6vh;
         height: 5.5vh;
         border: transparent;
         border-radius: 0.5vh;
         background-color: var(--dark-blue-colour-2);
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        cursor: default;
     }
 
     & .bi {
@@ -190,6 +194,11 @@ option {
         background-color: var(--dark-blue-colour-2);
         font-size: 3.5vh;
     }
+}
+
+.scroll_to_top button.active {
+    opacity: 1;
+    cursor: pointer;
 }
 /* MAIN */
 
