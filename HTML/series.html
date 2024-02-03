@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../CSS/series.css" type="text/css">
     <link rel="stylesheet" href="../CSS/global.css" type="text/css">
     <link rel="stylesheet" href="../CSS/responsive.css" type="text/css">
+    <link rel="stylesheet" href="../CSS/responsive2.css" type="text/css">
     <link rel="stylesheet" href="../CSS/animations.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>
@@ -39,7 +40,7 @@
                     </tr>
                 </table>
             </div>
-            <div id="expandButtonBox" class="expand_button">
+            <div class="expand_button">
                 <button type="button" id="expandNavbarButton">
                     <i id="expandButtonIcon" class="icon bi bi-list"></i>
                 </button>
@@ -83,16 +84,35 @@
         <div class="main_divs">
             <section class="serie_section_by_index" id="container">
                 <div class="serie_overlay"></div>
-                <div class="serie_content">
+                <div class="serie_content" id="contentByIndex">
                     <div class="serie_poster">
                         <img id="poster">
                     </div>
-                    <div class="serie_info">
-                        <div class="serie_title">
-                            <h1 id="title"></h1>
+                    <div class="serie_info_container">
+                        <div class="serie_info">
+                            <div class="serie_title">
+                                <h1 id="title"></h1>
+                            </div>
                         </div>
-                        <div class="serie_date">
-                            <h1 id="date"></h1>
+                        <div class="serie_info">
+                            <div class="serie_date">
+                                <h3 id="date"></h3>
+                            </div>
+                            <span id="contentGap">•</span>
+                            <div class="serie_genres">
+                                <div id="genres"></div>
+                            </div>
+                        </div>
+                        <div class="serie_info">
+                            <div class="serie_tagline">
+                                <h2 id="tagline"></h2>
+                            </div>
+                        </div>
+                        <div class="serie_info">
+                            <div class="serie_overview">
+                                <h2>Overview</h2>
+                                <h3 id="overview"></h3>
+                            </div>
                         </div>
                     </div>
                 </div>

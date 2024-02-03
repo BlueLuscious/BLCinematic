@@ -40,7 +40,7 @@
                     </tr>
                 </table>
             </div>
-            <div id="expandButtonBox" class="expand_button">
+            <div class="expand_button">
                 <button type="button" id="expandNavbarButton">
                     <i id="expandButtonIcon" class="icon bi bi-list"></i>
                 </button>
@@ -86,7 +86,7 @@
                 <div class="choose_content">
                     <h1>Trending</h1>
                 </div>
-                <div class="choose_content">
+                <div class="choose_content" id="choose_trending_content">
                     <table>
                         <tr class="choose_content_option">
                             <td class="content_choice" id="choose_content_all"><strong>All</strong></td>
@@ -114,14 +114,14 @@
 
             <!-- SELECT -->
             <div class="select_contents">
-                <div class="select_content_time">
+                <div class="select_content_time" id="select_content_box">
                     <select name="content" id="select_content">
                         <option value="all" selected>All</option>
                         <option value="movies">Movies</option>
                         <option value="series">Series</option>
                     </select>
                 </div>
-                <div class="select_content_time">
+                <div class="select_content_time" id="select_time_box">
                     <select name="time" id="select_time">
                         <option value="day" selected>Day</option>
                         <option value="week">Week</option>
@@ -191,7 +191,7 @@
 
             <!-- SELECT -->
             <div class="select_contents">
-                <div class="select_content_time">
+                <div class="select_content_time" id="select_movies_box">
                     <select name="content" id="select_movies">
                         <option value="nowPlaying">Now Playing</option>
                         <option value="popularMov">Popular</option>
@@ -252,7 +252,7 @@
 
             <!-- SELECT -->
             <div class="select_contents">
-                <div class="select_content_time">
+                <div class="select_content_time" id="select_series_box">
                     <select name="content" id="select_series">
                         <option value="airingToday">Airing Today</option>
                         <option value="onTheAir">On The Air</option>
