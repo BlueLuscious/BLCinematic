@@ -1,6 +1,7 @@
 /* VARS */
 :root {
     --white-colour: rgb(255, 255, 255);
+    --grey-colour: rgb(176, 176, 176);
     --black-colour-alpha: rgba(255, 255, 255, 0);
     --dark-blue-colour: rgb(6, 33, 74);
     --dark-blue-colour-2: rgb(17, 60, 124);
@@ -59,6 +60,10 @@ select {
     outline: transparent;
     cursor: pointer;
 }
+
+option {
+    text-align: left;
+}
 /* ELEMENTS */
 
 /* HEADER */
@@ -74,20 +79,9 @@ select {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 20vh;
+    transition: gap 0.25s ease-in;
     z-index: 11;
-}
-
-.header_navbar_item:first-of-type {
-    margin-left: 5vh;
-    margin-right: 10vh;
-}
-
-.header_navbar_item:nth-of-type(2) {
-    margin-left: 10vh;
-}
-
-.header_navbar_item:nth-of-type(3) {
-    margin-left: 20vh;
 }
 
 .header_navbar_item img {
@@ -101,27 +95,31 @@ select {
     justify-content: center;
     align-items: center;
     padding: 2vh;
-    width: 50vh;
+    width: 60vh;
     border: var(--white-colour);
     border-radius: 5vh;
     outline: transparent;
     font-size: 2vh;
+    transition: width 0.25s ease-in;
 }
 
 .header_navbar_tr {
     display: inline;
     margin: 2vh;
+    transition: margin 0.25s ease-in;
 }
 
 .header_navbar_td {
-    display: inline;
     border-bottom: 0.3vh var(--white-colour) solid;
     color: var(--white-colour);
     font-size: 2.5vh;
+    transition: font-size 0.25s ease-in-out;
     cursor: pointer;
 }
 
 .expand_button {
+    position: absolute;
+    right: 2%;
     display: none;
 
     & button {
@@ -177,6 +175,7 @@ select {
     position: fixed;
     bottom: 2.5vh;
     right: 2.5vh;
+    z-index: 10;
 
     & button {
         width: 6vh;
