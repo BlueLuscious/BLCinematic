@@ -48,6 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
     interactivity.chooseMoviesOrSeries(moviesOptions, moviesChoices, moviesSections)
     interactivity.chooseMoviesOrSeries(seriesOptions, seriesChoices, seriesSections)
 
+    interactivity.bindTrendingInteractions(selectContent, contentOptions, contentChoices)
+    interactivity.bindTrendingInteractions(selectTime, timeOptions, timeChoices)
+    interactivity.bindMoviesAndSeriesInteractions(selectMovies, moviesOptions, moviesChoices)
+    interactivity.bindMoviesAndSeriesInteractions(selectSeries, seriesOptions, seriesChoices)
+    
     toolbox.removeAfterFromTables(trendingTables)
     toolbox.removeAfterFromTables(moviesTables)
     toolbox.removeAfterFromTables(seriesTables)
