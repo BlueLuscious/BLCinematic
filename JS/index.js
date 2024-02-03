@@ -6,7 +6,7 @@ const styles = new Styles
 const toolbox = new Toolbox
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     const trendingTables = Array.from(document.getElementsByClassName('trending_tables'))
     const trendingSections = Array.from(document.getElementsByClassName('trending_section'))
     const contentOptions = Array.from(document.getElementsByClassName('choose_content_option'))
@@ -48,12 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
     interactivity.chooseMoviesOrSeries(moviesOptions, moviesChoices, moviesSections)
     interactivity.chooseMoviesOrSeries(seriesOptions, seriesChoices, seriesSections)
 
+    interactivity.bindTrendingInteractions(selectContent, contentOptions, contentChoices)
+    interactivity.bindTrendingInteractions(selectTime, timeOptions, timeChoices)
+    interactivity.bindMoviesAndSeriesInteractions(selectMovies, moviesOptions, moviesChoices)
+    interactivity.bindMoviesAndSeriesInteractions(selectSeries, seriesOptions, seriesChoices)
+    
     toolbox.removeAfterFromTables(trendingTables)
     toolbox.removeAfterFromTables(moviesTables)
     toolbox.removeAfterFromTables(seriesTables)
 
-    // -iPad Pro
-    if (window.innerWidth <= 1024 && window.innerHeight > 600) {
+    if (window.innerWidth <= 1370) {
         interactivity.selectTrending(selectContent, selectTime, trendingSections)
         interactivity.selectTrending(selectTime, selectContent, trendingSections)
         interactivity.selectMoviesOrSeries(selectMovies, moviesSections)
@@ -65,6 +69,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         toolbox.displayArray(chooseTimeBox, Display.DISPLAY_NONE)
         toolbox.displayArray(selectContentTime, Display.DISPLAY_BLOCK)
+
+        toolbox.handleSelectArrow([selectContent, selectTime, selectMovies, selectSeries], selectContentTime)
     }
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 1370) {
+            interactivity.selectTrending(selectContent, selectTime, trendingSections)
+            interactivity.selectTrending(selectTime, selectContent, trendingSections)
+            interactivity.selectMoviesOrSeries(selectMovies, moviesSections)
+            interactivity.selectMoviesOrSeries(selectSeries, seriesSections)
+
+            chooseContentBox.forEach((choose, index) => {
+                index != 0 && index != 2 && index != 4 ? choose.style.display = Display.DISPLAY_NONE : false
+            })
+
+            toolbox.displayArray(chooseTimeBox, Display.DISPLAY_NONE)
+            toolbox.displayArray(selectContentTime, Display.DISPLAY_BLOCK)
+        } else {
+            toolbox.displayArray(chooseContentBox, Display.DISPLAY_BLOCK)
+            toolbox.displayArray(chooseTimeBox, Display.DISPLAY_BLOCK)
+            toolbox.displayArray(selectContentTime, Display.DISPLAY_NONE)
+        }
+    })
 
 })

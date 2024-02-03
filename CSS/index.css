@@ -1,17 +1,25 @@
 /* MAIN */
-.contents,
-.choice_contents,
+.choice_contents {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10vh;
+    transition: gap 0.25s ease-in;
+}
+
 .select_contents {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     align-items: center;
+    gap: 5vh;
 }
 
 .choose_content,
 .choose_time {
-    margin-left: 12.5vh;
-    margin-right: 12.5vh;
     margin-top: 7.5vh;
 
     & h1 {
@@ -45,6 +53,7 @@
         color: var(--dark-blue-colour-2);
         background-color: var(--white-colour);
         font-size: 3vh;
+        transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
         cursor: pointer;
     }
 }
@@ -58,21 +67,66 @@
     cursor: default;
 }
 
-.select_content_time {
-    margin-left: 1vh;
-    margin-right: 5vh;
+.select_content_time,
+.select_content_time_2 {
+    position: relative;
     margin-top: 7.5vh;
+
+    &::before,
+    &::after {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        padding: 0.3vh;
+        content: '\F124';
+        border-radius: 0 1vh 1vh 0;
+        background-color: var(--dark-blue-colour-2);
+        font-size: 4vh;
+        font-family: 'Bootstrap-icons';
+        pointer-events: none;
+    }
+
+    &::before {
+        color: var(--dark-blue-colour-2);
+    }
+
+    &::after {
+        color: var(--white-colour);
+    }
 
     & select {
         margin: 0;
         padding: 1.5vh;
         width: 16vh;
         text-align: center;
-        border: 0.3vh solid var(--dark-blue-colour-2);
+        border: 0.7vh solid var(--dark-blue-colour-2);
         border-radius: 1vh;
-        color: var(--white-colour);
-        background-color: var(--dark-blue-colour-2);
+        color: var(--dark-blue-colour-2);
+        background-color: var(--white-colour);
+        transition: color 0.25s ease, background-color 0.25s ease;
         font-size: 2.5vh;
+        appearance: none;
+
+        &:hover {
+            color: var(--white-colour);
+            background-color: var(--dark-blue-colour-2);
+        }
+    }
+}
+
+.select_content_time {
+    &::after {
+        content: '\F124';
+    }
+}
+
+.select_content_time_2 {
+    &::after {
+        content: '\F145';
     }
 }
 
@@ -165,7 +219,7 @@
     border-radius: 2vh;
     box-shadow: 0.5vh 0.5vh 1vh 0.4vh var(--dark-blue-colour);
     background-color: var(--white-colour);
-    transition: height 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    transition: height 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
     cursor: pointer;
 
     &:first-of-type {
@@ -192,7 +246,7 @@
     & img {
         width: 25vh;
         border-radius: 2vh;
-        transition: width 0.5s ease-in-out;
+        transition: width 0.25s ease-in-out;
     }
 }
 /* MAIN */

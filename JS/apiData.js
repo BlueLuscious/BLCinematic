@@ -1,13 +1,9 @@
-import { ApiUrls, Card, CardClassName, Category, Key, Pathname, Template } from "./constants.js"
+import { ApiUrls, CardClassName, Category, Key, MappedApiUrls, Pathname, Template } from "./constants.js"
 import { Toolbox } from "./handlers.js"
 
 const toolbox = new Toolbox
 
-export class ApiHandlers {
-
-    constructor() {
-        this.api_toolbox = new ApiToolbox
-    }
+class ApiConnection {
 
     // get api data
     async getApiDataByURL(params) {
@@ -28,6 +24,14 @@ export class ApiHandlers {
             .catch(err => console.error(err))
     }
 
+}
+
+class ApiData {
+
+    constructor() {
+        this.api_conn = new ApiConnection
+        this.api_toolbox = new ApiToolbox
+    }
 
     // get results
     getResults(listItem, card) {
@@ -50,7 +54,7 @@ export class ApiHandlers {
     }
 
     // get result by id
-    getResultsByIndexcard(item) {
+    getResultsByIndexcard(item, apiGenres) {
         const container = document.getElementById('container')
         container.style.backgroundImage = `url(${ApiUrls.IMAGE_URL_1920X800 + item.backdrop_path})`
 
@@ -62,6 +66,28 @@ export class ApiHandlers {
         
         const date = document.getElementById('date')
         this.api_toolbox.setCardDate(false, container, item, date)
+
+        const genres = document.getElementById('genres')
+        this.api_toolbox.setGenresName(item, genres, apiGenres)
+
+        const url = this.api_toolbox.setDetailsURL(item)
+        this.api_conn.getApiDataByURL(url).then(data => {
+
+            const runtime = document.getElementById('runtime')
+            this.api_toolbox.formatRuntime(data, runtime)
+    
+            const tagline = document.getElementById('tagline')
+            tagline.textContent = data.tagline
+        })
+
+        const url_2 = this.api_toolbox.setCreditsURL(item)
+        this.api_conn.getApiDataByURL(url_2).then(data => {
+            // TODO
+        })
+
+        const overview = document.getElementById('overview')
+        overview.textContent = item.overview
+
     }
 
     // get clicked results
@@ -85,55 +111,84 @@ export class ApiHandlers {
         })
     }
 
+}
+
+export class ApiHandlers {
+
+    constructor() {
+        this.api_conn = new ApiConnection
+        this.api_data = new ApiData
+        this.api_toolbox = new ApiToolbox
+    }
+
     // handle api data
     handleApiData(apiUrl, template, cardClassName) {
-        const categories = {
-            [ApiUrls.trendingAllDay]: [Card.trendingAllDayCard, Category.apiCategories[0]],
-            [ApiUrls.trendingMoviesDay]: [Card.trendingMoviesDayCard, Category.apiCategories[1]],
-            [ApiUrls.trendingSeriesDay]: [Card.trendingSeriesDayCard, Category.apiCategories[2]],
-            [ApiUrls.trendingAllWeek]: [Card.trendingAllWeekCard, Category.apiCategories[3]],
-            [ApiUrls.trendingMoviesWeek]: [Card.trendingMoviesWeekCard, Category.apiCategories[4]],
-            [ApiUrls.trendingSeriesWeek]: [Card.trendingSeriesWeekCard, Category.apiCategories[5]],
-            [ApiUrls.moviesNowPlaying]: [Card.moviesNowPlayingCard, Category.apiCategories[6]],
-            [ApiUrls.moviesPopular]: [Card.moviesPopularCard, Category.apiCategories[7]],
-            [ApiUrls.moviesTopRated]: [Card.moviesTopRatedCard, Category.apiCategories[8]],
-            [ApiUrls.moviesUpcoming]: [Card.moviesUpcomingCard, Category.apiCategories[9]],
-            [ApiUrls.seriesAiringToday]: [Card.seriesAiringTodayCard, Category.apiCategories[10]],
-            [ApiUrls.seriesOnTheAir]: [Card.seriesOnTheAirCard, Category.apiCategories[11]],
-            [ApiUrls.seriesPopular]: [Card.seriesPopularCard, Category.apiCategories[12]],
-            [ApiUrls.seriesTopRated]: [Card.seriesTopRatedCard, Category.apiCategories[13]],
+        const urlAssociation = MappedApiUrls.urlAssociation 
+        const indexUrl = window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE
+        const urls = {
+            [Template.MOVIES_TEMPLATE]: window.location.pathname === Pathname.HTML_FOLDER + Template.MOVIES_TEMPLATE,
+            [Template.SERIES_TEMPLATE]: window.location.pathname === Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE,
         }
-        
+        const genres = [ApiUrls.movieListGenres, ApiUrls.serieListGenres]
+
         const urlParams = new URLSearchParams(window.location.search)
         const category = urlParams.get('category')
         const indexCard = urlParams.get('indexCard')
+        const emptySearch = window.location.search === ''
+        const search = window.location.search === `?category=${urlAssociation[apiUrl][1]}&indexCard=${indexCard}`
 
-        if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE && window.location.search === '' ||
-            window.location.pathname === Pathname.HTML_FOLDER + template && window.location.search === '' ||
-            window.location.search === `?category=${categories[apiUrl][1]}&indexCard=${indexCard}`
-        ) {
-            this.getApiDataByURL(apiUrl).then(data => {
-                if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
-                    this.getResults(data.results, categories[apiUrl][0])
-                    this.getClickedCard(data.results, categories[apiUrl][0], cardClassName, categories[apiUrl][1])
-                } else {
-                    this.getResultsByIndexcard(data.results[indexCard])
+        if ((indexUrl && emptySearch) || (urls[template] && emptySearch || search)) {
+            this.api_conn.getApiDataByURL(apiUrl).then(data => {
+                if (indexUrl) {
+                    this.api_data.getResults(data.results, urlAssociation[apiUrl][0])
+                    this.api_data.getClickedCard(data.results, urlAssociation[apiUrl][0], cardClassName, urlAssociation[apiUrl][1])
+                }
+                
+                if (Category.apiCategories.includes(category)) {
+                    this.api_data.getResultsByIndexcard(data.results[indexCard], genres)
                 }
             })
         }
 
-        if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE && window.location.search !== '' ||
-            window.location.pathname === Pathname.HTML_FOLDER + template && window.location.search !== '' &&
-            (!urlParams.has('category') || category === '' || !Category.apiCategories.includes(category) ||
-            !urlParams.has('indexCard') || indexCard === '' || isNaN(indexCard))
-        ) {
-            window.location.href = 'error.html'
-        }
+        this.api_toolbox.catchNoUrlError(template)
     }
 
 }
 
 class ApiToolbox {
+
+    constructor() {
+        this.api_conn = new ApiConnection
+    }
+
+    // catch url that doesn't exists
+    catchNoUrlError(template) {
+        const indexUrl = window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE
+        const urls = {
+            [Template.MOVIES_TEMPLATE]: window.location.pathname === Pathname.HTML_FOLDER + Template.MOVIES_TEMPLATE,
+            [Template.SERIES_TEMPLATE]: window.location.pathname === Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE,
+        }
+
+        const urlParams = new URLSearchParams(window.location.search)
+        const category = urlParams.get('category')
+        const categoryError = !urlParams.has('category') || category === '' || !Category.apiCategories.includes(category)
+        const indexCard = urlParams.get('indexCard')
+        const indexCardError = !urlParams.has('indexCard') || indexCard === '' || isNaN(indexCard)
+        const fullSearch = window.location.search !== ''
+
+        if ((indexUrl && fullSearch) || urls[template] && fullSearch && (categoryError || indexCardError)) {
+            window.location.href = 'error.html'
+        }
+    }
+
+    // format runtime
+    formatRuntime(data, runtime) {
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.MOVIES_TEMPLATE) {
+            const hours = Math.floor(data.runtime / 60)
+            const minutes = data.runtime % 60
+            runtime.textContent = `${hours}h ${minutes}m`
+        }
+    }
 
     // set classname by media_type and data
     setCardClassname(row, item) {
@@ -200,5 +255,69 @@ class ApiToolbox {
             row.appendChild(title)
         }
     }
+
+    // set genres name
+    setGenresName(item, box, genres) {
+        if (item.media_type == 'movie' || container.classList.contains(CardClassName.MOVIE_BY_INDEX)) {
+            genres = genres[0]
+        }
+    
+        if (item.media_type == 'tv' || container.classList.contains(CardClassName.SERIE_BY_INDEX)) {
+            genres = genres[1]
+        }
+    
+        this.api_conn.getApiDataByURL(genres).then(genre_data => {
+            const genres_list = genre_data.genres
+            const content_genres = item.genre_ids
+    
+            const filteredGenres = genres_list.filter(genre_item => content_genres.includes(genre_item.id))
+    
+            content_genres.forEach((content_genre, index) => {
+                const matchingGenre = filteredGenres.find(genre_item => genre_item.id === content_genre)
+    
+                if (matchingGenre) {
+                    const genre_names_box = document.createElement('h3')
+    
+                    if (index < content_genres.length - 1) {
+                        genre_names_box.textContent = `${matchingGenre.name},`
+                    } else {
+                        genre_names_box.textContent = matchingGenre.name
+                    }
+    
+                    box.appendChild(genre_names_box)
+                }
+            })
+        })
+    }
+
+
+
+    // set content details URL
+    setDetailsURL(item){
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.MOVIES_TEMPLATE) {
+            const url = `https://api.themoviedb.org/3/movie/${item.id}?language=en-US`
+            return url
+        }
+        
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE) {
+            const url = `https://api.themoviedb.org/3/tv/${item.id}?language=en-US`
+            return url
+        }
+    }
+
+    // set content credits URL
+    setCreditsURL(item){
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.MOVIES_TEMPLATE) {
+            const url = `https://api.themoviedb.org/3/movie/${item.id}/credits?language=en-US`
+            return url
+        }
+        
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.SERIES_TEMPLATE) {
+            const url = `https://api.themoviedb.org/3/tv/${item.id}/credits?language=en-US`
+            return url
+        }
+    }
+
+    
 
 }

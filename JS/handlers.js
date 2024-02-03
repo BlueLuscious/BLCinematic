@@ -1,15 +1,113 @@
-import { ApiContents, Colour, Cursor, Display, Pathname, Template } from "./constants.js"
+import { ApiContents, Category, Colour, Cursor, Display, Pathname, Template } from "./constants.js"
 
 let content_0 = true
 let content_1 = false
 let content_2 = false
 let time_0 = true
 let time_1 = false
+
 export class Interactivity {
 
     constructor() {
         this.styles = new Styles
         this.toolbox = new Toolbox
+    }
+
+    // bind movies/series choices and selects
+    bindMoviesAndSeriesInteractions(selectMS, optionMS, choiceMS) {
+        optionMS.forEach((option, optionIndex) => {
+            option.addEventListener('click', () => {
+                optionIndex >= 0 ? selectMS[optionIndex].selected = true : selectMS[optionIndex].selected = false
+            })
+        })
+
+        const movies = {
+            [ApiContents.MOVIES_NOW_PLAYING]: 0,
+            [ApiContents.MOVIES_POPULAR]: 1,
+            [ApiContents.MOVIES_TOP_RATED]: 2,
+            [ApiContents.MOVIES_UPCOMING]: 3,
+        }
+
+        const series = {
+            [ApiContents.SERIES_AIRING_TODAY]: 0,
+            [ApiContents.SERIES_ON_THE_AIR]: 1,
+            [ApiContents.SERIES_POPULAR]: 2,
+            [ApiContents.SERIES_TOP_RATED]: 3,
+        }
+
+        selectMS.addEventListener('change', () => {
+            selectMS.value === ApiContents.MOVIES_NOW_PLAYING ? this.styles.changeChoiceStyles(choiceMS, movies[selectMS.value]) : false
+            selectMS.value === ApiContents.SERIES_AIRING_TODAY ? this.styles.changeChoiceStyles(choiceMS, series[selectMS.value]) : false
+
+            selectMS.value === ApiContents.MOVIES_POPULAR ? this.styles.changeChoiceStyles(choiceMS, movies[selectMS.value]) : false
+            selectMS.value === ApiContents.SERIES_ON_THE_AIR ? this.styles.changeChoiceStyles(choiceMS, series[selectMS.value]) : false
+
+            selectMS.value === ApiContents.MOVIES_TOP_RATED ? this.styles.changeChoiceStyles(choiceMS, movies[selectMS.value]) : false
+            selectMS.value === ApiContents.SERIES_POPULAR ? this.styles.changeChoiceStyles(choiceMS, series[selectMS.value]) : false
+
+            selectMS.value === ApiContents.MOVIES_UPCOMING ? this.styles.changeChoiceStyles(choiceMS, movies[selectMS.value]) : false
+            selectMS.value === ApiContents.SERIES_TOP_RATED ? this.styles.changeChoiceStyles(choiceMS, series[selectMS.value]) : false
+        })
+
+    }
+
+    // bind trending choices and selects
+    bindTrendingInteractions(selectT, optionT, choiceT) {
+        optionT.forEach((option, optionIndex) => {
+            option.addEventListener('click', () => {
+                if (optionT.length === 3) {
+                    optionIndex >= 0 ? selectT[optionIndex].selected = true : selectT[optionIndex].selected = false
+                }
+
+                if (optionT.length === 2) {
+                    optionIndex >= 0 ? selectT[optionIndex].selected = true : selectT[optionIndex].selected = false
+                }
+            })
+        })
+
+        const content = {
+            [ApiContents.TRENDING_ALL]: 0,
+            [ApiContents.TRENDING_MOVIES]: 1,
+            [ApiContents.TRENDING_SERIES]: 2,
+        }
+
+        const time = {
+            [ApiContents.TRENDING_DAY]: 0,
+            [ApiContents.TRENDING_WEEK]: 1,
+        }
+
+        selectT.addEventListener('change', () => {
+            if (selectT.length === 3) {
+                selectT.value === ApiContents.TRENDING_ALL ? content_0 = true : content_0 = false
+                selectT.value === ApiContents.TRENDING_MOVIES ? content_1 = true : content_1 = false
+                selectT.value === ApiContents.TRENDING_SERIES ? content_2 = true : content_2 = false
+
+                selectT.value === ApiContents.TRENDING_ALL ? this.styles.changeChoiceStyles(choiceT, content[selectT.value]) : false
+                selectT.value === ApiContents.TRENDING_MOVIES ? this.styles.changeChoiceStyles(choiceT, content[selectT.value]) : false
+                selectT.value === ApiContents.TRENDING_SERIES ? this.styles.changeChoiceStyles(choiceT, content[selectT.value]) : false
+            }
+    
+            if (selectT.length === 2) {
+                selectT.value === ApiContents.TRENDING_DAY ? time_0 = true : time_0 = false
+                selectT.value === ApiContents.TRENDING_WEEK ? time_1 = true : time_1 = false
+                
+                selectT.value === ApiContents.TRENDING_DAY ? this.styles.changeChoiceStyles(choiceT, time[selectT.value]) : false
+                selectT.value === ApiContents.TRENDING_WEEK ? this.styles.changeChoiceStyles(choiceT, time[selectT.value]) : false
+            }
+        })    
+    }
+
+    // choose movies and series content
+    chooseMoviesOrSeries(options, choices, sections) {
+        options.forEach((option, optionIndex) => {
+            option.addEventListener('click', () => {
+                this.toolbox.displayArrayValueByIndex(sections, optionIndex, Display.DISPLAY_BLOCK, Display.DISPLAY_NONE)
+            })
+        })
+
+        this.styles.changeChoiceStylesByClick(options, choices)
+        this.styles.changeChoiceStylesByMouseover(options, choices)
+        this.styles.changeChoiceStylesByMouseout(options, choices)
     }
 
     // choose trending content and time
@@ -22,7 +120,7 @@ export class Interactivity {
                     optionIndex == 0 ? content_0 = true : content_0 = false
                     optionIndex == 1 ? content_1 = true : content_1 = false
                     optionIndex == 2 ? content_2 = true : content_2 = false
-                    
+
                     optionIndex == 0 ? this.toolbox.displayOneThingIf(sections[0], time_0, Display.DISPLAY_BLOCK) : false
                     optionIndex == 0 ? this.toolbox.displayOneThingIf(sections[3], time_1, Display.DISPLAY_BLOCK) : false
 
@@ -53,38 +151,37 @@ export class Interactivity {
         this.styles.changeChoiceStylesByMouseout(options, choices)
     }
 
-    // choose movies and series content
-    chooseMoviesOrSeries(options, choices, sections) {
-        options.forEach((option, optionIndex) => {
-            option.addEventListener('click', () => {
-                this.toolbox.displayArrayValueByIndex(sections, optionIndex, Display.DISPLAY_BLOCK, Display.DISPLAY_NONE)
-            })
-        })
-
-        this.styles.changeChoiceStylesByClick(options, choices)
-        this.styles.changeChoiceStylesByMouseover(options, choices)
-        this.styles.changeChoiceStylesByMouseout(options, choices)
-    }
-
     // scroll top button
     scrollToTop(button) {
-        button.style.display = Display.DISPLAY_NONE
-        
         window.addEventListener('scroll', () => {
-            const shouldShowButton = document.body.scrollTop > 890 || document.documentElement.scrollTop > 890
+            const shouldShowButton = window.scrollY > 890
             button.disabled = !shouldShowButton
-            button.style.cursor = shouldShowButton ? Cursor.POINTER_CURSOR : Cursor.DEFAULT_CURSOR
-    
-            setTimeout(() => {
-                button.style.transition = 'opacity 0.5s ease-in-out'
-                button.style.opacity = shouldShowButton ? 1 : 0
-            }, 500)
             button.style.display = shouldShowButton ? Display.DISPLAY_BLOCK : false
+            button.classList.toggle('active', shouldShowButton)
         })
     
         button.addEventListener('click', () => {
             document.body.scrollTop = 0
             document.documentElement.scrollTop = 0
+        })
+    }
+
+    // select movies and series content
+    selectMoviesOrSeries(options, sections) {
+        options.addEventListener('change', () => {
+            this.toolbox.displayArray(sections, Display.DISPLAY_NONE)
+
+            options.value === ApiContents.MOVIES_NOW_PLAYING ? sections[0].style.display = Display.DISPLAY_BLOCK : false
+            options.value === ApiContents.SERIES_AIRING_TODAY ? sections[0].style.display = Display.DISPLAY_BLOCK : false
+
+            options.value === ApiContents.MOVIES_POPULAR ? sections[1].style.display = Display.DISPLAY_BLOCK : false
+            options.value === ApiContents.SERIES_ON_THE_AIR ? sections[1].style.display = Display.DISPLAY_BLOCK : false
+
+            options.value === ApiContents.MOVIES_TOP_RATED ? sections[2].style.display = Display.DISPLAY_BLOCK : false
+            options.value === ApiContents.SERIES_POPULAR ? sections[2].style.display = Display.DISPLAY_BLOCK : false
+
+            options.value === ApiContents.MOVIES_UPCOMING ? sections[3].style.display = Display.DISPLAY_BLOCK : false
+            options.value === ApiContents.SERIES_TOP_RATED ? sections[3].style.display = Display.DISPLAY_BLOCK : false
         })
     }
 
@@ -123,25 +220,6 @@ export class Interactivity {
         })
     }
 
-    // select movies and series content
-    selectMoviesOrSeries(options, sections) {
-        options.addEventListener('change', () => {
-            this.toolbox.displayArray(sections, Display.DISPLAY_NONE)
-
-            options.value === ApiContents.MOVIES_NOW_PLAYING ? sections[0].style.display = Display.DISPLAY_BLOCK : false
-            options.value === ApiContents.SERIES_AIRING_TODAY ? sections[0].style.display = Display.DISPLAY_BLOCK : false
-
-            options.value === ApiContents.MOVIES_POPULAR ? sections[1].style.display = Display.DISPLAY_BLOCK : false
-            options.value === ApiContents.SERIES_ON_THE_AIR ? sections[1].style.display = Display.DISPLAY_BLOCK : false
-
-            options.value === ApiContents.MOVIES_TOP_RATED ? sections[2].style.display = Display.DISPLAY_BLOCK : false
-            options.value === ApiContents.SERIES_POPULAR ? sections[2].style.display = Display.DISPLAY_BLOCK : false
-
-            options.value === ApiContents.MOVIES_UPCOMING ? sections[3].style.display = Display.DISPLAY_BLOCK : false
-            options.value === ApiContents.SERIES_TOP_RATED ? sections[3].style.display = Display.DISPLAY_BLOCK : false
-        })
-    }
-
     // redirects setted templates
     templateRedirects(items, currentTemplate) {
         const templateRedirects = {
@@ -164,6 +242,16 @@ export class Interactivity {
 }
 
 export class Styles {
+
+    // change choices styles
+    changeChoiceStyles(choices, optionIndex) {
+        choices.forEach((choice, choiceIndex) => {
+            choice.style.color = choiceIndex === optionIndex ? Colour.WHITE_COLOUR : Colour.DARK_BLUE_COLOUR_2
+            choice.style.borderColor = choiceIndex === optionIndex ? Colour.DARK_BLUE_COLOUR_2 : Colour.DARK_BLUE_COLOUR_2
+            choice.style.backgroundColor = choiceIndex === optionIndex ? Colour.DARK_BLUE_COLOUR_2 : Colour.WHITE_COLOUR
+            choice.style.cursor = choiceIndex === optionIndex ? Cursor.DEFAULT_CURSOR : Cursor.POINTER_CURSOR
+        })
+    }
 
     // modify background-colour and cursor by click
     changeChoiceStylesByClick(options, choices) {
@@ -296,10 +384,49 @@ export class Toolbox {
 
     // format date
     formatDate(date) {
+        const urlParams = new URLSearchParams(window.location.search)
+        const category = urlParams.get('category')
         const [year, month, day] = date.split('-')
-        const months = ['Invalid', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        const monthAbbr = months[Number(month)] || 'Invalid'
-        return `${monthAbbr} ${day}, ${year}`
+
+        if (window.location.pathname === Pathname.HTML_FOLDER + Template.INDEX_TEMPLATE) {
+            const months = ['Invalid', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            const monthAbbr = months[Number(month)] || 'Invalid'
+            return `${monthAbbr} ${day}, ${year}`
+        } 
+        
+        if (Category.apiCategories.includes(category)) {
+            return `${year}`
+        }
+        
+    }
+
+    // handle select arrow display
+    handleSelectArrow(selects, selectsBox) {
+        selects.forEach((select, index) => {
+            select.addEventListener('click', () => toggleClasses(index))
+          
+            select.addEventListener('focusout', () => resetClasses(index))
+          
+            window.addEventListener('scroll', () => resetClasses(index))
+          
+            document.addEventListener('wheel', () => resetClasses(index))
+          
+            document.addEventListener('keyup', (event) => {
+                if (event.key === 'Escape') {
+                    toggleClasses(index)
+                }
+            })
+        })
+          
+        function toggleClasses(index) {
+            selectsBox[index].classList.toggle('select_content_time')
+            selectsBox[index].classList.toggle('select_content_time_2')
+        }
+          
+        function resetClasses(index) {
+            selectsBox[index].classList.remove('select_content_time_2')
+            selectsBox[index].classList.add('select_content_time')
+        }
     }
 
     // remove attribute to an array
@@ -309,6 +436,7 @@ export class Toolbox {
         })
     }
 
+    // remove pseudoelement after by classes
     removeAfterFromTables(things) {
         things.forEach((thing) => {
             thing.addEventListener('scroll', function() {
