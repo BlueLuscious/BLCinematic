@@ -91,6 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
             toolbox.displayArray(chooseTimeBox, Display.DISPLAY_BLOCK)
             toolbox.displayArray(selectContentTime, Display.DISPLAY_NONE)
         }
+
+        toolbox.handleSelectArrow([selectContent, selectTime, selectMovies, selectSeries], selectContentTime)
     })
 
 })
